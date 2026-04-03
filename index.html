@@ -10,370 +10,419 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #0e0e0e;
-      --bg2: #161616;
-      --gold: #c9a96e;
-      --gold-light: #e2c99a;
-      --text: #e8e0d4;
-      --text-muted: #7a7068;
-      --border: #2a2520;
-      --overlay: rgba(10,8,6,0.97);
-    }
+:root {
+  --bg: #0e0e0e;
+  --bg2: #161616;
+  --gold: #c9a96e;
+  --gold-light: #e2c99a;
+  --text: #e8e0d4;
+  --text-muted: #7a7068;
+  --border: #2a2520;
+  --overlay: rgba(10,8,6,0.97);
+}
 
-    html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-    /* ── HEADER, SEARCH, GALLERY etc. bleiben unverändert ── */
-    header {
-      position: relative;
-      text-align: center;
-      padding: 70px 20px 50px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, #111008 0%, var(--bg) 100%);
-    }
+/* ── HEADER ── */
+header {
+  position: relative;
+  text-align: center;
+  padding: 70px 20px 50px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #111008 0%, var(--bg) 100%);
+}
 
-    .header-ornament {
-      display: block;
-      font-size: 11px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-      opacity: 0.8;
-    }
+.header-ornament {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  opacity: 0.8;
+}
 
-    header h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      letter-spacing: 0.08em;
-      color: var(--text);
-      line-height: 1.1;
-    }
+header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: 0.08em;
+  color: var(--text);
+  line-height: 1.1;
+}
 
-    header h1 em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
+header h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
 
-    .header-subtitle {
-      margin-top: 14px;
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
+.header-subtitle {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
 
-    .gold-line {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 28px auto 0;
-      opacity: 0.6;
-    }
+.gold-line {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 28px auto 0;
+  opacity: 0.6;
+}
 
-    .search-section {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(14,14,14,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+/* ── SEARCH BAR ── */
+.search-section {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14,14,14,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 220px;
-      max-width: 520px;
-    }
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 520px;
+}
 
-    .search-wrap svg {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
+.search-wrap svg {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.4;
+  pointer-events: none;
+}
 
-    #searchInput {
-      width: 100%;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--text);
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      padding: 11px 16px 11px 44px;
-      outline: none;
-      transition: border-color 0.3s;
-    }
+#searchInput {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  padding: 11px 16px 11px 44px;
+  outline: none;
+  transition: border-color 0.3s;
+}
 
-    #searchInput:focus { border-color: var(--gold); }
-    #searchInput::placeholder { color: var(--text-muted); }
+#searchInput:focus { border-color: var(--gold); }
+#searchInput::placeholder { color: var(--text-muted); }
 
-    .year-filters {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+.year-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-    .year-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'Jost', sans-serif;
-      font-size: 12px;
-      letter-spacing: 1px;
-      padding: 6px 14px;
-      cursor: pointer;
-      border-radius: 1px;
-      transition: all 0.25s;
-    }
+.year-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: all 0.25s;
+}
 
-    .year-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .year-btn.active { background: var(--gold); border-color: var(--gold); color: #0e0e0e; font-weight: 500; }
+.year-btn:hover { border-color: var(--gold); color: var(--gold); }
+.year-btn.active { background: var(--gold); border-color: var(--gold); color: #0e0e0e; font-weight: 500; }
 
-    .result-count {
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      margin-left: auto;
-      white-space: nowrap;
-    }
+.result-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-left: auto;
+  white-space: nowrap;
+}
 
-    .gallery-section { padding: 36px 20px 60px; }
+/* ── GALLERY GRID ── */
+.gallery-section { padding: 36px 20px 60px; }
 
-    #gallery {
-      columns: 5 220px;
-      gap: 12px;
-    }
+#gallery {
+  columns: 5 220px;
+  gap: 12px;
+}
 
-    .art-card {
-      break-inside: avoid;
-      margin-bottom: 12px;
-      position: relative;
-      cursor: pointer;
-      overflow: hidden;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
+.art-card {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
 
-    .art-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--gold);
-    }
+.art-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
 
-    .art-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transition: transform 0.5s ease;
-    }
+.art-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
 
-    .art-card:hover img { transform: scale(1.04); }
+.art-card:hover img { transform: scale(1.04); }
 
-    .art-card-info {
-      padding: 10px 12px 12px;
-      background: linear-gradient(0deg, rgba(14,14,14,1) 0%, rgba(14,14,14,0.85) 100%);
-    }
+.art-card-info {
+  padding: 10px 12px 12px;
+  background: linear-gradient(0deg, rgba(14,14,14,1) 0%, rgba(14,14,14,0.85) 100%);
+}
 
-    .art-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.3;
-      margin-bottom: 3px;
-    }
+.art-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
 
-    .art-card-year {
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: var(--gold);
-      opacity: 0.8;
-    }
+.art-card-year {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  opacity: 0.8;
+}
 
-    #noResults {
-      display: none;
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--text-muted);
-      font-size: 16px;
-      font-style: italic;
-      font-family: 'Cormorant Garamond', serif;
-    }
+/* ── NO RESULTS ── */
+#noResults {
+  display: none;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  font-size: 16px;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
 
-    /* ── LIGHTBOX ── */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: var(--overlay);
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
+/* ── LIGHTBOX ── */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--overlay);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-    #lightbox.open { display: flex; }
+#lightbox.open { display: flex; }
 
-    .lb-topbar {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 24px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
-      z-index: 10;
-    }
+.lb-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 10;
+}
 
-    .lb-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 20px;
-      color: var(--text);
-    }
+.lb-title-block {}
 
-    .lb-year {
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--gold);
-      margin-top: 2px;
-    }
+.lb-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--text);
+}
 
-    .lb-counter {
-      font-size: 12px;
-      letter-spacing: 2px;
-      color: var(--text-muted);
-    }
+.lb-year {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-top: 2px;
+}
 
-    .lb-close {
-      background: none;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: var(--text);
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
+.lb-counter {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
 
-    .lb-close:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
+.lb-close {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
 
-    .lb-controls {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 12px;
-      z-index: 20;
-      background: rgba(14,14,14,0.8);
-      padding: 8px 16px;
-      border-radius: 30px;
-      border: 1px solid var(--border);
-    }
+.lb-close:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
 
-    .lb-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
+.lb-img-wrap {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: zoom-in;
+}
 
-    .lb-btn:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #0e0e0e;
-    }
+.lb-img-wrap.zoomed { cursor: zoom-out; }
 
-    .lb-img-wrap {
-      position: relative;
-      max-width: 92vw;
-      max-height: 82vh;
-      overflow: hidden;
-      cursor: grab;
-      touch-action: none; /* wichtig für eigene Gesten */
-      border: 1px solid var(--border);
-    }
+#lbImg {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 
-    .lb-img-wrap:active { cursor: grabbing; }
+#lbImg.zoomed { transform: scale(2.2); }
 
-    #lbImg {
-      max-width: none;
-      max-height: none;
-      width: auto;
-      height: auto;
-      display: block;
-      transform-origin: center center;
-      user-select: none;
-      -webkit-user-drag: none;
-      transition: transform 0.08s linear;
-    }
+.lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(14,14,14,0.7);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
 
-    .lb-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(14,14,14,0.7);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 22px;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-      z-index: 15;
-    }
+.lb-nav:hover { background: var(--gold); border-color: var(--gold); color: #0e0e0e; }
+#lbPrev { left: 16px; }
+#lbNext { right: 16px; }
 
-    .lb-nav:hover { background: var(--gold); border-color: var(--gold); color: #0e0e0e; }
-    #lbPrev { left: 20px; }
-    #lbNext { right: 20px; }
+/* ── IMPRESSUM ── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 60px 40px 50px;
+  margin-top: 40px;
+}
 
-    @media (max-width: 600px) {
-      #gallery { columns: 2 150px; }
-      .lb-nav { width: 40px; height: 40px; font-size: 18px; }
-      .lb-controls { bottom: 12px; padding: 6px 12px; gap: 8px; }
-    }
-  </style>
-</head>
+.footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.footer-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.impressum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px 48px;
+}
+
+.impressum-block h4 {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.impressum-block p, .impressum-block a {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.8;
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.impressum-block a:hover { color: var(--gold); opacity: 1; }
+
+.impressum-legal {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.copyright {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+.art-card {
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  #gallery { columns: 2 150px; }
+  .lb-nav { display: none; }
+  header { padding: 50px 16px 36px; }
+}  </style></head>
 <body>
 
 <header>
   <span class="header-ornament">Galerie</span>
   <h1>Doris <em>Zarrinnam</em></h1>
-  <p class="header-subtitle">Malerei &nbsp;·&nbsp; 1971 – 2020</p>
+  <p class="header-subtitle">Malerei  ·  1971 – 2020</p>
   <div class="gold-line"></div>
 </header>
 
@@ -396,31 +445,21 @@
 <!-- LIGHTBOX -->
 <div id="lightbox" role="dialog" aria-modal="true">
   <div class="lb-topbar">
-    <div>
+    <div class="lb-title-block">
       <div class="lb-title" id="lbTitle"></div>
       <div class="lb-year" id="lbYear"></div>
     </div>
     <span class="lb-counter" id="lbCounter"></span>
     <button class="lb-close" id="lbClose" aria-label="Schließen">×</button>
   </div>
-
   <div class="lb-img-wrap" id="lbImgWrap">
     <img id="lbImg" src="" alt="">
   </div>
-
-  <div class="lb-controls">
-    <button class="lb-btn" id="btnZoomOut" title="Verkleinern">–</button>
-    <button class="lb-btn" id="btnReset" title="Zurücksetzen">⟳</button>
-    <button class="lb-btn" id="btnZoomIn" title="Vergrößern">+</button>
-    <button class="lb-btn" id="btnRotateLeft" title="90° gegen Uhrzeigersinn">↺</button>
-    <button class="lb-btn" id="btnRotateRight" title="90° im Uhrzeigersinn">↻</button>
-  </div>
-
-  <button class="lb-nav" id="lbPrev" aria-label="Vorheriges">‹</button>
-  <button class="lb-nav" id="lbNext" aria-label="Nächstes">›</button>
+  <button class="lb-nav" id="lbPrev" aria-label="Vorheriges">&#8592;</button>
+  <button class="lb-nav" id="lbNext" aria-label="Nächstes">&#8594;</button>
 </div>
 
-<!-- IMPRESSUM (unverändert) -->
+<!-- IMPRESSUM -->
 <footer>
   <div class="footer-inner">
     <div class="footer-heading">Impressum</div>
@@ -441,18 +480,245 @@
       </div>
     </div>
     <div class="impressum-legal">
-      <strong>Haftung für Inhalte:</strong> Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. […]
-      <strong>Datenschutz:</strong> Diese Website erhebt und speichert keine personenbezogenen Daten. […]
+      <strong>Haftung für Inhalte:</strong> Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt.
+      Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+      Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+      Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+      übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen,
+      die auf eine rechtswidrige Tätigkeit hinweisen.<br><br>
+      <strong>Datenschutz:</strong> Diese Website erhebt und speichert keine personenbezogenen Daten.
+      Es werden keine Cookies gesetzt und keine externen Tracking-Dienste genutzt.
     </div>
     <div class="copyright">© Doris Zarrinnam – Alle Rechte vorbehalten</div>
   </div>
 </footer>
 
 <script>
-// === Deine bestehenden IMAGES und Filter-Logik bleiben unverändert ===
-const IMAGES = [ /* ... dein gesamtes Array bleibt genau gleich ... */ ];
 
-// Decade-Filter-Buttons (unverändert)
+const IMAGES = [
+  { file: "1971 - persische Landschaft.JPG",              year: 1971, title: "Persische Landschaft" },
+  { file: "1992 - Blaue Engel.JPG",                       year: 1992, title: "Blaue Engel" },
+  { file: "1992 - Erlebnis '85 Aachen.JPG",               year: 1992, title: "Erlebnis '85 Aachen" },
+  { file: "1992 - Feuerwerk.JPG",                          year: 1992, title: "Feuerwerk" },
+  { file: "1992 - Flaggenbaum.JPG",                        year: 1992, title: "Flaggenbaum" },
+  { file: "1992 - Friedensgedanken.JPG",                   year: 1992, title: "Friedensgedanken" },
+  { file: "1992 - Glühwurm - Glühwein.JPG",               year: 1992, title: "Glühwurm – Glühwein" },
+  { file: "1992 - Hoffnung.JPG",                           year: 1992, title: "Hoffnung" },
+  { file: "1992 - Jahreszeiten.JPG",                       year: 1992, title: "Jahreszeiten" },
+  { file: "1992 - Lebenslauf.JPG",                         year: 1992, title: "Lebenslauf" },
+  { file: "1992 - Mut.JPG",                                year: 1992, title: "Mut" },
+  { file: "1992 - O.T..JPG",                               year: 1992, title: "O.T." },
+  { file: "1992 - Osterstrauß.JPG",                        year: 1992, title: "Osterstrauß" },
+  { file: "1992 - Prisma.JPG",                             year: 1992, title: "Prisma" },
+  { file: "1992 - Sehnsucht.JPG",                          year: 1992, title: "Sehnsucht" },
+  { file: "1992 - W.JPG",                                  year: 1992, title: "W" },
+  { file: "1992 - Zuversicht.JPG",                         year: 1992, title: "Zuversicht" },
+  { file: "1993 - Apfel.JPG",                              year: 1993, title: "Apfel" },
+  { file: "1993 - Augenschein.JPG",                        year: 1993, title: "Augenschein" },
+  { file: "1993 - Begutachtung.JPG",                       year: 1993, title: "Begutachtung" },
+  { file: "1993 - Betrachtungen.JPG",                      year: 1993, title: "Betrachtungen" },
+  { file: "1993 - Bildung I.JPG",                          year: 1993, title: "Bildung I" },
+  { file: "1993 - Der Pfau.JPG",                           year: 1993, title: "Der Pfau" },
+  { file: "1993 - Einblick Aussicht.JPG",                  year: 1993, title: "Einblick Aussicht" },
+  { file: "1993 - Einsamkeit.JPG",                         year: 1993, title: "Einsamkeit" },
+  { file: "1993 - Geduld.JPG",                             year: 1993, title: "Geduld" },
+  { file: "1993 - Kristal.JPG",                            year: 1993, title: "Kristal" },
+  { file: "1993 - Nächstenliebe.JPG",                      year: 1993, title: "Nächstenliebe" },
+  { file: "1993 Einsamkeit '86.JPG",                       year: 1993, title: "Einsamkeit '86" },
+  { file: "1994 - 1001.JPG",                               year: 1994, title: "1001" },
+  { file: "1994 - Durchblick.JPG",                         year: 1994, title: "Durchblick" },
+  { file: "1994 - Wunschdenken.JPG",                       year: 1994, title: "Wunschdenken" },
+  { file: "1995 - Einladung zum ....JPG",                   year: 1995, title: "Einladung zum …" },
+  { file: "1995 - Es war einmal ....JPG",                   year: 1995, title: "Es war einmal …" },
+  { file: "1995 - Fabel.JPG",                              year: 1995, title: "Fabel" },
+  { file: "1995 - Gästebuch.JPG",                          year: 1995, title: "Gästebuch" },
+  { file: "1995 - Kaffee.JPG",                             year: 1995, title: "Kaffee" },
+  { file: "1995 - Katzenkunst oder 15.000 Dollar.JPG",     year: 1995, title: "Katzenkunst oder 15.000 Dollar" },
+  { file: "1995 - Märchen.JPG",                            year: 1995, title: "Märchen" },
+  { file: "1995 - Trilogie gelbe Blumen.JPG",              year: 1995, title: "Trilogie gelbe Blumen" },
+  { file: "1996 - Gesellschaft.JPG",                       year: 1996, title: "Gesellschaft" },
+  { file: "1996 - Themen.JPG",                             year: 1996, title: "Themen" },
+  { file: "1996 - Trilogie weiße Blumen.JPG",              year: 1996, title: "Trilogie weiße Blumen" },
+  { file: "1996 - Zeit.JPG",                               year: 1996, title: "Zeit" },
+  { file: "1997 - Europa und Ophthalmologie.JPG",          year: 1997, title: "Europa und Ophthalmologie" },
+  { file: "1997 - Jahrtausendwende.JPG",                   year: 1997, title: "Jahrtausendwende" },
+  { file: "1997 - Komposition.JPG",                        year: 1997, title: "Komposition" },
+  { file: "1997 - Medienzeitalter.JPG",                    year: 1997, title: "Medienzeitalter" },
+  { file: "1997 - Position.JPG",                           year: 1997, title: "Position" },
+  { file: "1997 - Situation.JPG",                          year: 1997, title: "Situation" },
+  { file: "1997 - Trilogie rote Blumen.JPG",               year: 1997, title: "Trilogie rote Blumen" },
+  { file: "1997 - Unterhaltung.JPG",                       year: 1997, title: "Unterhaltung" },
+  { file: "1998 - Besinnung.JPG",                          year: 1998, title: "Besinnung" },
+  { file: "1998 - Betreuung.JPG",                          year: 1998, title: "Betreuung" },
+  { file: "1998 - Euroclown.JPG",                          year: 1998, title: "Euroclown" },
+  { file: "1998 - Integration.JPG",                        year: 1998, title: "Integration" },
+  { file: "1998 - Toleranz.JPG",                           year: 1998, title: "Toleranz" },
+  { file: "1998 - Weg.JPG",                                year: 1998, title: "Weg" },
+  { file: "1998 - Zeiterscheinung.JPG",                    year: 1998, title: "Zeiterscheinung" },
+  { file: "1998 - Überblick - Übersicht.JPG",              year: 1998, title: "Überblick – Übersicht" },
+  { file: "1999 - Blaue Rose.JPG",                         year: 1999, title: "Blaue Rose" },
+  { file: "1999 - Garten.JPG",                             year: 1999, title: "Garten" },
+  { file: "1999 - Gespräche.JPG",                          year: 1999, title: "Gespräche" },
+  { file: "1999 - Praxis.JPG",                             year: 1999, title: "Praxis" },
+  { file: "1999 - Rückblick.JPG",                          year: 1999, title: "Rückblick" },
+  { file: "1999 - Sonnenfinsternis.JPG",                   year: 1999, title: "Sonnenfinsternis" },
+  { file: "2000 - 5 Jahreszeiten.JPG",                     year: 2000, title: "5 Jahreszeiten" },
+  { file: "2000 - Wahrnemung.JPG",                         year: 2000, title: "Wahrnehmung" },
+  { file: "2001 - Kompetente Beratung.JPG",                year: 2001, title: "Kompetente Beratung" },
+  { file: "2002 - 3 Jahre.JPG",                            year: 2002, title: "3 Jahre" },
+  { file: "2002 - Schweigen.JPG",                          year: 2002, title: "Schweigen" },
+  { file: "2002 - Zuhause.JPG",                            year: 2002, title: "Zuhause" },
+  { file: "2002 - Zukunft.JPG",                            year: 2002, title: "Zukunft" },
+  { file: "2003 - Analyse.JPG",                            year: 2003, title: "Analyse" },
+  { file: "2003 - Europa und die Optik.JPG",               year: 2003, title: "Europa und die Optik" },
+  { file: "2003 - Garten.JPG",                             year: 2003, title: "Garten" },
+  { file: "2003 - Stilleben mit (Prisma)Hand.JPG",         year: 2003, title: "Stilleben mit (Prisma)Hand" },
+  { file: "2003 - Trilogie Gestern.JPG",                   year: 2003, title: "Trilogie Gestern" },
+  { file: "2003 - Trilogie Heute.JPG",                     year: 2003, title: "Trilogie Heute" },
+  { file: "2003 - Trilogie Morgen.JPG",                    year: 2003, title: "Trilogie Morgen" },
+  { file: "2004 - Eingebung.JPG",                          year: 2004, title: "Eingebung" },
+  { file: "2004 - Sprache der Malerei I.JPG",              year: 2004, title: "Sprache der Malerei I" },
+  { file: "2004 - Themenwahl.JPG",                         year: 2004, title: "Themenwahl" },
+  { file: "2004 - Vertrauen I.JPG",                        year: 2004, title: "Vertrauen I" },
+  { file: "2004 - Vertrauen II.JPG",                       year: 2004, title: "Vertrauen II" },
+  { file: "2004 Zweisamkeit.JPG",                          year: 2004, title: "Zweisamkeit" },
+  { file: "2005 - Bildung II.JPG",                         year: 2005, title: "Bildung II" },
+  { file: "2005 - Blumenstrauss.JPG",                      year: 2005, title: "Blumenstrauß" },
+  { file: "2005 - F.JPG",                                  year: 2005, title: "F" },
+  { file: "2005 - Geburt.JPG",                             year: 2005, title: "Geburt" },
+  { file: "2005 - Klostergarten.JPG",                      year: 2005, title: "Klostergarten" },
+  { file: "2005 - Sachverstand.JPG",                       year: 2005, title: "Sachverstand" },
+  { file: "2005 - U+M.JPG",                                year: 2005, title: "U+M" },
+  { file: "2005 - Umstellung.JPG",                         year: 2005, title: "Umstellung" },
+  { file: "2006 - Allegorie.JPG",                          year: 2006, title: "Allegorie" },
+  { file: "2006 - Ausdruckskraft.JPG",                     year: 2006, title: "Ausdruckskraft" },
+  { file: "2006 - Ausgleich.JPG",                          year: 2006, title: "Ausgleich" },
+  { file: "2006 - Gesundheit.JPG",                         year: 2006, title: "Gesundheit" },
+  { file: "2006 - Sprache der Malerei II.JPG",             year: 2006, title: "Sprache der Malerei II" },
+  { file: "2006 - Tulpen.JPG",                             year: 2006, title: "Tulpen" },
+  { file: "2006 - Virtuelle Welt.JPG",                     year: 2006, title: "Virtuelle Welt" },
+  { file: "2007 - Abstraktion I.JPG",                      year: 2007, title: "Abstraktion I" },
+  { file: "2007 - Abstraktion II.JPG",                     year: 2007, title: "Abstraktion II" },
+  { file: "2007 - Gefühl.JPG",                             year: 2007, title: "Gefühl" },
+  { file: "2007 - Prismarose.JPG",                         year: 2007, title: "Prismarose" },
+  { file: "2007 - Sprache der Malerei III.JPG",            year: 2007, title: "Sprache der Malerei III" },
+  { file: "2007 - Verstand.JPG",                           year: 2007, title: "Verstand" },
+  { file: "2007 - Zauberwürfel.JPG",                       year: 2007, title: "Zauberwürfel" },
+  { file: "2007 - Zuordnung.JPG",                          year: 2007, title: "Zuordnung" },
+  { file: "2007 - Zusammenhang.JPG",                       year: 2007, title: "Zusammenhang" },
+  { file: "2008 - Bausteine.JPG",                          year: 2008, title: "Bausteine" },
+  { file: "2008 - Bitte.JPG",                              year: 2008, title: "Bitte" },
+  { file: "2008 - Charisma.JPG",                           year: 2008, title: "Charisma" },
+  { file: "2008 - Feste.JPG",                              year: 2008, title: "Feste" },
+  { file: "2008 - Kulisse.JPG",                            year: 2008, title: "Kulisse" },
+  { file: "2008 - Mohn mit Schmetterling.JPG",             year: 2008, title: "Mohn mit Schmetterling" },
+  { file: "2008 - Spardose.JPG",                           year: 2008, title: "Spardose" },
+  { file: "2008 - Stille.JPG",                             year: 2008, title: "Stille" },
+  { file: "2008 - Ursache und Wirkung.JPG",                year: 2008, title: "Ursache und Wirkung" },
+  { file: "2008 - Wetter.JPG",                             year: 2008, title: "Wetter" },
+  { file: "2008 - Zuversicht II.JPG",                      year: 2008, title: "Zuversicht II" },
+  { file: "2009 - Bewusstsein.JPG",                        year: 2009, title: "Bewusstsein" },
+  { file: "2009 - Danke.JPG",                              year: 2009, title: "Danke" },
+  { file: "2009 - Frühstück.JPG",                          year: 2009, title: "Frühstück" },
+  { file: "2009 - Gabe.JPG",                               year: 2009, title: "Gabe" },
+  { file: "2009 - Künstliche Befruchtung.JPG",             year: 2009, title: "Künstliche Befruchtung" },
+  { file: "2009 - literarische Denkanstöße.JPG",           year: 2009, title: "Literarische Denkanstöße" },
+  { file: "2009 - Retrospektive (2).JPG",                  year: 2009, title: "Retrospektive (2)" },
+  { file: "2009 - Retrospektive.JPG",                      year: 2009, title: "Retrospektive" },
+  { file: "2009 - Sprache der Malerei IV.JPG",             year: 2009, title: "Sprache der Malerei IV" },
+  { file: "2010 - Baum.JPG",                               year: 2010, title: "Baum" },
+  { file: "2010 - Blumen mit Diskette.JPG",                year: 2010, title: "Blumen mit Diskette" },
+  { file: "2010 - Ebene Niveau.JPG",                       year: 2010, title: "Ebene Niveau" },
+  { file: "2010 - Freizeit.JPG",                           year: 2010, title: "Freizeit" },
+  { file: "2010 - Himmelsreisen.JPG",                      year: 2010, title: "Himmelsreisen" },
+  { file: "2010 - Parabel.JPG",                            year: 2010, title: "Parabel" },
+  { file: "2010 - Prisma mit Herz.JPG",                    year: 2010, title: "Prisma mit Herz" },
+  { file: "2010 - Sicherheit (2).JPG",                     year: 2010, title: "Sicherheit (2)" },
+  { file: "2010 - Sicherheit.JPG",                         year: 2010, title: "Sicherheit" },
+  { file: "2010 - Sprache der Malerei V.JPG",              year: 2010, title: "Sprache der Malerei V" },
+  { file: "2010 - Vielfalt I.JPG",                         year: 2010, title: "Vielfalt I" },
+  { file: "2010 - Vielfalt II.JPG",                        year: 2010, title: "Vielfalt II" },
+  { file: "2011 - Ansehen.JPG",                            year: 2011, title: "Ansehen" },
+  { file: "2011 - Ansicht.JPG",                            year: 2011, title: "Ansicht" },
+  { file: "2011 - Assoziation.JPG",                        year: 2011, title: "Assoziation" },
+  { file: "2011 - Blumenstrauß.JPG",                       year: 2011, title: "Blumenstrauß" },
+  { file: "2011 - Motivation.JPG",                         year: 2011, title: "Motivation" },
+  { file: "2011 - Phantasie.JPG",                          year: 2011, title: "Phantasie" },
+  { file: "2011 - Sprache der Malerei VI.JPG",             year: 2011, title: "Sprache der Malerei VI" },
+  { file: "2011 - Verantwortung.JPG",                      year: 2011, title: "Verantwortung" },
+  { file: "2012 - Begriffsbestimmung.JPG",                 year: 2012, title: "Begriffsbestimmung" },
+  { file: "2012 - Denkart.JPG",                            year: 2012, title: "Denkart" },
+  { file: "2012 - Einstellung.JPG",                        year: 2012, title: "Einstellung" },
+  { file: "2012 - Freude.JPG",                             year: 2012, title: "Freude" },
+  { file: "2012 - Gelassenheit.JPG",                       year: 2012, title: "Gelassenheit" },
+  { file: "2012 - Gestaltung.JPG",                         year: 2012, title: "Gestaltung" },
+  { file: "2012 - Kalender.JPG",                           year: 2012, title: "Kalender" },
+  { file: "2012 - Komposition II.JPG",                     year: 2012, title: "Komposition II" },
+  { file: "2012 - Muse.JPG",                               year: 2012, title: "Muse" },
+  { file: "2012 - Sprache der Malerei VII.JPG",            year: 2012, title: "Sprache der Malerei VII" },
+  { file: "2012 - Tropfen.JPG",                            year: 2012, title: "Tropfen" },
+  { file: "2013 - Alltag.JPG",                             year: 2013, title: "Alltag" },
+  { file: "2013 - Emotionen.JPG",                          year: 2013, title: "Emotionen" },
+  { file: "2013 - Ergänzungen.JPG",                        year: 2013, title: "Ergänzungen" },
+  { file: "2013 - Erneuerung.JPG",                         year: 2013, title: "Erneuerung" },
+  { file: "2013 - Harmonie.JPG",                           year: 2013, title: "Harmonie" },
+  { file: "2013 - Konstante.JPG",                          year: 2013, title: "Konstante" },
+  { file: "2013 - Künstliche Befruchtung.JPG",             year: 2013, title: "Künstliche Befruchtung" },
+  { file: "2013 - Sagen.JPG",                              year: 2013, title: "Sagen" },
+  { file: "2013 - Sprache der Malerei VIII.JPG",           year: 2013, title: "Sprache der Malerei VIII" },
+  { file: "2014 - Aspekte.JPG",                            year: 2014, title: "Aspekte" },
+  { file: "2014 - Auswahl.JPG",                            year: 2014, title: "Auswahl" },
+  { file: "2014 - Deutung.JPG",                            year: 2014, title: "Deutung" },
+  { file: "2014 - Dokumentation.JPG",                      year: 2014, title: "Dokumentation" },
+  { file: "2014 - Eurasia.JPG",                            year: 2014, title: "Eurasia" },
+  { file: "2014 - Farbenspiel.JPG",                        year: 2014, title: "Farbenspiel" },
+  { file: "2014 - Kohärenz.JPG",                           year: 2014, title: "Kohärenz" },
+  { file: "2014 - Lebensart.JPG",                          year: 2014, title: "Lebensart" },
+  { file: "2014 - Obulus.JPG",                             year: 2014, title: "Obulus" },
+  { file: "2014 - Sprache und Gedanken.JPG",               year: 2014, title: "Sprache und Gedanken" },
+  { file: "2015 - Gewissen.JPG",                           year: 2015, title: "Gewissen" },
+  { file: "2015 - Humor und Trickfilmzeichnung.JPG",       year: 2015, title: "Humor und Trickfilmzeichnung" },
+  { file: "2015 - Informationen.JPG",                      year: 2015, title: "Informationen" },
+  { file: "2015 - Proportionen.JPG",                       year: 2015, title: "Proportionen" },
+  { file: "2015 - Sprache der Malerei IX.JPG",             year: 2015, title: "Sprache der Malerei IX" },
+  { file: "2015 - Sympathien.JPG",                         year: 2015, title: "Sympathien" },
+  { file: "2015 - Äquivalent.JPG",                         year: 2015, title: "Äquivalent" },
+  { file: "2016 - 1000 Worte.JPG",                         year: 2016, title: "1000 Worte" },
+  { file: "2016 - Informationen II.JPG",                   year: 2016, title: "Informationen II" },
+  { file: "2016 - Migration.JPG",                          year: 2016, title: "Migration" },
+  { file: "2016 - Modus.JPG",                              year: 2016, title: "Modus" },
+  { file: "2016 - Sprache der Malerei X.JPG",              year: 2016, title: "Sprache der Malerei X" },
+  { file: "2016 - Unterbewußtsein.JPG",                    year: 2016, title: "Unterbewusstsein" },
+  { file: "2016 - Würde.JPG",                              year: 2016, title: "Würde" },
+  { file: "2016 - Zeitvertreib.JPG",                       year: 2016, title: "Zeitvertreib" },
+  { file: "2017 - Aesthetik.JPG",                          year: 2017, title: "Ästhetik" },
+  { file: "2017 - Eurabike.JPG",                           year: 2017, title: "Eurabike" },
+  { file: "2017 - Formeln.JPG",                            year: 2017, title: "Formeln" },
+  { file: "2017 - Gedankengut.JPG",                        year: 2017, title: "Gedankengut" },
+  { file: "2017 - Glückwünsche.JPG",                       year: 2017, title: "Glückwünsche" },
+  { file: "2017 - Göttliche Fügung.JPG",                   year: 2017, title: "Göttliche Fügung" },
+  { file: "2017 - Prävention.JPG",                         year: 2017, title: "Prävention" },
+  { file: "2017 - Verfügungen.JPG",                        year: 2017, title: "Verfügungen" },
+  { file: "2018 - Digitale Welt.JPG",                      year: 2018, title: "Digitale Welt" },
+  { file: "2018 - Einstellung.JPG",                        year: 2018, title: "Einstellung" },
+  { file: "2018 - Ergebnis.JPG",                           year: 2018, title: "Ergebnis" },
+  { file: "2018 - Generationen.JPG",                       year: 2018, title: "Generationen" },
+  { file: "2018 - Kompromisse.JPG",                        year: 2018, title: "Kompromisse" },
+  { file: "2018 - Sprache der Malerei XI.JPG",             year: 2018, title: "Sprache der Malerei XI" },
+  { file: "2018 - Zeitenwende.JPG",                        year: 2018, title: "Zeitenwende" },
+  { file: "2019 - Begutachtung II.JPG",                    year: 2019, title: "Begutachtung II" },
+  { file: "2019 - Stil.JPG",                               year: 2019, title: "Stil" },
+  { file: "2019 - Strauss.JPG",                            year: 2019, title: "Strauß" },
+  { file: "2019 - Trilogie.JPG",                           year: 2019, title: "Trilogie" },
+  { file: "2019 - Wirklichkeit.JPG",                       year: 2019, title: "Wirklichkeit" },
+  { file: "2020 - Manifest.JPG",                           year: 2020, title: "Manifest" },
+  { file: "2020 - Weg der Liebe.JPG",                      year: 2020, title: "Weg der Liebe" },
+  { file: "TSS04766-bearbeitet.JPG",                       year: null, title: "Ohne Titel (I)" },
+  { file: "TSS04855-bearbeitet.JPG",                       year: null, title: "Ohne Titel (II)" },
+  { file: "TSS04947-bearbeitet.JPG",                       year: null, title: "Ohne Titel (III)" }
+];
+
+// ── DECADE FILTER BUTTONS ──
 const decades = ['1970er', '1980er', '1990er', '2000er', '2010er', '2020er'];
 const decadeMap = { '1970er': [1970,1979], '1980er': [1980,1989], '1990er': [1990,1999],
                     '2000er': [2000,2009], '2010er': [2010,2019], '2020er': [2020,2029] };
@@ -465,157 +731,29 @@ decades.forEach(d => {
   filterBar.appendChild(btn);
 });
 
+// ── STATE ──
 let activeDecade = 'all';
 let searchQuery = '';
 let visibleImages = [...IMAGES];
 let lbIndex = 0;
 
-// Filter & Render Gallery (unverändert)
-function getFiltered() { /* ... dein bestehender Code ... */ }
-function renderGallery() { /* ... dein bestehender Code ... */ }
-
-// === NEUE LIGHTBOX MIT ZOOM + PAN + ROTATE ===
-const lb = document.getElementById('lightbox');
-const lbImgWrap = document.getElementById('lbImgWrap');
-const lbImg = document.getElementById('lbImg');
-const lbTitle = document.getElementById('lbTitle');
-const lbYear = document.getElementById('lbYear');
-const lbCounter = document.getElementById('lbCounter');
-
-let currentScale = 1;
-let currentRotate = 0;
-let posX = 0;
-let posY = 0;
-let isDragging = false;
-let startX, startY;
-
-function resetTransform() {
-  currentScale = 1;
-  currentRotate = 0;
-  posX = 0;
-  posY = 0;
-  applyTransform();
+// ── FILTER LOGIC ──
+function getFiltered() {
+  return IMAGES.filter(img => {
+    const q = searchQuery.toLowerCase();
+    const matchText = !q ||
+      img.title.toLowerCase().includes(q) ||
+      (img.year && String(img.year).includes(q));
+    let matchDecade = true;
+    if (activeDecade !== 'all') {
+      const [lo, hi] = decadeMap[activeDecade];
+      matchDecade = img.year && img.year >= lo && img.year <= hi;
+    }
+    return matchText && matchDecade;
+  });
 }
 
-function applyTransform() {
-  lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${currentScale}) rotate(${currentRotate}deg)`;
-}
-
-function openLightbox(idx) {
-  lbIndex = idx;
-  showLbImage();
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  resetTransform();
-}
-
-function closeLightbox() {
-  lb.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function showLbImage() {
-  const imgData = visibleImages[lbIndex];
-  lbImg.src = encodeURIComponent(imgData.file);
-  lbImg.alt = imgData.title;
-  lbTitle.textContent = imgData.title;
-  lbYear.textContent = imgData.year || '';
-  lbCounter.textContent = `${lbIndex + 1} / ${visibleImages.length}`;
-  resetTransform();
-}
-
-function lbNav(dir) {
-  lbIndex = (lbIndex + dir + visibleImages.length) % visibleImages.length;
-  showLbImage();
-}
-
-// Zoom-Funktionen
-function zoom(delta) {
-  const oldScale = currentScale;
-  currentScale = Math.max(0.5, Math.min(8, currentScale + delta));
-  
-  // Zoom auf Maus-/Fingerposition zentrieren (vereinfacht hier auf Mitte)
-  const factor = currentScale / oldScale;
-  posX = posX * factor;
-  posY = posY * factor;
-  
-  applyTransform();
-}
-
-// Rotate
-function rotate(deg) {
-  currentRotate = (currentRotate + deg + 360) % 360;
-  applyTransform();
-}
-
-// Drag / Pan (Maus + Touch)
-function startDrag(e) {
-  isDragging = true;
-  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-  startX = clientX - posX;
-  startY = clientY - posY;
-  lbImgWrap.style.cursor = 'grabbing';
-}
-
-function doDrag(e) {
-  if (!isDragging) return;
-  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-  posX = clientX - startX;
-  posY = clientY - startY;
-  applyTransform();
-}
-
-function endDrag() {
-  isDragging = false;
-  lbImgWrap.style.cursor = 'grab';
-}
-
-// Wheel / Pinch Zoom
-lbImgWrap.addEventListener('wheel', e => {
-  e.preventDefault();
-  const delta = e.deltaY < 0 ? 0.2 : -0.2;
-  zoom(delta);
-}, { passive: false });
-
-// Event Listener
-lbImgWrap.addEventListener('mousedown', startDrag);
-lbImgWrap.addEventListener('mousemove', doDrag);
-document.addEventListener('mouseup', endDrag);
-
-lbImgWrap.addEventListener('touchstart', startDrag, { passive: true });
-lbImgWrap.addEventListener('touchmove', doDrag, { passive: true });
-lbImgWrap.addEventListener('touchend', endDrag);
-
-// Buttons
-document.getElementById('btnZoomIn').addEventListener('click', () => zoom(0.4));
-document.getElementById('btnZoomOut').addEventListener('click', () => zoom(-0.4));
-document.getElementById('btnReset').addEventListener('click', resetTransform);
-document.getElementById('btnRotateLeft').addEventListener('click', () => rotate(-90));
-document.getElementById('btnRotateRight').addEventListener('click', () => rotate(90));
-
-document.getElementById('lbClose').addEventListener('click', closeLightbox);
-document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
-document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
-
-// Tastatur
-document.addEventListener('keydown', e => {
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') lbNav(-1);
-  if (e.key === 'ArrowRight') lbNav(1);
-  if (e.key === '+') zoom(0.4);
-  if (e.key === '-') zoom(-0.4);
-  if (e.key === 'r' || e.key === 'R') resetTransform();
-});
-
-// Klick auf Hintergrund schließen
-lb.addEventListener('click', e => {
-  if (e.target === lb) closeLightbox();
-});
-
-// Gallery Cards (unverändert, nur openLightbox aufrufen)
+// ── RENDER GALLERY ──
 function renderGallery() {
   visibleImages = getFiltered();
   const gallery = document.getElementById('gallery');
@@ -642,12 +780,82 @@ function renderGallery() {
   });
 }
 
-// Search & Filter (unverändert)
+// ── LIGHTBOX ──
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbTitle = document.getElementById('lbTitle');
+const lbYear = document.getElementById('lbYear');
+const lbCounter = document.getElementById('lbCounter');
+const lbImgWrap = document.getElementById('lbImgWrap');
+
+function openLightbox(idx) {
+  lbIndex = idx;
+  showLbImage();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  lbImg.classList.remove('zoomed');
+  lbImgWrap.classList.remove('zoomed');
+}
+
+function showLbImage() {
+  const img = visibleImages[lbIndex];
+  lbImg.src = encodeURIComponent(img.file);
+  lbImg.alt = img.title;
+  lbTitle.textContent = img.title;
+  lbYear.textContent = img.year || '';
+  lbCounter.textContent = (lbIndex + 1) + ' / ' + visibleImages.length;
+  lbImg.classList.remove('zoomed');
+  lbImgWrap.classList.remove('zoomed');
+}
+
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + visibleImages.length) % visibleImages.length;
+  showLbImage();
+}
+
+// Toggle zoom on click
+lbImgWrap.addEventListener('click', e => {
+  if (e.target === lbImgWrap || e.target === lbImg) {
+    lbImg.classList.toggle('zoomed');
+    lbImgWrap.classList.toggle('zoomed');
+  }
+});
+
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
+document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+// Close on backdrop click
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+// Touch/swipe support
+let touchStartX = 0;
+lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+lb.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+// ── SEARCH ──
 document.getElementById('searchInput').addEventListener('input', e => {
   searchQuery = e.target.value;
   renderGallery();
 });
 
+// ── DECADE BUTTONS ──
 filterBar.addEventListener('click', e => {
   if (!e.target.matches('.year-btn')) return;
   filterBar.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
@@ -656,8 +864,9 @@ filterBar.addEventListener('click', e => {
   renderGallery();
 });
 
-// Init
+// ── INIT ──
 renderGallery();
 </script>
 </body>
 </html>
+
