@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doris Zarrinnam • Künstlerin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -61,11 +61,149 @@
     <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
   </section>
 
-  <!-- Karussell -->
+  <!-- Karussell (einfach und stabil) -->
   <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
     <div class="max-w-[95vw] w-full px-4 relative">
       <button onclick="closeModal()" 
               class="absolute -top-4 -right-4 bg-black text-white rounded-full w-12 h-12 flex items-center justify-center text-4xl hover:bg-amber-300 hover:text-black z-50">×</button>
       
       <div class="swiper mySwiper">
-        <div id="swiper-wrapper"
+        <div id="swiper-wrapper" class="swiper-wrapper"></div>
+        <div class="swiper-button-prev text-white"></div>
+        <div class="swiper-button-next text-white"></div>
+      </div>
+      
+      <div id="modal-caption" class="text-center text-zinc-400 mt-6 text-sm"></div>
+    </div>
+  </div>
+
+  <!-- Impressum -->
+  <footer class="bg-black border-t border-zinc-800 py-8 text-xs text-zinc-400">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <strong>Impressum</strong><br>
+        Angaben gemäß § 5 TMG<br>
+        Dr. Dirk-Bijan Zarrinnam<br>
+        Geilenkirchener Str. 15<br>
+        52525 Heinsberg<br>
+        E-Mail: <a href="mailto:doris.zarrinnam@web.de" class="underline hover:text-amber-300">doris.zarrinnam@web.de</a>
+      </div>
+      <div class="text-center md:text-right">
+        © 2026 Dr. Dirk-Bijan Zarrinnam • Alle Rechte vorbehalten
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const imageFiles = [ /* Deine volle Liste bleibt unverändert */ 
+      "1971 - persische Landschaft.JPG",
+      "1992 - Blaue Engel.JPG",
+      /* ... alle weiteren Bilder ... */
+      "TSS04947-bearbeitet.JPG"
+    ];
+
+    let allImages = [];
+
+    function loadImages(filteredImages = null) {
+      const gallery = document.getElementById("gallery");
+      const title = document.getElementById("gallery-title");
+      gallery.innerHTML = "";
+
+      const imagesToShow = filteredImages || allImages;
+
+      title.textContent = `Werke • chronologisch (${imagesToShow.length} Werke)`;
+
+      if (imagesToShow.length === 0) {
+        gallery.innerHTML = `<p class="col-span-full text-center text-amber-300 py-12">Keine Bilder gefunden.</p>`;
+        return;
+      }
+
+      imagesToShow.forEach((img, idx) => {
+        const div = document.createElement("div");
+        div.className = "cursor-pointer group overflow-hidden rounded-xl bg-zinc-900 aspect-square";
+        div.innerHTML = `
+          <img src="${img.url}" 
+               alt="${img.name}"
+               class="gallery-img"
+               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden:<br>${img.name}</div>'">
+          <p class="text-xs text-zinc-500 mt-2 text-center truncate px-1">${img.name}</p>
+        `;
+        div.onclick = () => openCarousel(idx);
+        gallery.appendChild(div);
+      });
+    }
+
+    function setupSearch() {
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", () => {
+        const term = searchInput.value.toLowerCase().trim();
+        if (!term) {
+          loadImages();
+          return;
+        }
+        const filtered = allImages.filter(img => 
+          img.name.toLowerCase().includes(term) || img.year.toString().includes(term)
+        );
+        loadImages(filtered);
+      });
+    }
+
+    let swiperInstance = null;
+
+    function openCarousel(startIndex) {
+      const modal = document.getElementById("modal");
+      const wrapper = document.getElementById("swiper-wrapper");
+      wrapper.innerHTML = "";
+
+      allImages.forEach(img => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+        slide.innerHTML = `
+          <img src="${img.url}" 
+               class="max-h-[90vh] max-w-[92vw] object-contain rounded-xl" 
+               alt="${img.name}">
+        `;
+        wrapper.appendChild(slide);
+      });
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      if (swiperInstance) swiperInstance.destroy();
+
+      swiperInstance = new Swiper('.mySwiper', {
+        initialSlide: startIndex,
+        loop: true,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        keyboard: { enabled: true },
+        centeredSlides: true
+      });
+
+      const updateCaption = () => {
+        const active = allImages[swiperInstance.realIndex];
+        document.getElementById("modal-caption").textContent = active ? active.name : '';
+      };
+      swiperInstance.on('slideChange', updateCaption);
+      updateCaption();
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+      document.getElementById("modal").classList.remove("flex");
+      if (swiperInstance) swiperInstance.destroy();
+    }
+
+    // Start der Seite
+    window.onload = () => {
+      allImages = imageFiles.map(name => {
+        const match = name.match(/(\d{4})/);
+        const year = match ? parseInt(match[1]) : 9999;
+        return { name, year, url: name };
+      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+
+      loadImages();     // ← Galerie zuerst laden
+      setupSearch();
+    };
+  </script>
+</body>
+</html>
