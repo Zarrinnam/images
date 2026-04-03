@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Doris Zarrinnam • Künstlerin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -61,7 +61,7 @@
     <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
   </section>
 
-  <!-- Karussell (einfach und stabil) -->
+  <!-- Karussell -->
   <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
     <div class="max-w-[95vw] w-full px-4 relative">
       <button onclick="closeModal()" 
@@ -95,115 +95,93 @@
   </footer>
 
   <script>
-    const imageFiles = [ /* Deine volle Liste bleibt unverändert */ 
+    const imageFiles = [
       "1971 - persische Landschaft.JPG",
       "1992 - Blaue Engel.JPG",
-      /* ... alle weiteren Bilder ... */
-      "TSS04947-bearbeitet.JPG"
-    ];
-
-    let allImages = [];
-
-    function loadImages(filteredImages = null) {
-      const gallery = document.getElementById("gallery");
-      const title = document.getElementById("gallery-title");
-      gallery.innerHTML = "";
-
-      const imagesToShow = filteredImages || allImages;
-
-      title.textContent = `Werke • chronologisch (${imagesToShow.length} Werke)`;
-
-      if (imagesToShow.length === 0) {
-        gallery.innerHTML = `<p class="col-span-full text-center text-amber-300 py-12">Keine Bilder gefunden.</p>`;
-        return;
-      }
-
-      imagesToShow.forEach((img, idx) => {
-        const div = document.createElement("div");
-        div.className = "cursor-pointer group overflow-hidden rounded-xl bg-zinc-900 aspect-square";
-        div.innerHTML = `
-          <img src="${img.url}" 
-               alt="${img.name}"
-               class="gallery-img"
-               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden:<br>${img.name}</div>'">
-          <p class="text-xs text-zinc-500 mt-2 text-center truncate px-1">${img.name}</p>
-        `;
-        div.onclick = () => openCarousel(idx);
-        gallery.appendChild(div);
-      });
-    }
-
-    function setupSearch() {
-      const searchInput = document.getElementById("searchInput");
-      searchInput.addEventListener("input", () => {
-        const term = searchInput.value.toLowerCase().trim();
-        if (!term) {
-          loadImages();
-          return;
-        }
-        const filtered = allImages.filter(img => 
-          img.name.toLowerCase().includes(term) || img.year.toString().includes(term)
-        );
-        loadImages(filtered);
-      });
-    }
-
-    let swiperInstance = null;
-
-    function openCarousel(startIndex) {
-      const modal = document.getElementById("modal");
-      const wrapper = document.getElementById("swiper-wrapper");
-      wrapper.innerHTML = "";
-
-      allImages.forEach(img => {
-        const slide = document.createElement("div");
-        slide.className = "swiper-slide";
-        slide.innerHTML = `
-          <img src="${img.url}" 
-               class="max-h-[90vh] max-w-[92vw] object-contain rounded-xl" 
-               alt="${img.name}">
-        `;
-        wrapper.appendChild(slide);
-      });
-
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-
-      if (swiperInstance) swiperInstance.destroy();
-
-      swiperInstance = new Swiper('.mySwiper', {
-        initialSlide: startIndex,
-        loop: true,
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        keyboard: { enabled: true },
-        centeredSlides: true
-      });
-
-      const updateCaption = () => {
-        const active = allImages[swiperInstance.realIndex];
-        document.getElementById("modal-caption").textContent = active ? active.name : '';
-      };
-      swiperInstance.on('slideChange', updateCaption);
-      updateCaption();
-    }
-
-    function closeModal() {
-      document.getElementById("modal").classList.add("hidden");
-      document.getElementById("modal").classList.remove("flex");
-      if (swiperInstance) swiperInstance.destroy();
-    }
-
-    // Start der Seite
-    window.onload = () => {
-      allImages = imageFiles.map(name => {
-        const match = name.match(/(\d{4})/);
-        const year = match ? parseInt(match[1]) : 9999;
-        return { name, year, url: name };
-      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
-
-      loadImages();     // ← Galerie zuerst laden
-      setupSearch();
-    };
-  </script>
-</body>
-</html>
+      "1992 - Erlebnis '85 Aachen.JPG",
+      "1992 - Feuerwerk.JPG",
+      "1992 - Flaggenbaum.JPG",
+      "1992 - Friedensgedanken.JPG",
+      "1992 - Glühwurm - Glühwein.JPG",
+      "1992 - Hoffnung.JPG",
+      "1992 - Jahreszeiten.JPG",
+      "1992 - Lebenslauf.JPG",
+      "1992 - Mut.JPG",
+      "1992 - O.T..JPG",
+      "1992 - Osterstrauß.JPG",
+      "1992 - Prisma.JPG",
+      "1992 - Sehnsucht.JPG",
+      "1992 - W.JPG",
+      "1992 - Zuversicht.JPG",
+      "1993 - Apfel.JPG",
+      "1993 - Augenschein.JPG",
+      "1993 - Begutachtung.JPG",
+      "1993 - Betrachtungen.JPG",
+      "1993 - Bildung I.JPG",
+      "1993 - Der Pfau.JPG",
+      "1993 - Einblick Aussicht.JPG",
+      "1993 - Einsamkeit.JPG",
+      "1993 - Geduld.JPG",
+      "1993 - Kristal.JPG",
+      "1993 - Nächstenliebe.JPG",
+      "1993 Einsamkeit '86.JPG",
+      "1994 - 1001.JPG",
+      "1994 - Durchblick.JPG",
+      "1994 - Wunschdenken.JPG",
+      "1995 - Einladung zum ....JPG",
+      "1995 - Es war einmal ....JPG",
+      "1995 - Fabel.JPG",
+      "1995 - Gästebuch.JPG",
+      "1995 - Kaffee.JPG",
+      "1995 - Katzenkunst oder 15.000 Dollar.JPG",
+      "1995 - Märchen.JPG",
+      "1995 - Trilogie gelbe Blumen.JPG",
+      "1996 - Gesellschaft.JPG",
+      "1996 - Themen.JPG",
+      "1996 - Trilogie weiße Blumen.JPG",
+      "1996 - Zeit.JPG",
+      "1997 - Europa und Ophthalmologie.JPG",
+      "1997 - Jahrtausendwende.JPG",
+      "1997 - Komposition.JPG",
+      "1997 - Medienzeitalter.JPG",
+      "1997 - Position.JPG",
+      "1997 - Situation.JPG",
+      "1997 - Trilogie rote Blumen.JPG",
+      "1997 - Unterhaltung.JPG",
+      "1998 - Besinnung.JPG",
+      "1998 - Betreuung.JPG",
+      "1998 - Euroclown.JPG",
+      "1998 - Integration.JPG",
+      "1998 - Toleranz.JPG",
+      "1998 - Überblick - Übersicht.JPG",
+      "1998 - Weg.JPG",
+      "1998 - Zeiterscheinung.JPG",
+      "1999 - Blaue Rose.JPG",
+      "1999 - Garten.JPG",
+      "1999 - Gespräche.JPG",
+      "1999 - Praxis.JPG",
+      "1999 - Rückblick.JPG",
+      "1999 - Sonnenfinsternis.JPG",
+      "2000 - 5 Jahreszeiten.JPG",
+      "2000 - Wahrnemung.JPG",
+      "2001 - Kompetente Beratung.JPG",
+      "2002 - 3 Jahre.JPG",
+      "2002 - Schweigen.JPG",
+      "2002 - Zuhause.JPG",
+      "2002 - Zukunft.JPG",
+      "2003 - Analyse.JPG",
+      "2003 - Europa und die Optik.JPG",
+      "2003 - Garten.JPG",
+      "2003 - Stilleben mit (Prisma)Hand.JPG",
+      "2003 - Trilogie Gestern.JPG",
+      "2003 - Trilogie Heute.JPG",
+      "2003 - Trilogie Morgen.JPG",
+      "2004 - Eingebung.JPG",
+      "2004 - Sprache der Malerei I.JPG",
+      "2004 - Themenwahl.JPG",
+      "2004 - Vertrauen I.JPG",
+      "2004 - Vertrauen II.JPG",
+      "2004 Zweisamkeit.JPG",
+      "2005 - Bildung II.JPG",
+      "2005 - Blumenstrauss.JPG",
+      "
