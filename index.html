@@ -100,7 +100,7 @@
       letter-spacing: 1px;
     }
 
-    /* Lightbox */
+    /* ==================== LIGHTBOX ==================== */
     #lightbox {
       display: none;
       position: fixed;
@@ -112,23 +112,48 @@
       flex-direction: column;
     }
     #lightbox.open { display: flex; }
+
+    .lb-topbar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 20px 25px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 20;
+      color: white;
+    }
+    .lb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .lb-year {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
     .lb-content {
       position: relative;
       max-width: 94vw;
-      max-height: 88vh;
+      max-height: 82vh;
     }
     #lbImg {
       max-width: 100%;
-      max-height: 88vh;
+      max-height: 82vh;
       object-fit: contain;
       transform-origin: center center;
       transition: transform 0.08s linear;
       cursor: grab;
       user-select: none;
     }
+
     .lb-controls {
       position: absolute;
-      bottom: -65px;
+      bottom: -68px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -153,6 +178,7 @@
       color: #0e0e0e;
       border-color: var(--gold);
     }
+
     .lb-nav {
       position: absolute;
       top: 50%;
@@ -167,20 +193,21 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 10;
+      z-index: 15;
     }
     #lbPrev { left: 20px; }
     #lbNext { right: 20px; }
+
     .lb-close {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 20px;
+      right: 25px;
       font-size: 36px;
       background: none;
       border: none;
       color: #fff;
       cursor: pointer;
-      z-index: 20;
+      z-index: 25;
     }
 
     footer {
@@ -214,12 +241,22 @@
 
 <!-- Lightbox -->
 <div id="lightbox">
+  <!-- Top Bar mit Titel und Jahr -->
+  <div class="lb-topbar">
+    <div>
+      <div class="lb-title" id="lbTitle"></div>
+      <div class="lb-year" id="lbYear"></div>
+    </div>
+  </div>
+
   <button class="lb-close" id="lbClose">×</button>
+
   <div class="lb-content">
     <img id="lbImg" src="" alt="">
     <button class="lb-nav" id="lbPrev">‹</button>
     <button class="lb-nav" id="lbNext">›</button>
   </div>
+
   <div class="lb-controls">
     <button class="lb-btn" id="zoomOut" title="Verkleinern">–</button>
     <button class="lb-btn" id="reset" title="Zurücksetzen">⟳</button>
@@ -242,11 +279,11 @@
     
     Haftungshinweis gemäß § 5 DDG: Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.
   </div>
-  <div>© Dr. Dirk-Bijan Zarrinnam – Alle Rechte vorbehalten</div>
+  <div>© Doris Zarrinnam – Alle Rechte vorbehalten</div>
 </footer>
 
 <script>
-// Alle Bilder (relative Pfade – funktionieren direkt auf GitHub Pages)
+// Bilder – relative Pfade (funktionieren direkt auf https://zarrinnam.github.io/images/)
 const IMAGES = [
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -481,6 +518,8 @@ const galleryEl = document.getElementById('gallery');
 const searchInput = document.getElementById('searchInput');
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
+const lbTitle = document.getElementById('lbTitle');
+const lbYear = document.getElementById('lbYear');
 
 // Gallery rendern
 function renderGallery(filtered) {
@@ -511,7 +550,7 @@ function filterImages() {
 
 searchInput.addEventListener('input', filterImages);
 
-// Lightbox
+// Lightbox Funktionen
 function openLightbox(idx) {
   currentIndex = idx;
   showImage();
@@ -520,7 +559,10 @@ function openLightbox(idx) {
 }
 
 function showImage() {
-  lbImg.src = IMAGES[currentIndex].file;
+  const imgData = IMAGES[currentIndex];
+  lbImg.src = imgData.file;
+  lbTitle.textContent = imgData.title;
+  lbYear.textContent = imgData.year ? imgData.year : '';
   resetTransform();
 }
 
@@ -549,14 +591,14 @@ document.getElementById('lbNext').addEventListener('click', () => {
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 
-// Buttons
+// Zoom, Rotate, Reset
 document.getElementById('zoomIn').addEventListener('click', () => { scale = Math.min(6, scale + 0.3); applyTransform(); });
 document.getElementById('zoomOut').addEventListener('click', () => { scale = Math.max(0.5, scale - 0.3); applyTransform(); });
 document.getElementById('rotateLeft').addEventListener('click', () => { rotateDeg -= 90; applyTransform(); });
 document.getElementById('rotateRight').addEventListener('click', () => { rotateDeg += 90; applyTransform(); });
 document.getElementById('reset').addEventListener('click', resetTransform);
 
-// Drag & Wheel
+// Drag
 lbImg.addEventListener('mousedown', e => {
   isDragging = true;
   startX = e.clientX - posX;
@@ -570,6 +612,7 @@ document.addEventListener('mousemove', e => {
 });
 document.addEventListener('mouseup', () => { isDragging = false; });
 
+// Wheel Zoom
 lbImg.addEventListener('wheel', e => {
   e.preventDefault();
   const delta = e.deltaY < 0 ? 0.25 : -0.25;
