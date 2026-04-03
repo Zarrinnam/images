@@ -21,7 +21,6 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Jost', sans-serif;
-      line-height: 1.6;
     }
     header {
       text-align: center;
@@ -116,22 +115,20 @@
     .lb-topbar {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: 20px 25px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      z-index: 20;
-      color: white;
+      padding: 25px 30px 20px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+      z-index: 30;
+      color: #fff;
     }
     .lb-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 22px;
-      margin-bottom: 4px;
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 6px;
     }
     .lb-year {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--gold);
       letter-spacing: 2px;
     }
@@ -139,21 +136,23 @@
     .lb-content {
       position: relative;
       max-width: 94vw;
-      max-height: 82vh;
+      max-height: 78vh;
+      margin-top: 20px;
     }
     #lbImg {
       max-width: 100%;
-      max-height: 82vh;
+      max-height: 78vh;
       object-fit: contain;
       transform-origin: center center;
-      transition: transform 0.08s linear;
+      transition: transform 0.1s linear;
       cursor: grab;
       user-select: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
     .lb-controls {
       position: absolute;
-      bottom: -68px;
+      bottom: -70px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -162,6 +161,7 @@
       padding: 10px 18px;
       border-radius: 30px;
       border: 1px solid var(--border);
+      z-index: 25;
     }
     .lb-btn {
       background: transparent;
@@ -183,31 +183,31 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(20,20,20,0.8);
+      background: rgba(20,20,20,0.85);
       color: white;
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      font-size: 30px;
+      font-size: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 15;
+      z-index: 20;
     }
     #lbPrev { left: 20px; }
     #lbNext { right: 20px; }
 
     .lb-close {
       position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 36px;
+      top: 25px;
+      right: 30px;
+      font-size: 38px;
       background: none;
       border: none;
       color: #fff;
       cursor: pointer;
-      z-index: 25;
+      z-index: 35;
     }
 
     footer {
@@ -241,7 +241,6 @@
 
 <!-- Lightbox -->
 <div id="lightbox">
-  <!-- Top Bar mit Titel und Jahr -->
   <div class="lb-topbar">
     <div>
       <div class="lb-title" id="lbTitle"></div>
@@ -279,11 +278,11 @@
     
     Haftungshinweis gemäß § 5 DDG: Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.
   </div>
-  <div>© Dr. Dirk-Bijan Zarrinnam – Alle Rechte vorbehalten</div>
+  <div>© Doris Zarrinnam – Alle Rechte vorbehalten</div>
 </footer>
 
 <script>
-// Bilder – relative Pfade (funktionieren direkt auf https://zarrinnam.github.io/images/)
+// Bilder – relative Pfade
 const IMAGES = [
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -550,7 +549,7 @@ function filterImages() {
 
 searchInput.addEventListener('input', filterImages);
 
-// Lightbox Funktionen
+// Lightbox
 function openLightbox(idx) {
   currentIndex = idx;
   showImage();
@@ -559,10 +558,10 @@ function openLightbox(idx) {
 }
 
 function showImage() {
-  const imgData = IMAGES[currentIndex];
-  lbImg.src = imgData.file;
-  lbTitle.textContent = imgData.title;
-  lbYear.textContent = imgData.year ? imgData.year : '';
+  const data = IMAGES[currentIndex];
+  lbImg.src = data.file;
+  lbTitle.textContent = data.title;
+  lbYear.textContent = data.year ? data.year : '';
   resetTransform();
 }
 
@@ -580,7 +579,7 @@ function resetTransform() {
   applyTransform();
 }
 
-// Navigation
+// Navigation & Controls
 document.getElementById('lbPrev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
   showImage();
@@ -591,14 +590,13 @@ document.getElementById('lbNext').addEventListener('click', () => {
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 
-// Zoom, Rotate, Reset
 document.getElementById('zoomIn').addEventListener('click', () => { scale = Math.min(6, scale + 0.3); applyTransform(); });
 document.getElementById('zoomOut').addEventListener('click', () => { scale = Math.max(0.5, scale - 0.3); applyTransform(); });
 document.getElementById('rotateLeft').addEventListener('click', () => { rotateDeg -= 90; applyTransform(); });
 document.getElementById('rotateRight').addEventListener('click', () => { rotateDeg += 90; applyTransform(); });
 document.getElementById('reset').addEventListener('click', resetTransform);
 
-// Drag
+// Drag & Wheel
 lbImg.addEventListener('mousedown', e => {
   isDragging = true;
   startX = e.clientX - posX;
@@ -612,7 +610,6 @@ document.addEventListener('mousemove', e => {
 });
 document.addEventListener('mouseup', () => { isDragging = false; });
 
-// Wheel Zoom
 lbImg.addEventListener('wheel', e => {
   e.preventDefault();
   const delta = e.deltaY < 0 ? 0.25 : -0.25;
@@ -624,8 +621,14 @@ lbImg.addEventListener('wheel', e => {
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length; showImage(); }
-  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % IMAGES.length; showImage(); }
+  if (e.key === 'ArrowLeft') {
+    currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+    showImage();
+  }
+  if (e.key === 'ArrowRight') {
+    currentIndex = (currentIndex + 1) % IMAGES.length;
+    showImage();
+  }
 });
 
 // Init
