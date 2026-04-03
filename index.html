@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doris Zarrinnam • Künstlerin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    .gallery-img { transition: all 0.3s ease; }
+    .gallery-img:hover { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2); }
+    .modal { animation: fadeIn 0.3s ease; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100">
+
+  <!-- HEADER -->
+  <header class="bg-black py-8 border-b border-zinc-800">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-light tracking-widest">DORIS ZARRINNAM</h1>
+      <p class="text-lg text-amber-300 mt-2">Künstlerin • Malerei &amp; Fotografie</p>
+    </div>
+  </header>
+
+  <!-- BIO / EINLEITUNG -->
+  <section class="max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-light mb-6 border-l-4 border-amber-300 pl-4">Über mich</h2>
+    <div class="prose prose-invert max-w-none text-zinc-300 text-lg leading-relaxed">
+      <!-- HIER kannst du deinen Lebenslauf / Einleitung einfügen -->
+      <p>Hier kommt deine persönliche Einleitung und dein Lebenslauf hin. Du kannst diesen Abschnitt jederzeit beliebig erweitern oder mit Fotos ergänzen.</p>
+      <p>Geboren in … | Studium … | Ausstellungen … etc.</p>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="max-w-7xl mx-auto px-6 pb-20">
+    <h2 class="text-3xl font-light mb-10 text-center">Werke • chronologisch</h2>
+    
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <!-- Wird dynamisch mit Bildern gefüllt -->
+    </div>
+
+    <p id="empty-msg" class="text-center text-zinc-400 mt-12 hidden">
+      Noch keine Bilder im Repository. Lade deine Bilder mit datumsbasierten Dateinamen hoch (z. B. 2025-04-03_…).
+    </p>
+  </section>
+
+  <!-- MODALES KARUSSELL (drehbar / swipe-fähig auf allen Geräten) -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center modal">
+    <div class="max-w-6xl w-full px-4 relative">
+      <!-- Close Button -->
+      <button onclick="closeModal()" 
+              class="absolute -top-4 -right-4 bg-black text-white rounded-full w-10 h-10 flex items-center justify-center text-3xl hover:bg-amber-300 hover:text-black z-50">
+        ×
+      </button>
+
+      <!-- Swiper Carousel -->
+      <div class="swiper mySwiper">
+        <div id="swiper-wrapper" class="swiper-wrapper">
+          <!-- Slides werden per JS eingefügt -->
+        </div>
+        <!-- Navigation -->
+        <div class="swiper-button-prev text-white"></div>
+        <div class="swiper-button-next text-white"></div>
+      </div>
+
+      <!-- Bildtitel + Datum -->
+      <div id="modal-caption" class="text-center text-zinc-400 mt-4 text-sm"></div>
+    </div>
+  </div>
+
+  <!-- IMPRESSUMLEISTE (rechtssicher nach § 5 TMG) -->
+  <footer class="bg-black border-t border-zinc-800 py-8 text-xs text-zinc-400">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <strong>Impressum</strong><br>
+        Angaben gemäß § 5 TMG<br>
+        Doris Zarrinnam<br>
+        <span id="impressum-address">[Deine vollständige Adresse hier eintragen]</span><br>
+        Telefon: <span id="impressum-phone">[Telefonnummer]</span><br>
+        E-Mail: <a href="mailto:[deine@email.de]" class="underline hover:text-amber-300">[deine@email.de]</a>
+      </div>
+      <div class="text-center md:text-right">
+        © 2026 Doris Zarrinnam • Alle Rechte vorbehalten<br>
+        <a href="#" onclick="alert('Datenschutzerklärung kann hier als separates HTML oder Link eingefügt werden.')" class="underline hover:text-amber-300">Datenschutz</a> • 
+        <a href="#" onclick="alert('Hier kannst du das Impressum noch ausführlicher machen.')" class="underline hover:text-amber-300">Impressum erweitern</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === DYNAMISCHES LADEN DER BILDER AUS DEINEM GITHUB-REPO ===
+    async function loadImages() {
+      const repo = "Zarrinnam/images";
+      const url = `https://api.github.com/repos/${repo}/contents`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Repo leer oder nicht erreichbar");
+        
+        const files = await res.json();
+        
+        // Nur Bild-Dateien filtern
+        const imageFiles = files.filter(file => 
+          file.type === "file" && 
+          /\.(jpg|jpeg|png|gif|webp)$/i.test(file.name)
+        );
+
+        if (imageFiles.length === 0) {
+          document.getElementById("empty-msg").classList.remove("hidden");
+          return;
+        }
+
+        // Datum aus Dateinamen extrahieren (z. B. 2025-04-03_...)
+        const parsed = imageFiles.map(file => {
+          const match = file.name.match(/(\d{4}-\d{2}-\d{2})/);
+          const date = match ? new Date(match[1]) : new Date(0);
+          return { ...file, date };
+        });
+
+        // Chronologisch sortieren (älteste zuerst)
+        parsed.sort((a, b) => a.date - b.date);
+
+        // Gallery rendern
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = "";
+
+        parsed.forEach((img, index) => {
+          const div = document.createElement("div");
+          div.className = "cursor-pointer group";
+          div.innerHTML = `
+            <div class="overflow-hidden rounded-xl bg-zinc-900">
+              <img src="${img.download_url}" 
+                   alt="${img.name}"
+                   class="gallery-img w-full aspect-square object-cover">
+            </div>
+            <p class="text-xs text-zinc-500 mt-2 text-center">${img.name}</p>
+          `;
+          div.onclick = () => openCarousel(parsed, index);
+          gallery.appendChild(div);
+        });
+
+      } catch (e) {
+        console.error(e);
+        document.getElementById("empty-msg").classList.remove("hidden");
+      }
+    }
+
+    // === KARUSSELL ÖFFNEN ===
+    let swiperInstance = null;
+
+    function openCarousel(images, startIndex) {
+      const modal = document.getElementById("modal");
+      const wrapper = document.getElementById("swiper-wrapper");
+      wrapper.innerHTML = "";
+
+      images.forEach(img => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide flex items-center justify-center h-[80vh]";
+        slide.innerHTML = `
+          <img src="${img.download_url}" 
+               class="max-h-full max-w-full object-contain rounded-2xl shadow-2xl"
+               alt="${img.name}">
+        `;
+        wrapper.appendChild(slide);
+      });
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      // Swiper initialisieren (drehbar / swipe-fähig)
+      if (swiperInstance) swiperInstance.destroy();
+      swiperInstance = new Swiper('.mySwiper', {
+        initialSlide: startIndex,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        keyboard: { enabled: true },
+        mousewheel: { enabled: true },
+        centeredSlides: true,
+      });
+
+      // Caption aktualisieren
+      const updateCaption = () => {
+        const active = images[swiperInstance.realIndex];
+        document.getElementById("modal-caption").textContent = 
+          `${active.name} • ${active.date.toISOString().split('T')[0]}`;
+      };
+      swiperInstance.on('slideChange', updateCaption);
+      updateCaption();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      if (swiperInstance) swiperInstance.destroy();
+    }
+
+    // Tailwind aktivieren
+    tailwind.config = { content: ["./**/*"] };
+
+    // Seite starten
+    window.onload = loadImages;
+  </script>
+</body>
+</html>
