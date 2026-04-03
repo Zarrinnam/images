@@ -189,4 +189,404 @@
       text-align: center;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size
+      font-size: 14px;
+    }
+    .impressum {
+      max-width: 720px;
+      margin: 0 auto 30px;
+      text-align: left;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Doris <em>Zarrinnam</em></h1>
+  <p style="margin-top:12px; color:var(--muted);">Malerei • 1971 – 2020</p>
+</header>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Titel oder Jahr suchen …">
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">×</button>
+  <div class="lb-content">
+    <img id="lbImg" src="" alt="">
+    <button class="lb-nav" id="lbPrev">‹</button>
+    <button class="lb-nav" id="lbNext">›</button>
+  </div>
+  <div class="lb-controls">
+    <button class="lb-btn" id="zoomOut" title="Verkleinern">–</button>
+    <button class="lb-btn" id="reset" title="Zurücksetzen">⟳</button>
+    <button class="lb-btn" id="zoomIn" title="Vergrößern">+</button>
+    <button class="lb-btn" id="rotateLeft" title="90° links">↺</button>
+    <button class="lb-btn" id="rotateRight" title="90° rechts">↻</button>
+  </div>
+</div>
+
+<footer>
+  <div class="impressum">
+    <strong>Impressum</strong><br><br>
+    Dr. Dirk-Bijan Zarrinnam<br>
+    Geilenkirchener Str. 15<br>
+    52525 Heinsberg<br><br>
+    E-Mail: <a href="mailto:doris.zarrinnam@web.de" style="color:var(--gold);">doris.zarrinnam@web.de</a><br><br>
+    
+    Alle auf dieser Website gezeigten Werke sind urheberrechtlich geschützt. 
+    Jede Vervielfältigung, Verbreitung oder öffentliche Wiedergabe bedarf der schriftlichen Zustimmung der Erben.<br><br>
+    
+    Haftungshinweis gemäß § 5 DDG: Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.
+  </div>
+  <div>© Doris Zarrinnam – Alle Rechte vorbehalten</div>
+</footer>
+
+<script>
+// Alle Bilder (relative Pfade – funktionieren direkt auf GitHub Pages)
+const IMAGES = [
+  { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
+  { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
+  { file: "1992 - Erlebnis '85 Aachen.JPG", year: 1992, title: "Erlebnis '85 Aachen" },
+  { file: "1992 - Feuerwerk.JPG", year: 1992, title: "Feuerwerk" },
+  { file: "1992 - Flaggenbaum.JPG", year: 1992, title: "Flaggenbaum" },
+  { file: "1992 - Friedensgedanken.JPG", year: 1992, title: "Friedensgedanken" },
+  { file: "1992 - Glühwurm - Glühwein.JPG", year: 1992, title: "Glühwurm – Glühwein" },
+  { file: "1992 - Hoffnung.JPG", year: 1992, title: "Hoffnung" },
+  { file: "1992 - Jahreszeiten.JPG", year: 1992, title: "Jahreszeiten" },
+  { file: "1992 - Lebenslauf.JPG", year: 1992, title: "Lebenslauf" },
+  { file: "1992 - Mut.JPG", year: 1992, title: "Mut" },
+  { file: "1992 - O.T..JPG", year: 1992, title: "O.T." },
+  { file: "1992 - Osterstrauß.JPG", year: 1992, title: "Osterstrauß" },
+  { file: "1992 - Prisma.JPG", year: 1992, title: "Prisma" },
+  { file: "1992 - Sehnsucht.JPG", year: 1992, title: "Sehnsucht" },
+  { file: "1992 - W.JPG", year: 1992, title: "W" },
+  { file: "1992 - Zuversicht.JPG", year: 1992, title: "Zuversicht" },
+  { file: "1993 - Apfel.JPG", year: 1993, title: "Apfel" },
+  { file: "1993 - Augenschein.JPG", year: 1993, title: "Augenschein" },
+  { file: "1993 - Begutachtung.JPG", year: 1993, title: "Begutachtung" },
+  { file: "1993 - Betrachtungen.JPG", year: 1993, title: "Betrachtungen" },
+  { file: "1993 - Bildung I.JPG", year: 1993, title: "Bildung I" },
+  { file: "1993 - Der Pfau.JPG", year: 1993, title: "Der Pfau" },
+  { file: "1993 - Einblick Aussicht.JPG", year: 1993, title: "Einblick Aussicht" },
+  { file: "1993 - Einsamkeit.JPG", year: 1993, title: "Einsamkeit" },
+  { file: "1993 - Geduld.JPG", year: 1993, title: "Geduld" },
+  { file: "1993 - Kristal.JPG", year: 1993, title: "Kristal" },
+  { file: "1993 - Nächstenliebe.JPG", year: 1993, title: "Nächstenliebe" },
+  { file: "1993 Einsamkeit '86.JPG", year: 1993, title: "Einsamkeit '86" },
+  { file: "1994 - 1001.JPG", year: 1994, title: "1001" },
+  { file: "1994 - Durchblick.JPG", year: 1994, title: "Durchblick" },
+  { file: "1994 - Wunschdenken.JPG", year: 1994, title: "Wunschdenken" },
+  { file: "1995 - Einladung zum ....JPG", year: 1995, title: "Einladung zum …" },
+  { file: "1995 - Es war einmal ....JPG", year: 1995, title: "Es war einmal …" },
+  { file: "1995 - Fabel.JPG", year: 1995, title: "Fabel" },
+  { file: "1995 - Gästebuch.JPG", year: 1995, title: "Gästebuch" },
+  { file: "1995 - Kaffee.JPG", year: 1995, title: "Kaffee" },
+  { file: "1995 - Katzenkunst oder 15.000 Dollar.JPG", year: 1995, title: "Katzenkunst oder 15.000 Dollar" },
+  { file: "1995 - Märchen.JPG", year: 1995, title: "Märchen" },
+  { file: "1995 - Trilogie gelbe Blumen.JPG", year: 1995, title: "Trilogie gelbe Blumen" },
+  { file: "1996 - Gesellschaft.JPG", year: 1996, title: "Gesellschaft" },
+  { file: "1996 - Themen.JPG", year: 1996, title: "Themen" },
+  { file: "1996 - Trilogie weiße Blumen.JPG", year: 1996, title: "Trilogie weiße Blumen" },
+  { file: "1996 - Zeit.JPG", year: 1996, title: "Zeit" },
+  { file: "1997 - Europa und Ophthalmologie.JPG", year: 1997, title: "Europa und Ophthalmologie" },
+  { file: "1997 - Jahrtausendwende.JPG", year: 1997, title: "Jahrtausendwende" },
+  { file: "1997 - Komposition.JPG", year: 1997, title: "Komposition" },
+  { file: "1997 - Medienzeitalter.JPG", year: 1997, title: "Medienzeitalter" },
+  { file: "1997 - Position.JPG", year: 1997, title: "Position" },
+  { file: "1997 - Situation.JPG", year: 1997, title: "Situation" },
+  { file: "1997 - Trilogie rote Blumen.JPG", year: 1997, title: "Trilogie rote Blumen" },
+  { file: "1997 - Unterhaltung.JPG", year: 1997, title: "Unterhaltung" },
+  { file: "1998 - Besinnung.JPG", year: 1998, title: "Besinnung" },
+  { file: "1998 - Betreuung.JPG", year: 1998, title: "Betreuung" },
+  { file: "1998 - Euroclown.JPG", year: 1998, title: "Euroclown" },
+  { file: "1998 - Integration.JPG", year: 1998, title: "Integration" },
+  { file: "1998 - Toleranz.JPG", year: 1998, title: "Toleranz" },
+  { file: "1998 - Überblick - Übersicht.JPG", year: 1998, title: "Überblick – Übersicht" },
+  { file: "1998 - Weg.JPG", year: 1998, title: "Weg" },
+  { file: "1998 - Zeiterscheinung.JPG", year: 1998, title: "Zeiterscheinung" },
+  { file: "1999 - Blaue Rose.JPG", year: 1999, title: "Blaue Rose" },
+  { file: "1999 - Garten.JPG", year: 1999, title: "Garten" },
+  { file: "1999 - Gespräche.JPG", year: 1999, title: "Gespräche" },
+  { file: "1999 - Praxis.JPG", year: 1999, title: "Praxis" },
+  { file: "1999 - Rückblick.JPG", year: 1999, title: "Rückblick" },
+  { file: "1999 - Sonnenfinsternis.JPG", year: 1999, title: "Sonnenfinsternis" },
+  { file: "2000 - 5 Jahreszeiten.JPG", year: 2000, title: "5 Jahreszeiten" },
+  { file: "2000 - Wahrnemung.JPG", year: 2000, title: "Wahrnehmung" },
+  { file: "2001 - Kompetente Beratung.JPG", year: 2001, title: "Kompetente Beratung" },
+  { file: "2002 - 3 Jahre.JPG", year: 2002, title: "3 Jahre" },
+  { file: "2002 - Schweigen.JPG", year: 2002, title: "Schweigen" },
+  { file: "2002 - Zuhause.JPG", year: 2002, title: "Zuhause" },
+  { file: "2002 - Zukunft.JPG", year: 2002, title: "Zukunft" },
+  { file: "2003 - Analyse.JPG", year: 2003, title: "Analyse" },
+  { file: "2003 - Europa und die Optik.JPG", year: 2003, title: "Europa und die Optik" },
+  { file: "2003 - Garten.JPG", year: 2003, title: "Garten" },
+  { file: "2003 - Stilleben mit (Prisma)Hand.JPG", year: 2003, title: "Stilleben mit (Prisma)Hand" },
+  { file: "2003 - Trilogie Gestern.JPG", year: 2003, title: "Trilogie Gestern" },
+  { file: "2003 - Trilogie Heute.JPG", year: 2003, title: "Trilogie Heute" },
+  { file: "2003 - Trilogie Morgen.JPG", year: 2003, title: "Trilogie Morgen" },
+  { file: "2004 - Eingebung.JPG", year: 2004, title: "Eingebung" },
+  { file: "2004 - Sprache der Malerei I.JPG", year: 2004, title: "Sprache der Malerei I" },
+  { file: "2004 - Themenwahl.JPG", year: 2004, title: "Themenwahl" },
+  { file: "2004 - Vertrauen I.JPG", year: 2004, title: "Vertrauen I" },
+  { file: "2004 - Vertrauen II.JPG", year: 2004, title: "Vertrauen II" },
+  { file: "2004 Zweisamkeit.JPG", year: 2004, title: "Zweisamkeit" },
+  { file: "2005 - Bildung II.JPG", year: 2005, title: "Bildung II" },
+  { file: "2005 - Blumenstrauss.JPG", year: 2005, title: "Blumenstrauß" },
+  { file: "2005 - F.JPG", year: 2005, title: "F" },
+  { file: "2005 - Geburt.JPG", year: 2005, title: "Geburt" },
+  { file: "2005 - Klostergarten.JPG", year: 2005, title: "Klostergarten" },
+  { file: "2005 - Sachverstand.JPG", year: 2005, title: "Sachverstand" },
+  { file: "2005 - U+M.JPG", year: 2005, title: "U+M" },
+  { file: "2005 - Umstellung.JPG", year: 2005, title: "Umstellung" },
+  { file: "2006 - Allegorie.JPG", year: 2006, title: "Allegorie" },
+  { file: "2006 - Ausdruckskraft.JPG", year: 2006, title: "Ausdruckskraft" },
+  { file: "2006 - Ausgleich.JPG", year: 2006, title: "Ausgleich" },
+  { file: "2006 - Gesundheit.JPG", year: 2006, title: "Gesundheit" },
+  { file: "2006 - Sprache der Malerei II.JPG", year: 2006, title: "Sprache der Malerei II" },
+  { file: "2006 - Tulpen.JPG", year: 2006, title: "Tulpen" },
+  { file: "2006 - Virtuelle Welt.JPG", year: 2006, title: "Virtuelle Welt" },
+  { file: "2007 - Abstraktion I.JPG", year: 2007, title: "Abstraktion I" },
+  { file: "2007 - Abstraktion II.JPG", year: 2007, title: "Abstraktion II" },
+  { file: "2007 - Gefühl.JPG", year: 2007, title: "Gefühl" },
+  { file: "2007 - Prismarose.JPG", year: 2007, title: "Prismarose" },
+  { file: "2007 - Sprache der Malerei III.JPG", year: 2007, title: "Sprache der Malerei III" },
+  { file: "2007 - Verstand.JPG", year: 2007, title: "Verstand" },
+  { file: "2007 - Zauberwürfel.JPG", year: 2007, title: "Zauberwürfel" },
+  { file: "2007 - Zuordnung.JPG", year: 2007, title: "Zuordnung" },
+  { file: "2007 - Zusammenhang.JPG", year: 2007, title: "Zusammenhang" },
+  { file: "2008 - Bausteine.JPG", year: 2008, title: "Bausteine" },
+  { file: "2008 - Bitte.JPG", year: 2008, title: "Bitte" },
+  { file: "2008 - Charisma.JPG", year: 2008, title: "Charisma" },
+  { file: "2008 - Feste.JPG", year: 2008, title: "Feste" },
+  { file: "2008 - Kulisse.JPG", year: 2008, title: "Kulisse" },
+  { file: "2008 - Mohn mit Schmetterling.JPG", year: 2008, title: "Mohn mit Schmetterling" },
+  { file: "2008 - Spardose.JPG", year: 2008, title: "Spardose" },
+  { file: "2008 - Stille.JPG", year: 2008, title: "Stille" },
+  { file: "2008 - Ursache und Wirkung.JPG", year: 2008, title: "Ursache und Wirkung" },
+  { file: "2008 - Wetter.JPG", year: 2008, title: "Wetter" },
+  { file: "2008 - Zuversicht II.JPG", year: 2008, title: "Zuversicht II" },
+  { file: "2009 - Bewusstsein.JPG", year: 2009, title: "Bewusstsein" },
+  { file: "2009 - Danke.JPG", year: 2009, title: "Danke" },
+  { file: "2009 - Frühstück.JPG", year: 2009, title: "Frühstück" },
+  { file: "2009 - Gabe.JPG", year: 2009, title: "Gabe" },
+  { file: "2009 - Künstliche Befruchtung.JPG", year: 2009, title: "Künstliche Befruchtung" },
+  { file: "2009 - literarische Denkanstöße.JPG", year: 2009, title: "Literarische Denkanstöße" },
+  { file: "2009 - Retrospektive (2).JPG", year: 2009, title: "Retrospektive (2)" },
+  { file: "2009 - Retrospektive.JPG", year: 2009, title: "Retrospektive" },
+  { file: "2009 - Sprache der Malerei IV.JPG", year: 2009, title: "Sprache der Malerei IV" },
+  { file: "2010 - Baum.JPG", year: 2010, title: "Baum" },
+  { file: "2010 - Blumen mit Diskette.JPG", year: 2010, title: "Blumen mit Diskette" },
+  { file: "2010 - Ebene Niveau.JPG", year: 2010, title: "Ebene Niveau" },
+  { file: "2010 - Freizeit.JPG", year: 2010, title: "Freizeit" },
+  { file: "2010 - Himmelsreisen.JPG", year: 2010, title: "Himmelsreisen" },
+  { file: "2010 - Parabel.JPG", year: 2010, title: "Parabel" },
+  { file: "2010 - Prisma mit Herz.JPG", year: 2010, title: "Prisma mit Herz" },
+  { file: "2010 - Sicherheit (2).JPG", year: 2010, title: "Sicherheit (2)" },
+  { file: "2010 - Sicherheit.JPG", year: 2010, title: "Sicherheit" },
+  { file: "2010 - Sprache der Malerei V.JPG", year: 2010, title: "Sprache der Malerei V" },
+  { file: "2010 - Vielfalt I.JPG", year: 2010, title: "Vielfalt I" },
+  { file: "2010 - Vielfalt II.JPG", year: 2010, title: "Vielfalt II" },
+  { file: "2011 - Ansehen.JPG", year: 2011, title: "Ansehen" },
+  { file: "2011 - Ansicht.JPG", year: 2011, title: "Ansicht" },
+  { file: "2011 - Assoziation.JPG", year: 2011, title: "Assoziation" },
+  { file: "2011 - Blumenstrauß.JPG", year: 2011, title: "Blumenstrauß" },
+  { file: "2011 - Motivation.JPG", year: 2011, title: "Motivation" },
+  { file: "2011 - Phantasie.JPG", year: 2011, title: "Phantasie" },
+  { file: "2011 - Sprache der Malerei VI.JPG", year: 2011, title: "Sprache der Malerei VI" },
+  { file: "2011 - Verantwortung.JPG", year: 2011, title: "Verantwortung" },
+  { file: "2012 - Begriffsbestimmung.JPG", year: 2012, title: "Begriffsbestimmung" },
+  { file: "2012 - Denkart.JPG", year: 2012, title: "Denkart" },
+  { file: "2012 - Einstellung.JPG", year: 2012, title: "Einstellung" },
+  { file: "2012 - Freude.JPG", year: 2012, title: "Freude" },
+  { file: "2012 - Gelassenheit.JPG", year: 2012, title: "Gelassenheit" },
+  { file: "2012 - Gestaltung.JPG", year: 2012, title: "Gestaltung" },
+  { file: "2012 - Kalender.JPG", year: 2012, title: "Kalender" },
+  { file: "2012 - Komposition II.JPG", year: 2012, title: "Komposition II" },
+  { file: "2012 - Muse.JPG", year: 2012, title: "Muse" },
+  { file: "2012 - Sprache der Malerei VII.JPG", year: 2012, title: "Sprache der Malerei VII" },
+  { file: "2012 - Tropfen.JPG", year: 2012, title: "Tropfen" },
+  { file: "2013 - Alltag.JPG", year: 2013, title: "Alltag" },
+  { file: "2013 - Emotionen.JPG", year: 2013, title: "Emotionen" },
+  { file: "2013 - Ergänzungen.JPG", year: 2013, title: "Ergänzungen" },
+  { file: "2013 - Erneuerung.JPG", year: 2013, title: "Erneuerung" },
+  { file: "2013 - Harmonie.JPG", year: 2013, title: "Harmonie" },
+  { file: "2013 - Konstante.JPG", year: 2013, title: "Konstante" },
+  { file: "2013 - Künstliche Befruchtung.JPG", year: 2013, title: "Künstliche Befruchtung" },
+  { file: "2013 - Sagen.JPG", year: 2013, title: "Sagen" },
+  { file: "2013 - Sprache der Malerei VIII.JPG", year: 2013, title: "Sprache der Malerei VIII" },
+  { file: "2014 - Aspekte.JPG", year: 2014, title: "Aspekte" },
+  { file: "2014 - Auswahl.JPG", year: 2014, title: "Auswahl" },
+  { file: "2014 - Deutung.JPG", year: 2014, title: "Deutung" },
+  { file: "2014 - Dokumentation.JPG", year: 2014, title: "Dokumentation" },
+  { file: "2014 - Eurasia.JPG", year: 2014, title: "Eurasia" },
+  { file: "2014 - Farbenspiel.JPG", year: 2014, title: "Farbenspiel" },
+  { file: "2014 - Kohärenz.JPG", year: 2014, title: "Kohärenz" },
+  { file: "2014 - Lebensart.JPG", year: 2014, title: "Lebensart" },
+  { file: "2014 - Obulus.JPG", year: 2014, title: "Obulus" },
+  { file: "2014 - Sprache und Gedanken.JPG", year: 2014, title: "Sprache und Gedanken" },
+  { file: "2015 - Äquivalent.JPG", year: 2015, title: "Äquivalent" },
+  { file: "2015 - Gewissen.JPG", year: 2015, title: "Gewissen" },
+  { file: "2015 - Humor und Trickfilmzeichnung.JPG", year: 2015, title: "Humor und Trickfilmzeichnung" },
+  { file: "2015 - Informationen.JPG", year: 2015, title: "Informationen" },
+  { file: "2015 - Proportionen.JPG", year: 2015, title: "Proportionen" },
+  { file: "2015 - Sprache der Malerei IX.JPG", year: 2015, title: "Sprache der Malerei IX" },
+  { file: "2015 - Sympathien.JPG", year: 2015, title: "Sympathien" },
+  { file: "2016 - 1000 Worte.JPG", year: 2016, title: "1000 Worte" },
+  { file: "2016 - Informationen II.JPG", year: 2016, title: "Informationen II" },
+  { file: "2016 - Migration.JPG", year: 2016, title: "Migration" },
+  { file: "2016 - Modus.JPG", year: 2016, title: "Modus" },
+  { file: "2016 - Sprache der Malerei X.JPG", year: 2016, title: "Sprache der Malerei X" },
+  { file: "2016 - Unterbewußtsein.JPG", year: 2016, title: "Unterbewusstsein" },
+  { file: "2016 - Würde.JPG", year: 2016, title: "Würde" },
+  { file: "2016 - Zeitvertreib.JPG", year: 2016, title: "Zeitvertreib" },
+  { file: "2017 - Aesthetik.JPG", year: 2017, title: "Ästhetik" },
+  { file: "2017 - Eurabike.JPG", year: 2017, title: "Eurabike" },
+  { file: "2017 - Formeln.JPG", year: 2017, title: "Formeln" },
+  { file: "2017 - Gedankengut.JPG", year: 2017, title: "Gedankengut" },
+  { file: "2017 - Glückwünsche.JPG", year: 2017, title: "Glückwünsche" },
+  { file: "2017 - Göttliche Fügung.JPG", year: 2017, title: "Göttliche Fügung" },
+  { file: "2017 - Prävention.JPG", year: 2017, title: "Prävention" },
+  { file: "2017 - Verfügungen.JPG", year: 2017, title: "Verfügungen" },
+  { file: "2018 - Digitale Welt.JPG", year: 2018, title: "Digitale Welt" },
+  { file: "2018 - Einstellung.JPG", year: 2018, title: "Einstellung" },
+  { file: "2018 - Ergebnis.JPG", year: 2018, title: "Ergebnis" },
+  { file: "2018 - Generationen.JPG", year: 2018, title: "Generationen" },
+  { file: "2018 - Kompromisse.JPG", year: 2018, title: "Kompromisse" },
+  { file: "2018 - Sprache der Malerei XI.JPG", year: 2018, title: "Sprache der Malerei XI" },
+  { file: "2018 - Zeitenwende.JPG", year: 2018, title: "Zeitenwende" },
+  { file: "2019 - Begutachtung II.JPG", year: 2019, title: "Begutachtung II" },
+  { file: "2019 - Stil.JPG", year: 2019, title: "Stil" },
+  { file: "2019 - Strauss.JPG", year: 2019, title: "Strauß" },
+  { file: "2019 - Trilogie.JPG", year: 2019, title: "Trilogie" },
+  { file: "2019 - Wirklichkeit.JPG", year: 2019, title: "Wirklichkeit" },
+  { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" },
+  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
+  { file: "TSS04766-bearbeitet.JPG", year: null, title: "Ohne Titel (I)" },
+  { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" },
+  { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" }
+];
+
+let currentIndex = 0;
+let scale = 1;
+let rotateDeg = 0;
+let posX = 0, posY = 0;
+let isDragging = false;
+let startX, startY;
+
+const galleryEl = document.getElementById('gallery');
+const searchInput = document.getElementById('searchInput');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+
+// Gallery rendern
+function renderGallery(filtered) {
+  galleryEl.innerHTML = '';
+  filtered.forEach((img, i) => {
+    const card = document.createElement('div');
+    card.className = 'art-card';
+    card.innerHTML = `
+      <img src="${img.file}" alt="${img.title}" loading="lazy">
+      <div class="info">
+        <div class="title">${img.title}</div>
+        ${img.year ? `<div class="year">${img.year}</div>` : ''}
+      </div>
+    `;
+    card.addEventListener('click', () => openLightbox(i));
+    galleryEl.appendChild(card);
+  });
+}
+
+function filterImages() {
+  const term = searchInput.value.toLowerCase().trim();
+  const filtered = IMAGES.filter(img => 
+    img.title.toLowerCase().includes(term) || 
+    (img.year && String(img.year).includes(term))
+  );
+  renderGallery(filtered);
+}
+
+searchInput.addEventListener('input', filterImages);
+
+// Lightbox
+function openLightbox(idx) {
+  currentIndex = idx;
+  showImage();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showImage() {
+  lbImg.src = IMAGES[currentIndex].file;
+  resetTransform();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function applyTransform() {
+  lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale}) rotate(${rotateDeg}deg)`;
+}
+
+function resetTransform() {
+  scale = 1; rotateDeg = 0; posX = 0; posY = 0;
+  applyTransform();
+}
+
+// Navigation
+document.getElementById('lbPrev').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+  showImage();
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % IMAGES.length;
+  showImage();
+});
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+
+// Buttons
+document.getElementById('zoomIn').addEventListener('click', () => { scale = Math.min(6, scale + 0.3); applyTransform(); });
+document.getElementById('zoomOut').addEventListener('click', () => { scale = Math.max(0.5, scale - 0.3); applyTransform(); });
+document.getElementById('rotateLeft').addEventListener('click', () => { rotateDeg -= 90; applyTransform(); });
+document.getElementById('rotateRight').addEventListener('click', () => { rotateDeg += 90; applyTransform(); });
+document.getElementById('reset').addEventListener('click', resetTransform);
+
+// Drag & Wheel
+lbImg.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.clientX - posX;
+  startY = e.clientY - posY;
+});
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  posX = e.clientX - startX;
+  posY = e.clientY - startY;
+  applyTransform();
+});
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+lbImg.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY < 0 ? 0.25 : -0.25;
+  scale = Math.max(0.5, Math.min(6, scale + delta));
+  applyTransform();
+}, { passive: false });
+
+// Tastatur
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length; showImage(); }
+  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % IMAGES.length; showImage(); }
+});
+
+// Init
+renderGallery(IMAGES);
+</script>
+</body>
+</html>
