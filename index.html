@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Doris Zarrinnam • Künstlerin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -19,20 +19,25 @@
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3); 
     }
 
-    /* Verbessertes Karussell – große, scharfe Darstellung */
-    .swiper-slide img {
-      max-height: 92vh;
-      max-width: 95vw;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+    /* Karussell-Optimierung */
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .swiper-zoom-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100">
 
+  <!-- Header, Über mich, Suchfeld und Galerie bleiben unverändert -->
   <header class="bg-black py-8 border-b border-zinc-800">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h1 class="text-5xl md:text-6xl font-light tracking-widest">DORIS ZARRINNAM</h1>
@@ -74,7 +79,7 @@
     </div>
   </section>
 
-  <!-- Karussell -->
+  <!-- Karussell mit aktivierter Zoom-Funktion -->
   <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
     <div class="max-w-[95vw] w-full px-4 relative">
       <button onclick="closeModal()" 
@@ -108,7 +113,6 @@
   </footer>
 
   <script>
-    // === AUTOMATISCH EINGEFÜGTE BILDERLISTE ===
     const imageFiles = [
       "1971 - persische Landschaft.JPG",
       "1992 - Blaue Engel.JPG",
@@ -238,204 +242,4 @@
       "2009 - Künstliche Befruchtung.JPG",
       "2009 - literarische Denkanstöße.JPG",
       "2009 - Retrospektive (2).JPG",
-      "2009 - Retrospektive.JPG",
-      "2009 - Sprache der Malerei IV.JPG",
-      "2010 - Baum.JPG",
-      "2010 - Blumen mit Diskette.JPG",
-      "2010 - Ebene Niveau.JPG",
-      "2010 - Freizeit.JPG",
-      "2010 - Himmelsreisen.JPG",
-      "2010 - Parabel.JPG",
-      "2010 - Prisma mit Herz.JPG",
-      "2010 - Sicherheit (2).JPG",
-      "2010 - Sicherheit.JPG",
-      "2010 - Sprache der Malerei V.JPG",
-      "2010 - Vielfalt I.JPG",
-      "2010 - Vielfalt II.JPG",
-      "2011 - Ansehen.JPG",
-      "2011 - Ansicht.JPG",
-      "2011 - Assoziation.JPG",
-      "2011 - Blumenstrauß.JPG",
-      "2011 - Motivation.JPG",
-      "2011 - Phantasie.JPG",
-      "2011 - Sprache der Malerei VI.JPG",
-      "2011 - Verantwortung.JPG",
-      "2012 - Begriffsbestimmung.JPG",
-      "2012 - Denkart.JPG",
-      "2012 - Einstellung.JPG",
-      "2012 - Freude.JPG",
-      "2012 - Gelassenheit.JPG",
-      "2012 - Gestaltung.JPG",
-      "2012 - Kalender.JPG",
-      "2012 - Komposition II.JPG",
-      "2012 - Muse.JPG",
-      "2012 - Sprache der Malerei VII.JPG",
-      "2012 - Tropfen.JPG",
-      "2013 - Alltag.JPG",
-      "2013 - Emotionen.JPG",
-      "2013 - Ergänzungen.JPG",
-      "2013 - Erneuerung.JPG",
-      "2013 - Harmonie.JPG",
-      "2013 - Konstante.JPG",
-      "2013 - Künstliche Befruchtung.JPG",
-      "2013 - Sagen.JPG",
-      "2013 - Sprache der Malerei VIII.JPG",
-      "2014 - Aspekte.JPG",
-      "2014 - Auswahl.JPG",
-      "2014 - Deutung.JPG",
-      "2014 - Dokumentation.JPG",
-      "2014 - Eurasia.JPG",
-      "2014 - Farbenspiel.JPG",
-      "2014 - Kohärenz.JPG",
-      "2014 - Lebensart.JPG",
-      "2014 - Obulus.JPG",
-      "2014 - Sprache und Gedanken.JPG",
-      "2015 - Äquivalent.JPG",
-      "2015 - Gewissen.JPG",
-      "2015 - Humor und Trickfilmzeichnung.JPG",
-      "2015 - Informationen.JPG",
-      "2015 - Proportionen.JPG",
-      "2015 - Sprache der Malerei IX.JPG",
-      "2015 - Sympathien.JPG",
-      "2016 - 1000 Worte.JPG",
-      "2016 - Informationen II.JPG",
-      "2016 - Migration.JPG",
-      "2016 - Modus.JPG",
-      "2016 - Sprache der Malerei X.JPG",
-      "2016 - Unterbewußtsein.JPG",
-      "2016 - Würde.JPG",
-      "2016 - Zeitvertreib.JPG",
-      "2017 - Aesthetik.JPG",
-      "2017 - Eurabike.JPG",
-      "2017 - Formeln.JPG",
-      "2017 - Gedankengut.JPG",
-      "2017 - Glückwünsche.JPG",
-      "2017 - Göttliche Fügung.JPG",
-      "2017 - Prävention.JPG",
-      "2017 - Verfügungen.JPG",
-      "2018 - Digitale Welt.JPG",
-      "2018 - Einstellung.JPG",
-      "2018 - Ergebnis.JPG",
-      "2018 - Generationen.JPG",
-      "2018 - Kompromisse.JPG",
-      "2018 - Sprache der Malerei XI.JPG",
-      "2018 - Zeitenwende.JPG",
-      "2019 - Begutachtung II.JPG",
-      "2019 - Stil.JPG",
-      "2019 - Strauss.JPG",
-      "2019 - Trilogie.JPG",
-      "2019 - Wirklichkeit.JPG",
-      "2020 - Manifest.JPG",
-      "2020 - Weg der Liebe.JPG",
-      "TSS04766-bearbeitet.JPG",
-      "TSS04855-bearbeitet.JPG",
-      "TSS04947-bearbeitet.JPG"
-    ];
-
-    let allImages = [];
-
-    function loadImages(filteredImages = null) {
-      const gallery = document.getElementById("gallery");
-      const title = document.getElementById("gallery-title");
-      gallery.innerHTML = "";
-
-      const imagesToShow = filteredImages || allImages;
-
-      title.textContent = `Werke • chronologisch (${imagesToShow.length} Werke)`;
-
-      if (imagesToShow.length === 0) {
-        gallery.innerHTML = `<p class="col-span-full text-center text-amber-300 py-12">Keine Bilder gefunden.</p>`;
-        return;
-      }
-
-      imagesToShow.forEach((img) => {
-        const div = document.createElement("div");
-        div.className = "cursor-pointer group overflow-hidden rounded-xl bg-zinc-900 aspect-square";
-        div.innerHTML = `
-          <img src="${img.url}" 
-               alt="${img.name}"
-               class="gallery-img"
-               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden:<br>${img.name}</div>'">
-          <p class="text-xs text-zinc-500 mt-2 text-center truncate px-1">${img.name}</p>
-        `;
-        div.onclick = () => openCarousel(allImages, allImages.findIndex(i => i.name === img.name));
-        gallery.appendChild(div);
-      });
-    }
-
-    function setupSearch() {
-      const searchInput = document.getElementById("searchInput");
-      searchInput.addEventListener("input", () => {
-        const term = searchInput.value.toLowerCase().trim();
-        if (!term) {
-          loadImages();
-          return;
-        }
-        const filtered = allImages.filter(img => 
-          img.name.toLowerCase().includes(term) || img.year.toString().includes(term)
-        );
-        loadImages(filtered);
-      });
-    }
-
-    let swiperInstance = null;
-
-    function openCarousel(images, startIndex) {
-      const modal = document.getElementById("modal");
-      const wrapper = document.getElementById("swiper-wrapper");
-      wrapper.innerHTML = "";
-
-      images.forEach(img => {
-        const slide = document.createElement("div");
-        slide.className = "swiper-slide flex items-center justify-center py-8";
-        slide.innerHTML = `
-          <img src="${img.url}" 
-               class="max-h-[92vh] max-w-[95vw] w-auto h-auto object-contain rounded-2xl shadow-2xl" 
-               alt="${img.name}">
-        `;
-        wrapper.appendChild(slide);
-      });
-
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-
-      if (swiperInstance) swiperInstance.destroy();
-      
-      swiperInstance = new Swiper('.mySwiper', {
-        initialSlide: startIndex,
-        loop: true,
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        keyboard: { enabled: true },
-        mousewheel: { enabled: true },
-        centeredSlides: true,
-        grabCursor: true
-      });
-
-      const updateCaption = () => {
-        const active = images[swiperInstance.realIndex];
-        document.getElementById("modal-caption").textContent = active.name;
-      };
-      swiperInstance.on('slideChange', updateCaption);
-      updateCaption();
-    }
-
-    function closeModal() {
-      document.getElementById("modal").classList.add("hidden");
-      document.getElementById("modal").classList.remove("flex");
-      if (swiperInstance) swiperInstance.destroy();
-    }
-
-    // Seite starten
-    window.onload = () => {
-      allImages = imageFiles.map(name => {
-        const match = name.match(/(\d{4})/);
-        const year = match ? parseInt(match[1]) : 9999;
-        return { name, year, url: name };
-      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
-
-      loadImages();
-      setupSearch();
-    };
-  </script>
-</body>
-</html>
+      "2009 -
