@@ -18,6 +18,17 @@
       transform: scale(1.05); 
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3); 
     }
+
+    /* Verbessertes Karussell – große, scharfe Darstellung */
+    .swiper-slide img {
+      max-height: 92vh;
+      max-width: 95vw;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+    }
   </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100">
@@ -41,7 +52,6 @@
     <div class="mb-10">
       <h2 class="text-3xl font-light text-center mb-6" id="gallery-title">Werke • chronologisch</h2>
       
-      <!-- Suchfeld unterhalb der Überschrift -->
       <div class="max-w-xl mx-auto">
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -52,7 +62,7 @@
           <input 
             type="text" 
             id="searchInput"
-            placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Trilogie, Prisma, Blumen...)"
+            placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Trilogie, Prisma...)"
             class="block w-full bg-zinc-900 border border-zinc-700 focus:border-amber-300 rounded-2xl py-3 pl-11 pr-4 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-300">
         </div>
         <p class="text-center text-xs text-zinc-500 mt-2">Tippe z. B. „1995“, „Trilogie“ oder „Prisma“</p>
@@ -66,7 +76,7 @@
 
   <!-- Karussell -->
   <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
-    <div class="max-w-6xl w-full px-4 relative">
+    <div class="max-w-[95vw] w-full px-4 relative">
       <button onclick="closeModal()" 
               class="absolute -top-4 -right-4 bg-black text-white rounded-full w-12 h-12 flex items-center justify-center text-4xl hover:bg-amber-300 hover:text-black z-50">×</button>
       
@@ -76,7 +86,7 @@
         <div class="swiper-button-next text-white"></div>
       </div>
       
-      <div id="modal-caption" class="text-center text-zinc-400 mt-4 text-sm"></div>
+      <div id="modal-caption" class="text-center text-zinc-400 mt-6 text-sm"></div>
     </div>
   </div>
 
@@ -98,6 +108,7 @@
   </footer>
 
   <script>
+    // === AUTOMATISCH EINGEFÜGTE BILDERLISTE ===
     const imageFiles = [
       "1971 - persische Landschaft.JPG",
       "1992 - Blaue Engel.JPG",
@@ -354,20 +365,15 @@
 
     function setupSearch() {
       const searchInput = document.getElementById("searchInput");
-      
       searchInput.addEventListener("input", () => {
         const term = searchInput.value.toLowerCase().trim();
-        
         if (!term) {
           loadImages();
           return;
         }
-
         const filtered = allImages.filter(img => 
-          img.name.toLowerCase().includes(term) || 
-          img.year.toString().includes(term)
+          img.name.toLowerCase().includes(term) || img.year.toString().includes(term)
         );
-
         loadImages(filtered);
       });
     }
@@ -381,8 +387,12 @@
 
       images.forEach(img => {
         const slide = document.createElement("div");
-        slide.className = "swiper-slide flex items-center justify-center min-h-[80vh]";
-        slide.innerHTML = `<img src="${img.url}" class="max-h-[85vh] max-w-full object-contain rounded-2xl shadow-2xl" alt="${img.name}">`;
+        slide.className = "swiper-slide flex items-center justify-center py-8";
+        slide.innerHTML = `
+          <img src="${img.url}" 
+               class="max-h-[92vh] max-w-[95vw] w-auto h-auto object-contain rounded-2xl shadow-2xl" 
+               alt="${img.name}">
+        `;
         wrapper.appendChild(slide);
       });
 
@@ -396,7 +406,9 @@
         loop: true,
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         keyboard: { enabled: true },
-        mousewheel: { enabled: true }
+        mousewheel: { enabled: true },
+        centeredSlides: true,
+        grabCursor: true
       });
 
       const updateCaption = () => {
@@ -421,7 +433,7 @@
         return { name, year, url: name };
       }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
 
-      loadImages();      // ← Wichtig: Galerie sofort anzeigen
+      loadImages();
       setupSearch();
     };
   </script>
