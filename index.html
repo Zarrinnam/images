@@ -99,7 +99,7 @@
       letter-spacing: 1px;
     }
 
-    /* ==================== LIGHTBOX ==================== */
+    /* Lightbox mit sichtbarem Titel + Jahr */
     #lightbox {
       display: none;
       position: fixed;
@@ -116,7 +116,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       padding: 25px 30px 20px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
       z-index: 30;
       color: #fff;
     }
@@ -128,7 +128,7 @@
       margin-bottom: 6px;
     }
     .lb-year {
-      font-size: 14px;
+      font-size: 14.5px;
       color: var(--gold);
       letter-spacing: 2px;
     }
@@ -137,7 +137,6 @@
       position: relative;
       max-width: 94vw;
       max-height: 78vh;
-      margin-top: 20px;
     }
     #lbImg {
       max-width: 100%;
@@ -147,7 +146,7 @@
       transition: transform 0.1s linear;
       cursor: grab;
       user-select: none;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     }
 
     .lb-controls {
@@ -282,7 +281,7 @@
 </footer>
 
 <script>
-// Bilder – relative Pfade
+// Bilder mit relativen Pfaden
 const IMAGES = [
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -520,7 +519,6 @@ const lbImg = document.getElementById('lbImg');
 const lbTitle = document.getElementById('lbTitle');
 const lbYear = document.getElementById('lbYear');
 
-// Gallery rendern
 function renderGallery(filtered) {
   galleryEl.innerHTML = '';
   filtered.forEach((img, i) => {
@@ -549,7 +547,6 @@ function filterImages() {
 
 searchInput.addEventListener('input', filterImages);
 
-// Lightbox
 function openLightbox(idx) {
   currentIndex = idx;
   showImage();
@@ -579,7 +576,7 @@ function resetTransform() {
   applyTransform();
 }
 
-// Navigation & Controls
+// Event Listener
 document.getElementById('lbPrev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
   showImage();
@@ -596,7 +593,6 @@ document.getElementById('rotateLeft').addEventListener('click', () => { rotateDe
 document.getElementById('rotateRight').addEventListener('click', () => { rotateDeg += 90; applyTransform(); });
 document.getElementById('reset').addEventListener('click', resetTransform);
 
-// Drag & Wheel
 lbImg.addEventListener('mousedown', e => {
   isDragging = true;
   startX = e.clientX - posX;
@@ -617,7 +613,6 @@ lbImg.addEventListener('wheel', e => {
   applyTransform();
 }, { passive: false });
 
-// Tastatur
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
   if (e.key === 'Escape') closeLightbox();
@@ -631,7 +626,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Init
+// Initialisierung
 renderGallery(IMAGES);
 </script>
 </body>
