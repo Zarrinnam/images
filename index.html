@@ -136,7 +136,7 @@
       position: relative;
       max-width: 94vw;
       max-height: 74vh;
-      margin-bottom: 95px;   /* ausreichend Platz für die Leiste */
+      margin-bottom: 95px;
     }
     #lbImg {
       max-width: 100%;
@@ -149,7 +149,6 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     }
 
-    /* Schlanke untere Leiste – nur Vor, Zurück, Schließen */
     .lb-bottombar {
       position: absolute;
       bottom: 25px;
@@ -264,7 +263,7 @@
 </footer>
 
 <script>
-// Aktuelle Bildliste (ohne doppeltes "1992 - O.T.")
+// Aktuelle Bildliste (2020 - Weg der Liebe.JPG aktualisiert)
 const IMAGES = [
   { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
@@ -481,7 +480,7 @@ const IMAGES = [
   { file: "2019 - Trilogie.JPG", year: 2019, title: "Trilogie" },
   { file: "2019 - Wirklichkeit.JPG", year: 2019, title: "Wirklichkeit" },
   { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" },
-  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
+  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },   /* aktualisiertes Bild */
   { file: "TSS04766-bearbeitet.JPG", year: null, title: "Ohne Titel (I)" },
   { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" }
 ];
@@ -566,7 +565,7 @@ document.getElementById('lbNext').addEventListener('click', () => {
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 
-// Drag + Wheel Zoom (Pinch-to-Zoom mit zwei Fingern)
+// Drag + Wheel Zoom (Pinch-to-Zoom)
 lbImg.addEventListener('mousedown', e => {
   isDragging = true;
   startX = e.clientX - posX;
