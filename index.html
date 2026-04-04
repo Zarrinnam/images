@@ -2,22 +2,186 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Doris Zarrinnam • Künstlerin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-    .gallery-img:hover { transform: scale(1.05); }
+    .gallery-img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.4s ease; 
+    }
+    .gallery-img:hover { 
+      transform: scale(1.08); 
+    }
+    .art-card {
+      transition: all 0.3s ease;
+    }
+    .art-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+    }
+    #modal {
+      display: none;
+    }
+    #modal.open {
+      display: flex;
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    .nav-link.active {
+      color: #fbbf24;
+      border-bottom: 2px solid #fbbf24;
+    }
+    .prose p {
+      margin-bottom: 1.25rem;
+    }
   </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 p-6">
+<body class="bg-zinc-950 text-zinc-100 min-h-screen">
 
-  <h1 class="text-5xl text-center mb-8">DORIS ZARRINNAM</h1>
-  <p class="text-center text-amber-300 mb-12">Künstlerin • Malerei</p>
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+    <h1 class="text-5xl md:text-6xl font-light text-center tracking-wide">DORIS ZARRINNAM</h1>
+    <p class="text-center text-amber-300 text-xl mt-3">Künstlerin • Malerei</p>
+  </div>
 
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl text-center mb-6" id="title">Werke • chronologisch</h2>
-    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+  <!-- Menü -->
+  <nav class="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
+        <a href="#" id="menu-werke" onclick="showSection('werke')" class="nav-link active">Werke</a>
+        <a href="#" id="menu-person" onclick="showSection('person')" class="nav-link">Zur Person</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Werke-Sektion -->
+  <div id="werke-section">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="mb-10">
+        <h2 id="title" class="text-3xl font-light text-center mb-6">Werke • chronologisch</h2>
+        
+        <div class="max-w-md mx-auto">
+          <input 
+            id="searchInput"
+            type="text" 
+            placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Prisma...)"
+            class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-2xl px-5 py-3 text-zinc-100 placeholder-zinc-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"></div>
+    </div>
+  </div>
+
+  <!-- Zur Person Sektion -->
+  <div id="person-section" class="hidden max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-light text-center mb-12">Zur Person</h2>
+
+    <!-- Einleitung von Prof. Raimund Stecker -->
+    <div class="prose prose-invert max-w-none text-zinc-300 leading-relaxed text-[15.5px]">
+      <blockquote class="border-l-4 border-amber-300 pl-6 italic text-amber-200 mb-10">
+        Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
+        Ich kann beisteuern, meine Energie, damit die Kunst an die Macht kommt. 
+        Damit die Kunst sich platziert.<br>
+        <strong>— Jonathan Meese</strong>
+      </blockquote>
+
+      <h3 class="text-amber-300 text-2xl mb-6">sichten, um zu malen – malen, um zu sehen</h3>
+      <h3 class="text-amber-300 text-2xl mb-10">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
+
+      <p>Eine Entdeckung im wortwörtlichen Sinne: Vom faszinierend-hermetisch-malerischen Werk der Doris Zarrinnam wird die Decke seines Versteckseins genommen! Seit spätestens 1971, vor allem aber seit 1992, entäußerte die bisher unbeachtet gebliebene Künstlerin bildlich ihre ästhetisch betörenden, in weiten Teilen außerbildlich nur ihr anschaulich gewesenen Weltsichten. Sie schöpfte diese, immer tiefer in ihre Zurückgezogenheit vordringend, hauptsächlich aus sich und ihren Introspektionen! Zwischen Bildern aus einer auch uns zugänglichen Wirklichkeit und der genuin ihren, die offenbar auch von wunderlichen Träumen und Vorstellungen dominiert war, oszilliert der hier erstmals breiter öffentlich anschaulich werdende Bilderkosmos. Der Horizont dieses Kosmos’ ist menschenweit, ihre Welt hingegen war eng gegrenzt wie die ihrer Formate.</p>
+
+      <p>Als sie für einige Zeit in Teheran wohnte, malte sie noch eine vor ihr sich breitende Landschaft. Das ist inzwischen über 50 Jahre her. Sie lebte dort mit ihrem persischen Mann. Aus hügelerhöhter Position ist dieses frühe Bild gemalt. Ihr Standpunkt ist vorne links durch ein unhohes Mäuerchen sicher geortet. Sie gab das von ihr Gesehene wieder: sicher in der Perspektive, fernere Details lediglich schemenhaft sichtend, vom harten südlichen Licht und den fest umrissenen Schattenwürfen der Bäume im Mittelgrund inspiriert, die Asphaltstraße pittoresk akzeptiert, den Vordergrund als Bildeinblick offen …</p>
+
+      <p>Es ist ein fraglos privat wertvolles Bild. Ferner offenbart es aber ebenso malerisches Talent wie kompositorische Sensibilität. Es zeigt, dass der Blick der Malerin in die Landschaft mit der Absicht gerichtet wurde, die Aussicht nicht nur vor Ort zu sehen, sondern eine „Landschaft“ bildlich fassen zu wollen. Unzweideutig tritt mithin ein Sehen, um zu malen, bereits in diesem Bild schon auf.</p>
+
+      <p>Zwanzig Jahre später begann Doris Zarrinnam ihr Malen zu intensivieren. Das Malen wird sogar, wie ihr Sohn Dirk-Bijan heute berichtet, ein Lebensanker. Denn sie zog sich zurück, um zu malen – geistig wie räumlich. Lediglich im Jahre 1995 stellte sie ihre Bilder einmal in Heinsberg aus.</p>
+
+      <p>Ihre Bilderwelten entstammen fortan motivisch nur noch eingeschränkt einem gleichsam objektiviert zu sehenden Äußeren. Etwas Surreales, Fantastisch-Realistisches, Nebenweltliches eignet ihnen. Sie zeigen nur noch bedingt, was auch wir mit ihr gemeinsam hätten sehen können. Und das, was wir gemeinsam hätten sehen können, zeigt sie anders gesehen. Außerbildlich Gebundenes wird mit innerlich Visioniertem kombiniert.</p>
+
+      <p>Man kann es mit Wassily Kandinsky das Geistige nennen, man darf es auch als Privat-Symbolisches begreifen wollen, man muss aber wohl auch von Entäußerungen im Sinne des Kunsthistorikers und Psychiaters Hans Prinzhorns sprechen. Solche setzte der Gründer der Heidelberger Sammlung in seiner berühmten Abhandlung Bildnerei der Geisteskranken als einen „allgemein menschlichen Kernvorgang“ mit Leo Tolstois Kunstauffassung in Beziehung.</p>
+
+      <p>Doch mit dieser „Schublade“ wird man den Werken nicht gerecht. Denn die Malerei Doris Zarrinnams vereinnahmt durch ihre eigenständigen ästhetischen Qualitäten, durch konsistente Bildfindungen, ja: Er-findungen. Sie laden ein in nur in ihnen zu findenden Fremdheiten, die schon aufgrund ihres Fremdseins alle mehr oder weniger nur kontextbestimmten Einschränkungen künstlerisch hell überstrahlen.</p>
+
+      <p>Zu simpel erscheint es mithin, die hier vorzustellende Malerei mit vorauseilendem Gehorsam aufgrund eines übermittelten psychiatrischen Befundes (nur) pathografisch zu beschreiben. Karl Jaspers unternahm solch einen „Versuch“ zu August Strindberg und Immanuel Swedenborg, zu Vincent van Gogh und auch zu Friedrich Hölderlin. Er unterfütterte mit seinem Versuch über diese vier Größen unseres Kulturkreises nachdrücklich, dass womöglich primär – oder doch zumindest auch – psychopathologisch zu Deutendes dem individuellen Erwirken von überwältigend Künstlerischem nicht nur nicht im Wege steht, sondern dieses auch oder sogar überhaupt erst zu bedingen vermag.</p>
+
+      <p>Gleichwohl oder in Folge dessen gilt es hier festzuhalten, dass – so der Sohn – sich Doris Zarrinnam ab Anfang, Mitte der 90er Jahre signifikant aus ihrem zuvor gelebten sozialen Umfeld in den Elfenbeinturm ihrer Malerei zurückzog. Sie cocoonte sich gleichsam wie eine Nonne in ihr Skriptorium ein, um ihre Bilder malend zu schreiben.</p>
+
+      <p>Dieses Sich-Zurückziehen gilt es zwar zu benennen, nicht aber als Stigma zu begreifen. Darum wird hier im Kursorisch-Folgenden auch vor allem die offen sichtliche (sic) ästhetische Präsenz ihrer Bilder betont. Ihre Werke wollen folglich nicht als bloßer Kontakthof begriffen werden. Vielmehr wird mit Nachdruck behauptet, dass es sich lohnt, ihre Bilder schauend zu betrachten. Sie zu betrachten, birgt Gewinn.</p>
+
+      <p>Die Farbigkeit des hinterlassenen Werks der 2023 Gestorbenen ist licht. Die Farben sind klar, oft einer geweißten Palette entstammend. Die Stimmungen sind tageslicht positiv, infantil, unschuldig. Selbst im Dämmerlicht klingen viele ihrer Bilder hell. Alles tönt in Dur – und das selbst aus solchen Bildern, in denen motivisch Melancholie herrscht.</p>
+
+      <p>Die Bildanlagen sind flächig hinterfangen. Jedes Bild ist eher ein Tableau denn eine Perspektive. Skizzenhafte Farbanlegungen, Untermalungen, die zum Eigenwert drängen, nicht unähnlich, bezeugen ein gekonnt zweidimensionales, ornamentales, teilweise sogar auch gegenstandsbefreiendes Bildwollen. Die Bildflächen werden so zu Ebenen, auf denen die Malerin prosaisch ihre Geschichten breiten kann. Zarrinnams Bilder gleichen auf diese Weise oft Plattformen oder im metaphorischen Sinne den Brettern, also den Bühnen, auf denen sich ihre Welten und Erzählungen ereignen.</p>
+
+      <p>Formale Nähen zu persischen Miniaturen scheinen auf, zu Flächen verdichteten Bildräumen, in denen aus der Perspektive genommen stabpuppenhaft Szenen vorgestellt werden. Erinnerte oder erträumte Begegnungen, faktische oder ersehnte Ausblicke, vermutlich aufgeladene Gegenstände, die Kubatur des Aachener Klinikums, ein gläsernes Verlies, ein orientalischer Teppich, der mangels Erdung zu fliegen scheint, ein aus seinem Inneren strahlendes Gebäude oder auch nur ein Dinet, ein kryptischer Notenschlüssel oder eine Äskulapnatter, die einen zur Mumie Erstarrten umschlängelt. Oder auch eine evatrunkene Apfelpflückerin unter dem entzweienden Baum des Sündenbewusstseins sowie eine lippenbegrabene Odaliske.</p>
+
+      <p>Selbst kleine Retrospektiven ihres Bildschöpfens hat sie immer wieder gemalt – ihre autonomen Bilder als Vignetten wiederholt und einmal sogar, gleich 1992 in „Prisma“, unter einen madonnenhaften Schutzmantel geschützt. „Sprache der Malerei“ nannte sie diese Bilderreihe.</p>
+
+      <p>Auf einem anderen Werk fließt aus einer Farbentube ihre Welt ins Bild. „Besinnung“ ist es betitelt. Eine Verwandtschaft zum Bild „Garden“ und zu dem an ihrem Haus angelegten Garten, einem Hortus conclusus, einem Mikrokosmos in Heinsberg, scheint auf. Auf einem anderen Bild finden wir eine Doppelhelix. Die genetische „Zukunft“ – so der Bildtitel – wird Bild in einer Transformation von schwarz-weißen zu farbigen Sprossen oder vice versa. Ebenenverschachtelt bildete die Künstlerin ihr „zu Hause“. Epigrammatisch wird das Abstraktum „Mut“ vorgestellt.</p>
+
+      <p>Es sind zugegeben Schöpfungen aus einer nicht immer einfach zugänglichen Gedanken- und Visionenwelt, die uns diese Bilder erst einmal zu sehen, dann versuchend zu entschlüsseln und womöglich nie zu verstehen geben. Allgemein zu kennende Versatzstücke verschränken sich mit hermetischen Codes, Begegnungen mit nicht wiederzuerkennenden Szenen, Ausblicke mit Einblicken, Darstellungen mit Vorstellungen…</p>
+
+      <p>Und die Malweise? Die Bilder sind mit der Zeit immer mikrostrukturierter. Feinhaarpinselduktus an Feinhaarpinselduktus sind gesetzt, ersetzen anfänglich noch kurze Pinselschwünge. Besessenheit und eine schier unendliche Geduld werden spürbar, mit der die Bilder gemalt wurden. Nie scheint es einen Abgabetermin gegeben zu haben, nie einen äußeren Grund, sie zu malen. Ohne vollkommene Selbstbestimmt- und Unentfremdetheit ist es nicht vorstellbar, dass dieses Oeuvre aus über 300 Werken gewachsen ist.</p>
+
+      <p>Eine Konzentration wird anschaulich, wie man sie in der neueren Kunstgeschichte auch von Werken einer Agnes Martin oder Max Cole kennt. Mit einer für mich als Betrachter nur sehr schwer auszuhaltenden Geduld, stoischer Ruhe und Besessenheit konnte ich einmal miterleben, wie Max Cole ihre Bilder Strich für Strich „schrieb“. Nachts, bei Kunstlicht und von draußen hineindringenden Schreiereien und Sirenengejaule der Polizei in der Lower East Side New Yorks. Auch Yayoi Kusamas Frühwerk aus den 70er Jahren drängt sich im Vergleich auf. Oder die riesigen Werke von Giovanni Segantini in seinem Museum in Sankt Moritz, der die „Durchsichtigkeit der Luft“, wie es Michael Köhler treffsicher formulierte, gleichermaßen wie Doris Zarrinnam ihre kleinen Formate „gestrickt“ hat.</p>
+
+      <p>Wir sind an einer profund durch Prinzhorn 1921-23 gestellten, bereits zeitgleich, 1922 (1949), von Jaspers philosophisch diskutierten und gleich 1937 von unseren Nationalsozialisten in ihrer Ausstellung „Entartete Kunst“ pervers beantworteten Grundsatzfrage nach der zumindest Auch-Wesensmöglichkeit von Kunst angelangt: Vermag Kunst nur das zu sein, was sich einem akademisch und infolgedessen intellektualistisch fundierten Kunstwollen verdankt, oder auch – und womöglich sogar notwendigerweise: hauptsächlich – das, was einem eher zwanghaft Unterbewussten entquellt?</p>
+
+      <p>Harald Szeemann, der mit Werner Hofmann und Jean-Hubert Martin wohl am nachdrücklichsten intuitiv-intellektuell gegen den Strich denkende Kurator des 20. Jahrhunderts mit sowohl kunst- wie kulturgeschichtlichem Anspruch, beantwortete diese Frage 1963 mit seiner Ausstellung Bildnerei der Geisteskranken. Art Brut. Insania pingens in der Kunsthalle Bern eindeutig mit einem Ja! Ja, er schied fortan sogar auch in seinen weiteren Ausstellungen nicht mehr die einen von den anderen Künstler*innen und betonte auch nicht mehr ausdrücklich die je differenten Wege der Jeweiligen zur Kunst. Allein die Werke waren für ihn entscheidend. Denn die Bilder kommunizieren schließlich unmittelbar mit den Betrachtern und sind als solche weit mehr als nur Membran zwischen malend Sichtenden und Malerei Sehenden.</p>
+
+      <p>Emma Kunz und Paul Klee wurden durch Harald Szeemann gleichbedeutend. Er überantwortete die jeweiligen Werke unserer je eigenen ästhetisch emanzipierten Erkenntnisbereitschaft und unserer immer subjektiven und dennoch aufgeklärten Genussfähigkeit.</p>
+
+      <p>Vor diese individualisierte Urteilsfindung wird auch das Werk Doris Zarrinnams mit dieser Publikation gestellt: Wer kann sich diesen Bildern entziehen, diesen fremdartigen Erzählungen wie in einer Novelle ohne Anfang und Ende? Wer hat den Wunsch, sich den unbedarften Farbwelten zu verschließen, wer nicht den, für sich den Gewinn aus diesen Bildern zu ziehen, den, sich zu konzentrieren (mit ihr sich ins Zentrum zu begeben)? Wer kann sich angesichts dieser Bilder der Erkenntnis verweigern, dass eine infantile Grundstimmung ein Quantum Kontinuum unseres Lebens ist? Geträumtes und Erlebtes wunderlich zu sichten, ist nicht gleich pathologisch, sondern nicht selten auch nur Nichtverdrängung. Und wo denn in der Kunst soll dieses in uns allen vorhandene Innere noch nach außen sichtbar werden?</p>
+
+      <p>Die gemalten Sichten Doris Zarrinnams zeigen ohne Wenn und Aber, dass ihr Malen sichtbar macht, was genuin nur so sehend zu entdecken ist. Sie sind ihre Vorstellungen, wie wir Vorstellungen aus dem Theater kennen: Aus einem Lesestoff, einem Libretto, der Schilderung von Erlebtem wird eine Dramaturgie. Aus dieser entwickelt die Regie eine Aufführung mit Schauspieler*innen und Kulissen für die Bühne. Das Resultat ist eine Vorstellung, die die jeweiligen Vorstellungen vom Stoff – die von den Autor*innen, Dramaturg*innen, Regisseur*innen, Bühnenbildner*innen und Schauspielenden oder eben wie von einer Malerin – vorstellt, um schlussendlich im Publikum Vorstellungen zu erwirken wie die der ermalten Bilder von Doris Zarrinnam.</p>
+
+      <p class="text-right italic mt-12 text-amber-300">
+        Raimund Stecker<br>
+        Düsseldorf, im März 2026
+      </p>
+    </div>
+
+    <!-- Lebenslauf -->
+    <div class="mt-20">
+      <h3 class="text-amber-300 text-2xl mb-8 text-center">Lebenslauf Doris (Dodo) Zarrinnam</h3>
+      <dl class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-12 gap-y-5 text-sm leading-relaxed">
+        <dt class="text-amber-300 text-right font-medium">* 19.09.1941</dt><dd>in Bromberg</dd>
+        <dt class="text-amber-300 text-right font-medium">Vorschule</dt><dd>1948–1952</dd>
+        <dt class="text-amber-300 text-right font-medium">Internatsschule Marienberg</dt><dd>1952–1955</dd>
+        <dt class="text-amber-300 text-right font-medium">Schulzeit</dt><dd>1957–1961</dd>
+        <dt class="text-amber-300 text-right font-medium">Tod der Mutter 1959</dt><dd>Vollweise</dd>
+        <dt class="text-amber-300 text-right font-medium">Januar 1960</dt><dd>Kennenlernen von Shapur Zarrinnam beim indischen Abend im Paulushaus in Düsseldorf</dd>
+        <dt class="text-amber-300 text-right font-medium">Abitur</dt><dd>1961</dd>
+        <dt class="text-amber-300 text-right font-medium">1961–1963</dt><dd>Pharmaziestudium bis Vordiplom</dd>
+        <dt class="text-amber-300 text-right font-medium">04/1961 – 01/1963</dt><dd>Arbeit als Apothekengehilfin</dd>
+        <dt class="text-amber-300 text-right font-medium">November 1963</dt><dd>Hochzeit mit Abolghassem (Shapur) Zarrinnam</dd>
+        <dt class="text-amber-300 text-right font-medium">19.04.1967</dt><dd>Geburt Sohn Dirk-Bijan in Münster</dd>
+        <dt class="text-amber-300 text-right font-medium">1968–1971</dt><dd>Aufenthalt im Iran; Arbeit als Augenarzt im Iran</dd>
+        <dt class="text-amber-300 text-right font-medium">1976 Gründung</dt><dd>Augenarztpraxis in Heinsberg<br>Mitarbeit in der Praxis als Ehefrau</dd>
+        <dt class="text-amber-300 text-right font-medium">1992 Diagnose</dt><dd>paranoide Psychose; Betreuung durch Sohn Dirk-Bijan;<br>Aufgabe der Tätigkeit in der Arztpraxis</dd>
+        <dt class="text-amber-300 text-right font-medium">Ausstellung</dt><dd>„Grünes Haus“ 29.05. – 16.06.1995</dd>
+        <dt class="text-amber-300 text-right font-medium">Juli 1999</dt><dd>Sohn übernimmt väterliche Augenarztpraxis</dd>
+        <dt class="text-amber-300 text-right font-medium">Okt. 2001</dt><dd>Gemeinschaftspraxis Sohn mit Dr. Schmitz</dd>
+        <dt class="text-amber-300 text-right font-medium">22.04.2005</dt><dd>Geburt Enkel Julian</dd>
+        <dt class="text-amber-300 text-right font-medium">09.03.2007</dt><dd>Geburt Enkelin Neela</dd>
+        <dt class="text-amber-300 text-right font-medium">Jan. 2010</dt><dd>Tod Dr. Schmitz</dd>
+        <dt class="text-amber-300 text-right font-medium">✝ 21.09.2023</dt><dd>SZB Wassenberg</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Vollbild-Modal -->
+  <div id="modal" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
+    <div class="relative max-w-[95vw] max-h-[95vh]">
+      <button onclick="closeModal()" 
+              class="absolute -top-4 -right-4 bg-zinc-900 text-white w-11 h-11 rounded-full flex items-center justify-center text-4xl hover:bg-amber-300 hover:text-black z-10">×</button>
+      <img id="modalImg" src="" alt="" class="max-h-[90vh] max-w-full object-contain rounded-xl shadow-2xl">
+      <p id="modalCaption" class="text-center text-zinc-400 mt-6 text-sm"></p>
+    </div>
   </div>
 
   <script>
@@ -244,20 +408,91 @@
       "TSS04947-bearbeitet.JPG"
     ];
 
-    const gallery = document.getElementById("gallery");
+    let allImages = [];
 
-    imageFiles.forEach((filename, index) => {
-      const div = document.createElement("div");
-      div.className = "cursor-pointer overflow-hidden rounded-xl bg-zinc-900 aspect-square";
-      div.innerHTML = `
-        <img src="${filename}" class="gallery-img" alt="${filename}">
-        <p class="text-xs text-zinc-400 mt-2 text-center truncate px-2">${filename}</p>
-      `;
-      div.onclick = () => alert("Bild " + (index+1) + ": " + filename);
-      gallery.appendChild(div);
+    function createImageObjects() {
+      allImages = imageFiles.map(name => {
+        const match = name.match(/(\d{4})/);
+        const year = match ? parseInt(match[1]) : 9999;
+        return { name, year, url: name };
+      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+    }
+
+    function renderGallery(images) {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+      document.getElementById("title").textContent = `Werke • chronologisch (${images.length} Werke)`;
+
+      images.forEach((img, index) => {
+        const div = document.createElement("div");
+        div.className = "art-card cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 aspect-square border border-zinc-800";
+        div.innerHTML = `
+          <img src="${img.url}" 
+               class="gallery-img" 
+               alt="${img.name}"
+               loading="lazy"
+               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center bg-zinc-800 text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden<br>${img.name}</div>'">
+          <p class="text-xs text-zinc-500 mt-3 text-center px-2 truncate">${img.name}</p>
+        `;
+        div.onclick = () => openModal(index);
+        gallery.appendChild(div);
+      });
+    }
+
+    function setupSearch() {
+      const input = document.getElementById("searchInput");
+      input.addEventListener("input", () => {
+        const term = input.value.toLowerCase().trim();
+        if (!term) {
+          renderGallery(allImages);
+          return;
+        }
+        const filtered = allImages.filter(img => 
+          img.name.toLowerCase().includes(term) || 
+          img.year.toString().includes(term)
+        );
+        renderGallery(filtered);
+      });
+    }
+
+    function showSection(section) {
+      document.getElementById("werke-section").classList.toggle("hidden", section !== "werke");
+      document.getElementById("person-section").classList.toggle("hidden", section !== "person");
+
+      document.getElementById("menu-werke").classList.toggle("active", section === "werke");
+      document.getElementById("menu-person").classList.toggle("active", section === "person");
+    }
+
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      const img = allImages[currentIndex];
+      document.getElementById("modalImg").src = img.url;
+      document.getElementById("modalCaption").textContent = img.name;
+      const modal = document.getElementById("modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("open");
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("modal");
+      modal.classList.remove("open");
+      setTimeout(() => modal.classList.add("hidden"), 300);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (document.getElementById("modal").classList.contains("open") && e.key === "Escape") {
+        closeModal();
+      }
     });
 
-    document.getElementById("gallery-title").textContent = `Werke • chronologisch (${imageFiles.length} Werke)`;
+    window.onload = () => {
+      createImageObjects();
+      renderGallery(allImages);
+      setupSearch();
+      showSection("werke");
+    };
   </script>
 </body>
 </html>
