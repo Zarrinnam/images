@@ -135,12 +135,12 @@
     .lb-content {
       position: relative;
       max-width: 94vw;
-      max-height: 75vh;           /* etwas Platz für die Leiste unten lassen */
-      margin-bottom: 80px;        /* wichtig: Abstand zur unteren Leiste */
+      max-height: 74vh;
+      margin-bottom: 95px;   /* ausreichend Platz für die Leiste */
     }
     #lbImg {
       max-width: 100%;
-      max-height: 75vh;
+      max-height: 74vh;
       object-fit: contain;
       transform-origin: center center;
       transition: transform 0.12s linear;
@@ -149,7 +149,7 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     }
 
-    /* Schlanke untere Leiste – nur Navigation + Schließen */
+    /* Schlanke untere Leiste – nur Vor, Zurück, Schließen */
     .lb-bottombar {
       position: absolute;
       bottom: 25px;
@@ -189,7 +189,6 @@
       color: white;
     }
 
-    /* Noch kompakter auf Mobil */
     @media (max-width: 768px) {
       .lb-bottombar {
         padding: 8px 16px;
@@ -201,7 +200,7 @@
         font-size: 24px;
       }
       .lb-content {
-        margin-bottom: 70px;
+        margin-bottom: 85px;
       }
     }
 
@@ -265,8 +264,9 @@
 </footer>
 
 <script>
-// Bilder – relative Pfade
+// Aktuelle Bildliste (ohne doppeltes "1992 - O.T.")
 const IMAGES = [
+  { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
   { file: "1992 - Erlebnis '85 Aachen.JPG", year: 1992, title: "Erlebnis '85 Aachen" },
@@ -278,7 +278,6 @@ const IMAGES = [
   { file: "1992 - Jahreszeiten.JPG", year: 1992, title: "Jahreszeiten" },
   { file: "1992 - Lebenslauf.JPG", year: 1992, title: "Lebenslauf" },
   { file: "1992 - Mut.JPG", year: 1992, title: "Mut" },
-  { file: "1992 - O.T..JPG", year: 1992, title: "O.T." },
   { file: "1992 - Osterstrauß.JPG", year: 1992, title: "Osterstrauß" },
   { file: "1992 - Prisma.JPG", year: 1992, title: "Prisma" },
   { file: "1992 - Sehnsucht.JPG", year: 1992, title: "Sehnsucht" },
@@ -291,7 +290,7 @@ const IMAGES = [
   { file: "1993 - Bildung I.JPG", year: 1993, title: "Bildung I" },
   { file: "1993 - Der Pfau.JPG", year: 1993, title: "Der Pfau" },
   { file: "1993 - Einblick Aussicht.JPG", year: 1993, title: "Einblick Aussicht" },
-  { file: "1993 - Einsamkeit '86.JPG", year: 1993, title: "Einsamkeit" },
+  { file: "1993 - Einsamkeit '86.JPG", year: 1993, title: "Einsamkeit '86" },
   { file: "1993 - Geduld.JPG", year: 1993, title: "Geduld" },
   { file: "1993 - Kristal.JPG", year: 1993, title: "Kristal" },
   { file: "1993 - Nächstenliebe.JPG", year: 1993, title: "Nächstenliebe" },
@@ -484,8 +483,7 @@ const IMAGES = [
   { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" },
   { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
   { file: "TSS04766-bearbeitet.JPG", year: null, title: "Ohne Titel (I)" },
-  { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" },
-  { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" }
+  { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" }
 ];
 
 let currentIndex = 0;
@@ -568,7 +566,7 @@ document.getElementById('lbNext').addEventListener('click', () => {
 });
 document.getElementById('lbClose').addEventListener('click', closeLightbox);
 
-// Drag (Pan) + Wheel Zoom (Pinch-to-Zoom funktioniert nativ auf Mobil)
+// Drag + Wheel Zoom (Pinch-to-Zoom mit zwei Fingern)
 lbImg.addEventListener('mousedown', e => {
   isDragging = true;
   startX = e.clientX - posX;
