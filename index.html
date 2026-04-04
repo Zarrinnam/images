@@ -16,7 +16,7 @@
       --muted: #7a7068;
       --border: #2a2520;
     }
-    * { box-sizing: border-box; margin:0; padding:0; }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -36,11 +36,12 @@
     }
     h1 em { color: var(--gold); font-style: italic; }
 
+    /* Menü oberhalb der Suchleiste */
     .main-nav {
       background: rgba(14,14,14,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 20px;
+      padding: 14px 20px;
       position: sticky;
       top: 0;
       z-index: 110;
@@ -53,8 +54,8 @@
     .main-nav a {
       color: var(--text);
       text-decoration: none;
-      padding: 8px 16px;
-      transition: all 0.3s;
+      padding: 8px 20px;
+      transition: all 0.3s ease;
     }
     .main-nav a:hover { color: var(--gold); }
     .main-nav a.active {
@@ -267,6 +268,7 @@
   <p style="margin-top:12px; color:var(--muted);">Malerei • 1971 – 2020</p>
 </header>
 
+<!-- Menü oberhalb der Suchleiste -->
 <nav class="main-nav">
   <a href="#" id="menu-werke" class="active">Werke</a>
   <a href="#" id="menu-person">Zur Person</a>
@@ -276,7 +278,7 @@
   <input type="text" id="searchInput" placeholder="Titel oder Jahr suchen …">
 </div>
 
-<!-- Werke Galerie -->
+<!-- Werke Galerie (Hauptseite) -->
 <div id="werke-section">
   <div class="gallery" id="gallery"></div>
 </div>
@@ -285,7 +287,7 @@
 <div id="person-section">
   <h2 style="text-align:center; margin-bottom:50px; font-family:'Cormorant Garamond', serif; font-size:2.4rem;">Zur Person</h2>
 
-  <!-- Einleitung Prof. Stecker -->
+  <!-- Einleitung von Prof. Stecker -->
   <div class="einleitung">
     <blockquote>
       Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
@@ -321,7 +323,7 @@
 
     <p>Die Bildanlagen sind flächig hinterfangen. Jedes Bild ist eher ein Tableau denn eine Perspektive. Skizzenhafte Farbanlegungen, Untermalungen, die zum Eigenwert drängen, nicht unähnlich, bezeugen ein gekonnt zweidimensionales, ornamentales, teilweise sogar auch gegenstandsbefreiendes Bildwollen. Die Bildflächen werden so zu Ebenen, auf denen die Malerin prosaisch ihre Geschichten breiten kann. Zarrinnams Bilder gleichen auf diese Weise oft Plattformen oder im metaphorischen Sinne den Brettern, also den Bühnen, auf denen sich ihre Welten und Erzählungen ereignen.</p>
 
-    <p>Fermale Nähen zu persischen Miniaturen scheinen auf, zu Flächen verdichteten Bildräumen, in denen aus der Perspektive genommen stabpuppenhaft Szenen vorgestellt werden. Erinnerte oder erträumte Begegnungen, faktische oder ersehnte Ausblicke, vermutlich aufgeladene Gegenstände, die Kubatur des Aachener Klinikums, ein gläsernes Verlies, ein orientalischer Teppich, der mangels Erdung zu fliegen scheint, ein aus seinem Inneren strahlendes Gebäude oder auch nur ein Dinet, ein kryptischer Notenschlüssel oder eine Äskulapnatter, die einen zur Mumie Erstarrten umschlängelt. Oder auch eine evatrunkene Apfelpflückerin unter dem entzweienden Baum des Sündenbewusstseins sowie eine lippenbegrabene Odaliske.</p>
+    <p>Formale Nähen zu persischen Miniaturen scheinen auf, zu Flächen verdichteten Bildräumen, in denen aus der Perspektive genommen stabpuppenhaft Szenen vorgestellt werden. Erinnerte oder erträumte Begegnungen, faktische oder ersehnte Ausblicke, vermutlich aufgeladene Gegenstände, die Kubatur des Aachener Klinikums, ein gläsernes Verlies, ein orientalischer Teppich, der mangels Erdung zu fliegen scheint, ein aus seinem Inneren strahlendes Gebäude oder auch nur ein Dinet, ein kryptischer Notenschlüssel oder eine Äskulapnatter, die einen zur Mumie Erstarrten umschlängelt. Oder auch eine evatrunkene Apfelpflückerin unter dem entzweienden Baum des Sündenbewusstseins sowie eine lippenbegrabene Odaliske.</p>
 
     <p>Selbst kleine Retrospektiven ihres Bildschöpfens hat sie immer wieder gemalt – ihre autonomen Bilder als Vignetten wiederholt und einmal sogar, gleich 1992 in „Prisma“, unter einen madonnenhaften Schutzmantel geschützt. „Sprache der Malerei“ nannte sie diese Bilderreihe.</p>
 
@@ -376,7 +378,7 @@
   </dl>
 </div>
 
-<!-- Lightbox (unverändert) -->
+<!-- Lightbox -->
 <div id="lightbox">
   <div class="lb-topbar">
     <div>
@@ -412,8 +414,8 @@
   <div>© Doris Zarrinnam – Alle Rechte vorbehalten</div>
 </footer>
 
-<<script>
-// Aktuelle Bildliste (2020 - Weg der Liebe.JPG aktualisiert)
+<script>
+// Komplettes Bilder-Array (mit aktualisiertem "2020 - Weg der Liebe.JPG")
 const IMAGES = [
   { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
@@ -630,11 +632,10 @@ const IMAGES = [
   { file: "2019 - Trilogie.JPG", year: 2019, title: "Trilogie" },
   { file: "2019 - Wirklichkeit.JPG", year: 2019, title: "Wirklichkeit" },
   { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" },
-  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },   /* aktualisiertes Bild */
+  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
   { file: "TSS04766-bearbeitet.JPG", year: null, title: "Ohne Titel (I)" },
   { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" }
 ];
-
 
 let currentIndex = 0;
 let scale = 1;
@@ -672,19 +673,110 @@ menuPerson.addEventListener('click', e => {
   searchInput.parentElement.style.display = 'none';
 });
 
-// Rest der Gallery- und Lightbox-Funktionen (wie bisher)
-function renderGallery(filtered) { /* ... */ }
-function filterImages() { /* ... */ }
+// Gallery Rendering
+function renderGallery(filtered) {
+  galleryEl.innerHTML = '';
+  filtered.forEach((img, i) => {
+    const card = document.createElement('div');
+    card.className = 'art-card';
+    card.innerHTML = `
+      <img src="${img.file}" alt="${img.title}" loading="lazy">
+      <div class="info">
+        <div class="title">${img.title}</div>
+        ${img.year ? `<div class="year">${img.year}</div>` : ''}
+      </div>
+    `;
+    card.addEventListener('click', () => openLightbox(i));
+    galleryEl.appendChild(card);
+  });
+}
+
+function filterImages() {
+  const term = searchInput.value.toLowerCase().trim();
+  const filtered = IMAGES.filter(img => 
+    img.title.toLowerCase().includes(term) || 
+    (img.year && String(img.year).includes(term))
+  );
+  renderGallery(filtered);
+}
 searchInput.addEventListener('input', filterImages);
 
-function openLightbox(idx) { /* ... */ }
-function showImage() { /* ... */ }
-function closeLightbox() { /* ... */ }
-function applyTransform() { /* ... */ }
-function resetTransform() { /* ... */ }
+function openLightbox(idx) {
+  currentIndex = idx;
+  showImage();
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-// Lightbox-Navigation, Drag, Wheel, Tastatur (wie zuvor)
+function showImage() {
+  const data = IMAGES[currentIndex];
+  lbImg.src = data.file;
+  lbTitle.textContent = data.title;
+  lbYear.textContent = data.year ? data.year : '';
+  resetTransform();
+}
 
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function applyTransform() {
+  lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+}
+
+function resetTransform() {
+  scale = 1; posX = 0; posY = 0;
+  applyTransform();
+}
+
+// Lightbox Navigation
+document.getElementById('lbPrev').addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+  showImage();
+});
+document.getElementById('lbNext').addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % IMAGES.length;
+  showImage();
+});
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+
+// Drag + Wheel Zoom
+lbImg.addEventListener('mousedown', e => {
+  isDragging = true;
+  startX = e.clientX - posX;
+  startY = e.clientY - posY;
+});
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  posX = e.clientX - startX;
+  posY = e.clientY - startY;
+  applyTransform();
+});
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+lbImg.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY < 0 ? 0.25 : -0.25;
+  scale = Math.max(0.5, Math.min(6, scale + delta));
+  applyTransform();
+}, { passive: false });
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') {
+    currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+    showImage();
+  }
+  if (e.key === 'ArrowRight') {
+    currentIndex = (currentIndex + 1) % IMAGES.length;
+    showImage();
+  }
+});
+
+// Initialisierung – Start mit Werke
 renderGallery(IMAGES);
 </script>
 </body>
