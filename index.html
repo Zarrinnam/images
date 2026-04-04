@@ -415,8 +415,9 @@
 </footer>
 
 <script>
-// Vollständiges Bilder-Array
+// AKTUALISIERTE BILDER-Liste (genau wie von dir angegeben)
 const IMAGES = [
+  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
   { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -519,6 +520,7 @@ const IMAGES = [
   { file: "2006 - Virtuelle Welt.JPG", year: 2006, title: "Virtuelle Welt" },
   { file: "2007 - Abstraktion I.JPG", year: 2007, title: "Abstraktion I" },
   { file: "2007 - Abstraktion II.JPG", year: 2007, title: "Abstraktion II" },
+  { file: "2007 - Entwicklung.JPG", year: 2007, title: "Entwicklung" },
   { file: "2007 - Gefühl.JPG", year: 2007, title: "Gefühl" },
   { file: "2007 - Prismarose.JPG", year: 2007, title: "Prismarose" },
   { file: "2007 - Sprache der Malerei III.JPG", year: 2007, title: "Sprache der Malerei III" },
@@ -561,6 +563,7 @@ const IMAGES = [
   { file: "2011 - Ansehen.JPG", year: 2011, title: "Ansehen" },
   { file: "2011 - Ansicht.JPG", year: 2011, title: "Ansicht" },
   { file: "2011 - Assoziation.JPG", year: 2011, title: "Assoziation" },
+  { file: "2011 - Blumenstrauß (2).JPG", year: 2011, title: "Blumenstrauß (2)" },
   { file: "2011 - Blumenstrauß.JPG", year: 2011, title: "Blumenstrauß" },
   { file: "2011 - Motivation.JPG", year: 2011, title: "Motivation" },
   { file: "2011 - Phantasie.JPG", year: 2011, title: "Phantasie" },
@@ -631,10 +634,7 @@ const IMAGES = [
   { file: "2019 - Strauss.JPG", year: 2019, title: "Strauß" },
   { file: "2019 - Trilogie.JPG", year: 2019, title: "Trilogie" },
   { file: "2019 - Wirklichkeit.JPG", year: 2019, title: "Wirklichkeit" },
-  { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" },
-  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
-  { file: "TSS04766-bearbeitet.JPG", year: null, title: "Ohne Titel (I)" },
-  { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" }
+  { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" }
 ];
 
 let currentIndex = 0;
@@ -776,7 +776,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Initialisierung – Bilder werden sofort angezeigt
+// Initialisierung – Bilder sofort anzeigen
 renderGallery(IMAGES);
 </script>
 </body>
