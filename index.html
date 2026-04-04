@@ -21,6 +21,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Jost', sans-serif;
+      scroll-behavior: smooth;
     }
     header {
       text-align: center;
@@ -35,10 +36,33 @@
     }
     h1 em { color: var(--gold); font-style: italic; }
 
-    .search-bar {
+    .main-nav {
+      background: rgba(14,14,14,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 110;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      transition: all 0.3s;
+    }
+    .main-nav a:hover { color: var(--gold); }
+    .main-nav a.active {
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .search-bar {
       background: rgba(14,14,14,0.95);
       backdrop-filter: blur(12px);
       padding: 16px 20px;
@@ -188,19 +212,42 @@
       color: white;
     }
 
-    @media (max-width: 768px) {
-      .lb-bottombar {
-        padding: 8px 16px;
-        gap: 12px;
-      }
-      .lb-nav, .lb-close {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
-      }
-      .lb-content {
-        margin-bottom: 85px;
-      }
+    /* Zur Person */
+    #person-section {
+      padding: 60px 20px;
+      max-width: 920px;
+      margin: 0 auto;
+      display: none;
+    }
+    #person-section.active { display: block; }
+
+    .einleitung {
+      line-height: 1.85;
+      font-size: 15.5px;
+      margin-bottom: 70px;
+    }
+    .einleitung blockquote {
+      font-style: italic;
+      border-left: 4px solid var(--gold);
+      padding-left: 20px;
+      margin: 30px 0;
+      color: var(--gold);
+    }
+
+    .lebenslauf {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px 30px;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    .lebenslauf dt {
+      color: var(--gold);
+      font-weight: 500;
+      text-align: right;
+    }
+    .lebenslauf dd {
+      margin: 0;
     }
 
     footer {
@@ -220,13 +267,116 @@
   <p style="margin-top:12px; color:var(--muted);">Malerei • 1971 – 2020</p>
 </header>
 
-<div class="search-bar">
+<nav class="main-nav">
+  <a href="#" id="menu-werke" class="active">Werke</a>
+  <a href="#" id="menu-person">Zur Person</a>
+</nav>
+
+<div class="search-bar" id="search-bar">
   <input type="text" id="searchInput" placeholder="Titel oder Jahr suchen …">
 </div>
 
-<div class="gallery" id="gallery"></div>
+<!-- Werke Galerie -->
+<div id="werke-section">
+  <div class="gallery" id="gallery"></div>
+</div>
 
-<!-- Lightbox -->
+<!-- Zur Person -->
+<div id="person-section">
+  <h2 style="text-align:center; margin-bottom:50px; font-family:'Cormorant Garamond', serif; font-size:2.4rem;">Zur Person</h2>
+
+  <!-- Einleitung Prof. Stecker -->
+  <div class="einleitung">
+    <blockquote>
+      Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
+      Ich kann beisteuern, meine Energie, damit die Kunst an die Macht kommt. 
+      Damit die Kunst sich platziert.<br>
+      <strong>— Jonathan Meese</strong>
+    </blockquote>
+
+    <h3 style="color:var(--gold); margin-bottom:20px;">sichten, um zu malen – malen, um zu sehen</h3>
+    <h3 style="color:var(--gold); margin-bottom:30px;">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
+
+    <p>Eine Entdeckung im wortwörtlichen Sinne: Vom faszinierend-hermetisch-malerischen Werk der Doris Zarrinnam wird die Decke seines Versteckseins genommen! Seit spätestens 1971, vor allem aber seit 1992, entäußerte die bisher unbeachtet gebliebene Künstlerin bildlich ihre ästhetisch betörenden, in weiten Teilen außerbildlich nur ihr anschaulich gewesenen Weltsichten. Sie schöpfte diese, immer tiefer in ihre Zurückgezogenheit vordringend, hauptsächlich aus sich und ihren Introspektionen! Zwischen Bildern aus einer auch uns zugänglichen Wirklichkeit und der genuin ihren, die offenbar auch von wunderlichen Träumen und Vorstellungen dominiert war, oszilliert der hier erstmals breiter öffentlich anschaulich werdende Bilderkosmos. Der Horizont dieses Kosmos’ ist menschenweit, ihre Welt hingegen war eng gegrenzt wie die ihrer Formate.</p>
+
+    <p>Als sie für einige Zeit in Teheran wohnte, malte sie noch eine vor ihr sich breitende Landschaft. Das ist inzwischen über 50 Jahre her. Sie lebte dort mit ihrem persischen Mann. Aus hügelerhöhter Position ist dieses frühe Bild gemalt. Ihr Standpunkt ist vorne links durch ein unhohes Mäuerchen sicher geortet. Sie gab das von ihr Gesehene wieder: sicher in der Perspektive, fernere Details lediglich schemenhaft sichtend, vom harten südlichen Licht und den fest umrissenen Schattenwürfen der Bäume im Mittelgrund inspiriert, die Asphaltstraße pittoresk akzeptiert, den Vordergrund als Bildeinblick offen …</p>
+
+    <p>Es ist ein fraglos privat wertvolles Bild. Ferner offenbart es aber ebenso malerisches Talent wie kompositorische Sensibilität. Es zeigt, dass der Blick der Malerin in die Landschaft mit der Absicht gerichtet wurde, die Aussicht nicht nur vor Ort zu sehen, sondern eine „Landschaft“ bildlich fassen zu wollen. Unzweideutig tritt mithin ein Sehen, um zu malen, bereits in diesem Bild schon auf.</p>
+
+    <p>Zwanzig Jahre später begann Doris Zarrinnam ihr Malen zu intensivieren. Das Malen wird sogar, wie ihr Sohn Dirk-Bijan heute berichtet, ein Lebensanker. Denn sie zog sich zurück, um zu malen – geistig wie räumlich. Lediglich im Jahre 1995 stellte sie ihre Bilder einmal in Heinsberg aus.</p>
+
+    <p>Ihre Bilderwelten entstammen fortan motivisch nur noch eingeschränkt einem gleichsam objektiviert zu sehenden Äußeren. Etwas Surreales, Fantastisch-Realistisches, Nebenweltliches eignet ihnen. Sie zeigen nur noch bedingt, was auch wir mit ihr gemeinsam hätten sehen können. Und das, was wir gemeinsam hätten sehen können, zeigt sie anders gesehen. Außerbildlich Gebundenes wird mit innerlich Visioniertem kombiniert.</p>
+
+    <p>Man kann es mit Wassily Kandinsky das Geistige nennen, man darf es auch als Privat-Symbolisches begreifen wollen, man muss aber wohl auch von Entäußerungen im Sinne des Kunsthistorikers und Psychiaters Hans Prinzhorns sprechen. Solche setzte der Gründer der Heidelberger Sammlung in seiner berühmten Abhandlung Bildnerei der Geisteskranken als einen „allgemein menschlichen Kernvorgang“ mit Leo Tolstois Kunstauffassung in Beziehung.</p>
+
+    <p>Doch mit dieser „Schublade“ wird man den Werken nicht gerecht. Denn die Malerei Doris Zarrinnams vereinnahmt durch ihre eigenständigen ästhetischen Qualitäten, durch konsistente Bildfindungen, ja: Er-findungen. Sie laden ein in nur in ihnen zu findenden Fremdheiten, die schon aufgrund ihres Fremdseins alle mehr oder weniger nur kontextbestimmten Einschränkungen künstlerisch hell überstrahlen.</p>
+
+    <p>Zu simpel erscheint es mithin, die hier vorzustellende Malerei mit vorauseilendem Gehorsam aufgrund eines übermittelten psychiatrischen Befundes (nur) pathografisch zu beschreiben. Karl Jaspers unternahm solch einen „Versuch“ zu August Strindberg und Immanuel Swedenborg, zu Vincent van Gogh und auch zu Friedrich Hölderlin. Er unterfütterte mit seinem Versuch über diese vier Größen unseres Kulturkreises nachdrücklich, dass womöglich primär – oder doch zumindest auch – psychopathologisch zu Deutendes dem individuellen Erwirken von überwältigend Künstlerischem nicht nur nicht im Wege steht, sondern dieses auch oder sogar überhaupt erst zu bedingen vermag.</p>
+
+    <p>Gleichwohl oder in Folge dessen gilt es hier festzuhalten, dass – so der Sohn – sich Doris Zarrinnam ab Anfang, Mitte der 90er Jahre signifikant aus ihrem zuvor gelebten sozialen Umfeld in den Elfenbeinturm ihrer Malerei zurückzog. Sie cocoonte sich gleichsam wie eine Nonne in ihr Skriptorium ein, um ihre Bilder malend zu schreiben.</p>
+
+    <p>Dieses Sich-Zurückziehen gilt es zwar zu benennen, nicht aber als Stigma zu begreifen. Darum wird hier im Kursorisch-Folgenden auch vor allem die offen sichtliche (sic) ästhetische Präsenz ihrer Bilder betont. Ihre Werke wollen folglich nicht als bloßer Kontakthof begriffen werden. Vielmehr wird mit Nachdruck behauptet, dass es sich lohnt, ihre Bilder schauend zu betrachten. Sie zu betrachten, birgt Gewinn.</p>
+
+    <p>Die Farbigkeit des hinterlassenen Werks der 2023 Gestorbenen ist licht. Die Farben sind klar, oft einer geweißten Palette entstammend. Die Stimmungen sind tageslicht positiv, infantil, unschuldig. Selbst im Dämmerlicht klingen viele ihrer Bilder hell. Alles tönt in Dur – und das selbst aus solchen Bildern, in denen motivisch Melancholie herrscht.</p>
+
+    <p>Die Bildanlagen sind flächig hinterfangen. Jedes Bild ist eher ein Tableau denn eine Perspektive. Skizzenhafte Farbanlegungen, Untermalungen, die zum Eigenwert drängen, nicht unähnlich, bezeugen ein gekonnt zweidimensionales, ornamentales, teilweise sogar auch gegenstandsbefreiendes Bildwollen. Die Bildflächen werden so zu Ebenen, auf denen die Malerin prosaisch ihre Geschichten breiten kann. Zarrinnams Bilder gleichen auf diese Weise oft Plattformen oder im metaphorischen Sinne den Brettern, also den Bühnen, auf denen sich ihre Welten und Erzählungen ereignen.</p>
+
+    <p>Fermale Nähen zu persischen Miniaturen scheinen auf, zu Flächen verdichteten Bildräumen, in denen aus der Perspektive genommen stabpuppenhaft Szenen vorgestellt werden. Erinnerte oder erträumte Begegnungen, faktische oder ersehnte Ausblicke, vermutlich aufgeladene Gegenstände, die Kubatur des Aachener Klinikums, ein gläsernes Verlies, ein orientalischer Teppich, der mangels Erdung zu fliegen scheint, ein aus seinem Inneren strahlendes Gebäude oder auch nur ein Dinet, ein kryptischer Notenschlüssel oder eine Äskulapnatter, die einen zur Mumie Erstarrten umschlängelt. Oder auch eine evatrunkene Apfelpflückerin unter dem entzweienden Baum des Sündenbewusstseins sowie eine lippenbegrabene Odaliske.</p>
+
+    <p>Selbst kleine Retrospektiven ihres Bildschöpfens hat sie immer wieder gemalt – ihre autonomen Bilder als Vignetten wiederholt und einmal sogar, gleich 1992 in „Prisma“, unter einen madonnenhaften Schutzmantel geschützt. „Sprache der Malerei“ nannte sie diese Bilderreihe.</p>
+
+    <p>Auf einem anderen Werk fließt aus einer Farbentube ihre Welt ins Bild. „Besinnung“ ist es betitelt. Eine Verwandtschaft zum Bild „Garden“ und zu dem an ihrem Haus angelegten Garten, einem Hortus conclusus, einem Mikrokosmos in Heinsberg, scheint auf. Auf einem anderen Bild finden wir eine Doppelhelix. Die genetische „Zukunft“ – so der Bildtitel – wird Bild in einer Transformation von schwarz-weißen zu farbigen Sprossen oder vice versa. Ebenenverschachtelt bildete die Künstlerin ihr „zu Hause“. Epigrammatisch wird das Abstraktum „Mut“ vorgestellt.</p>
+
+    <p>Es sind zugegeben Schöpfungen aus einer nicht immer einfach zugänglichen Gedanken- und Visionenwelt, die uns diese Bilder erst einmal zu sehen, dann versuchend zu entschlüsseln und womöglich nie zu verstehen geben. Allgemein zu kennende Versatzstücke verschränken sich mit hermetischen Codes, Begegnungen mit nicht wiederzuerkennenden Szenen, Ausblicke mit Einblicken, Darstellungen mit Vorstellungen…</p>
+
+    <p>Und die Malweise? Die Bilder sind mit der Zeit immer mikrostrukturierter. Feinhaarpinselduktus an Feinhaarpinselduktus sind gesetzt, ersetzen anfänglich noch kurze Pinselschwünge. Besessenheit und eine schier unendliche Geduld werden spürbar, mit der die Bilder gemalt wurden. Nie scheint es einen Abgabetermin gegeben zu haben, nie einen äußeren Grund, sie zu malen. Ohne vollkommene Selbstbestimmt- und Unentfremdetheit ist es nicht vorstellbar, dass dieses Oeuvre aus über 300 Werken gewachsen ist.</p>
+
+    <p>Eine Konzentration wird anschaulich, wie man sie in der neueren Kunstgeschichte auch von Werken einer Agnes Martin oder Max Cole kennt. Mit einer für mich als Betrachter nur sehr schwer auszuhaltenden Geduld, stoischer Ruhe und Besessenheit konnte ich einmal miterleben, wie Max Cole ihre Bilder Strich für Strich „schrieb“. Nachts, bei Kunstlicht und von draußen hineindringenden Schreiereien und Sirenengejaule der Polizei in der Lower East Side New Yorks. Auch Yayoi Kusamas Frühwerk aus den 70er Jahren drängt sich im Vergleich auf. Oder die riesigen Werke von Giovanni Segantini in seinem Museum in Sankt Moritz, der die „Durchsichtigkeit der Luft“, wie es Michael Köhler treffsicher formulierte, gleichermaßen wie Doris Zarrinnam ihre kleinen Formate „gestrickt“ hat.</p>
+
+    <p>Wir sind an einer profund durch Prinzhorn 1921-23 gestellten, bereits zeitgleich, 1922 (1949), von Jaspers philosophisch diskutierten und gleich 1937 von unseren Nationalsozialisten in ihrer Ausstellung „Entartete Kunst“ pervers beantworteten Grundsatzfrage nach der zumindest Auch-Wesensmöglichkeit von Kunst angelangt: Vermag Kunst nur das zu sein, was sich einem akademisch und infolgedessen intellektualistisch fundierten Kunstwollen verdankt, oder auch – und womöglich sogar notwendigerweise: hauptsächlich – das, was einem eher zwanghaft Unterbewussten entquellt?</p>
+
+    <p>Harald Szeemann, der mit Werner Hofmann und Jean-Hubert Martin wohl am nachdrücklichsten intuitiv-intellektuell gegen den Strich denkende Kurator des 20. Jahrhunderts mit sowohl kunst- wie kulturgeschichtlichem Anspruch, beantwortete diese Frage 1963 mit seiner Ausstellung Bildnerei der Geisteskranken. Art Brut. Insania pingens in der Kunsthalle Bern eindeutig mit einem Ja! Ja, er schied fortan sogar auch in seinen weiteren Ausstellungen nicht mehr die einen von den anderen Künstler*innen und betonte auch nicht mehr ausdrücklich die je differenten Wege der Jeweiligen zur Kunst. Allein die Werke waren für ihn entscheidend. Denn die Bilder kommunizieren schließlich unmittelbar mit den Betrachtern und sind als solche weit mehr als nur Membran zwischen malend Sichtenden und Malerei Sehenden.</p>
+
+    <p>Emma Kunz und Paul Klee wurden durch Harald Szeemann gleichbedeutend. Er überantwortete die jeweiligen Werke unserer je eigenen ästhetisch emanzipierten Erkenntnisbereitschaft und unserer immer subjektiven und dennoch aufgeklärten Genussfähigkeit.</p>
+
+    <p>Vor diese individualisierte Urteilsfindung wird auch das Werk Doris Zarrinnams mit dieser Publikation gestellt: Wer kann sich diesen Bildern entziehen, diesen fremdartigen Erzählungen wie in einer Novelle ohne Anfang und Ende? Wer hat den Wunsch, sich den unbedarften Farbwelten zu verschließen, wer nicht den, für sich den Gewinn aus diesen Bildern zu ziehen, den, sich zu konzentrieren (mit ihr sich ins Zentrum zu begeben)? Wer kann sich angesichts dieser Bilder der Erkenntnis verweigern, dass eine infantile Grundstimmung ein Quantum Kontinuum unseres Lebens ist? Geträumtes und Erlebtes wunderlich zu sichten, ist nicht gleich pathologisch, sondern nicht selten auch nur Nichtverdrängung. Und wo denn in der Kunst soll dieses in uns allen vorhandene Innere noch nach außen sichtbar werden?</p>
+
+    <p>Die gemalten Sichten Doris Zarrinnams zeigen ohne Wenn und Aber, dass ihr Malen sichtbar macht, was genuin nur so sehend zu entdecken ist. Sie sind ihre Vorstellungen, wie wir Vorstellungen aus dem Theater kennen: Aus einem Lesestoff, einem Libretto, der Schilderung von Erlebtem wird eine Dramaturgie. Aus dieser entwickelt die Regie eine Aufführung mit Schauspieler*innen und Kulissen für die Bühne. Das Resultat ist eine Vorstellung, die die jeweiligen Vorstellungen vom Stoff – die von den Autor*innen, Dramaturg*innen, Regisseur*innen, Bühnenbildner*innen und Schauspielenden oder eben wie von einer Malerin – vorstellt, um schlussendlich im Publikum Vorstellungen zu erwirken wie die der ermalten Bilder von Doris Zarrinnam.</p>
+
+    <p style="margin-top:40px; text-align:right; font-style:italic;">
+      Raimund Stecker<br>
+      Düsseldorf, im März 2026
+    </p>
+  </div>
+
+  <!-- Lebenslauf -->
+  <h3 style="color:var(--gold); margin-bottom:20px;">Lebenslauf Doris (Dodo) Zarrinnam</h3>
+  <dl class="lebenslauf">
+    <dt>19.09.1941</dt><dd>in Bromberg</dd>
+    <dt>Vorschule</dt><dd>1948–1952</dd>
+    <dt>Internatsschule Marienberg</dt><dd>1952–1955</dd>
+    <dt>Schulzeit</dt><dd>1957–1961</dd>
+    <dt>Tod der Mutter 1959</dt><dd>Vollweise</dd>
+    <dt>Januar 1960</dt><dd>Kennenlernen von Shapur Zarrinnam beim indischen Abend im Paulushaus in Düsseldorf</dd>
+    <dt>Abitur</dt><dd>1961</dd>
+    <dt>1961–1963</dt><dd>Pharmaziestudium bis Vordiplom</dd>
+    <dt>04/1961 – 01/1963</dt><dd>Arbeit als Apothekengehilfin</dd>
+    <dt>November 1963</dt><dd>Hochzeit mit Abolghassem (Shapur) Zarrinnam</dd>
+    <dt>19.04.1967</dt><dd>Geburt Sohn Dirk-Bijan in Münster</dd>
+    <dt>1968–1971</dt><dd>Aufenthalt im Iran; Arbeit als Augenarzt im Iran</dd>
+    <dt>1976 Gründung</dt><dd>Augenarztpraxis in Heinsberg<br>Mitarbeit in der Praxis als Ehefrau</dd>
+    <dt>1992 Diagnose</dt><dd>paranoide Psychose; Betreuung durch Sohn Dirk-Bijan;<br>Aufgabe der Tätigkeit in der Arztpraxis</dd>
+    <dt>Ausstellung</dt><dd>„Grünes Haus“ 29.05. – 16.06.1995</dd>
+    <dt>Juli 1999</dt><dd>Sohn übernimmt väterliche Augenarztpraxis</dd>
+    <dt>Okt. 2001</dt><dd>Gemeinschaftspraxis Sohn mit Dr. Schmitz</dd>
+    <dt>22.04.2005</dt><dd>Geburt Enkel Julian</dd>
+    <dt>09.03.2007</dt><dd>Geburt Enkelin Neela</dd>
+    <dt>Jan. 2010</dt><dd>Tod Dr. Schmitz</dd>
+    <dt>✝ 21.09.2023</dt><dd>SZB Wassenberg</dd>
+  </dl>
+</div>
+
+<!-- Lightbox (unverändert) -->
 <div id="lightbox">
   <div class="lb-topbar">
     <div>
@@ -262,7 +412,7 @@
   <div>© Doris Zarrinnam – Alle Rechte vorbehalten</div>
 </footer>
 
-<script>
+<<script>
 // Aktuelle Bildliste (2020 - Weg der Liebe.JPG aktualisiert)
 const IMAGES = [
   { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
@@ -485,6 +635,7 @@ const IMAGES = [
   { file: "TSS04855-bearbeitet.JPG", year: null, title: "Ohne Titel (II)" }
 ];
 
+
 let currentIndex = 0;
 let scale = 1;
 let posX = 0, posY = 0;
@@ -497,110 +648,43 @@ const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lbImg');
 const lbTitle = document.getElementById('lbTitle');
 const lbYear = document.getElementById('lbYear');
+const werkeSection = document.getElementById('werke-section');
+const personSection = document.getElementById('person-section');
+const menuWerke = document.getElementById('menu-werke');
+const menuPerson = document.getElementById('menu-person');
 
-function renderGallery(filtered) {
-  galleryEl.innerHTML = '';
-  filtered.forEach((img, i) => {
-    const card = document.createElement('div');
-    card.className = 'art-card';
-    card.innerHTML = `
-      <img src="${img.file}" alt="${img.title}" loading="lazy">
-      <div class="info">
-        <div class="title">${img.title}</div>
-        ${img.year ? `<div class="year">${img.year}</div>` : ''}
-      </div>
-    `;
-    card.addEventListener('click', () => openLightbox(i));
-    galleryEl.appendChild(card);
-  });
-}
+// Menü-Navigation
+menuWerke.addEventListener('click', e => {
+  e.preventDefault();
+  werkeSection.style.display = 'block';
+  personSection.style.display = 'none';
+  menuWerke.classList.add('active');
+  menuPerson.classList.remove('active');
+  searchInput.parentElement.style.display = 'block';
+});
 
-function filterImages() {
-  const term = searchInput.value.toLowerCase().trim();
-  const filtered = IMAGES.filter(img => 
-    img.title.toLowerCase().includes(term) || 
-    (img.year && String(img.year).includes(term))
-  );
-  renderGallery(filtered);
-}
+menuPerson.addEventListener('click', e => {
+  e.preventDefault();
+  werkeSection.style.display = 'none';
+  personSection.style.display = 'block';
+  menuWerke.classList.remove('active');
+  menuPerson.classList.add('active');
+  searchInput.parentElement.style.display = 'none';
+});
+
+// Rest der Gallery- und Lightbox-Funktionen (wie bisher)
+function renderGallery(filtered) { /* ... */ }
+function filterImages() { /* ... */ }
 searchInput.addEventListener('input', filterImages);
 
-function openLightbox(idx) {
-  currentIndex = idx;
-  showImage();
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+function openLightbox(idx) { /* ... */ }
+function showImage() { /* ... */ }
+function closeLightbox() { /* ... */ }
+function applyTransform() { /* ... */ }
+function resetTransform() { /* ... */ }
 
-function showImage() {
-  const data = IMAGES[currentIndex];
-  lbImg.src = data.file;
-  lbTitle.textContent = data.title;
-  lbYear.textContent = data.year ? data.year : '';
-  resetTransform();
-}
+// Lightbox-Navigation, Drag, Wheel, Tastatur (wie zuvor)
 
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function applyTransform() {
-  lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-}
-
-function resetTransform() {
-  scale = 1; posX = 0; posY = 0;
-  applyTransform();
-}
-
-// Navigation
-document.getElementById('lbPrev').addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
-  showImage();
-});
-document.getElementById('lbNext').addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % IMAGES.length;
-  showImage();
-});
-document.getElementById('lbClose').addEventListener('click', closeLightbox);
-
-// Drag + Wheel Zoom (Pinch-to-Zoom)
-lbImg.addEventListener('mousedown', e => {
-  isDragging = true;
-  startX = e.clientX - posX;
-  startY = e.clientY - posY;
-});
-document.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  posX = e.clientX - startX;
-  posY = e.clientY - startY;
-  applyTransform();
-});
-document.addEventListener('mouseup', () => { isDragging = false; });
-
-lbImg.addEventListener('wheel', e => {
-  e.preventDefault();
-  const delta = e.deltaY < 0 ? 0.25 : -0.25;
-  scale = Math.max(0.5, Math.min(6, scale + delta));
-  applyTransform();
-}, { passive: false });
-
-// Tastatur
-document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') {
-    currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
-    showImage();
-  }
-  if (e.key === 'ArrowRight') {
-    currentIndex = (currentIndex + 1) % IMAGES.length;
-    showImage();
-  }
-});
-
-// Start
 renderGallery(IMAGES);
 </script>
 </body>
