@@ -242,7 +242,6 @@
     <img id="lbImg" src="" alt="">
   </div>
 
-  <!-- Elegante untere Leiste mit allen Buttons -->
   <div class="lb-bottombar">
     <button class="lb-nav" id="lbPrev">‹</button>
     
@@ -276,7 +275,7 @@
 </footer>
 
 <script>
-// === Bilder (relative Pfade) ===
+// === Vollständiges IMAGES-Array ===
 const IMAGES = [
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -570,7 +569,7 @@ function resetTransform() {
   applyTransform();
 }
 
-// Buttons
+// Navigation
 document.getElementById('lbPrev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
   showImage();
