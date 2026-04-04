@@ -98,7 +98,7 @@
       letter-spacing: 1px;
     }
 
-    /* Lightbox */
+    /* ==================== LIGHTBOX ==================== */
     #lightbox {
       display: none;
       position: fixed;
@@ -148,31 +148,32 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     }
 
-    /* Elegante untere Leiste */
+    /* Elegante untere Leiste – optimiert für Mobile */
     .lb-bottombar {
-      margin-top: 30px;
+      margin-top: 25px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: var(--bg2);
-      padding: 12px 24px;
+      padding: 10px 16px;
       border-radius: 50px;
       border: 1px solid var(--border);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     }
+
     .lb-nav, .lb-close {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      font-size: 28px;
+      font-size: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
     .lb-nav:hover, .lb-close:hover {
       background: var(--gold);
@@ -186,24 +187,46 @@
 
     .lb-controls {
       display: flex;
-      gap: 8px;
-      margin-left: 10px;
+      gap: 6px;
+      margin-left: 8px;
     }
     .lb-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 18px;
-      transition: all 0.25s;
+      font-size: 17px;
+      transition: all 0.2s;
     }
     .lb-btn:hover {
       background: var(--gold);
       color: #0e0e0e;
       border-color: var(--gold);
+    }
+
+    /* Auf Mobilgeräten kleinere Leiste und keine Rotation */
+    @media (max-width: 768px) {
+      .lb-bottombar {
+        padding: 8px 14px;
+        gap: 8px;
+      }
+      .lb-nav, .lb-close {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+      }
+      .lb-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      /* Rotation auf Mobil ausblenden */
+      #rotateLeft, #rotateRight {
+        display: none;
+      }
     }
 
     footer {
@@ -275,7 +298,7 @@
 </footer>
 
 <script>
-// === Vollständiges IMAGES-Array ===
+// Vollständiges IMAGES-Array
 const IMAGES = [
   { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
   { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
@@ -569,7 +592,7 @@ function resetTransform() {
   applyTransform();
 }
 
-// Navigation
+// Event Listener
 document.getElementById('lbPrev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
   showImage();
