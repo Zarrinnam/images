@@ -2,64 +2,22 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doris Zarrinnam • Künstlerin</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .gallery-img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      transition: transform 0.4s ease; 
-    }
-    .gallery-img:hover { 
-      transform: scale(1.08); 
-    }
-    .art-card {
-      transition: all 0.3s ease;
-    }
-    .art-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
-    }
-    #modal {
-      display: none;
-    }
-    #modal.open {
-      display: flex;
-    }
+    .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .gallery-img:hover { transform: scale(1.05); }
   </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
+<body class="bg-zinc-950 text-zinc-100 p-6">
 
-  <div class="max-w-7xl mx-auto px-6 py-12">
-    <h1 class="text-5xl md:text-6xl font-light text-center tracking-wide mb-2">DORIS ZARRINNAM</h1>
-    <p class="text-center text-amber-300 text-xl mb-12">Künstlerin • Malerei</p>
+  <h1 class="text-5xl text-center mb-8">DORIS ZARRINNAM</h1>
+  <p class="text-center text-amber-300 mb-12">Künstlerin • Malerei</p>
 
-    <div class="mb-10">
-      <h2 id="title" class="text-3xl font-light text-center mb-6">Werke • chronologisch</h2>
-      
-      <!-- Suche -->
-      <div class="max-w-md mx-auto mb-8">
-        <input 
-          id="searchInput"
-          type="text" 
-          placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Prisma...)"
-          class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-2xl px-5 py-3 text-zinc-100 placeholder-zinc-500 focus:outline-none">
-      </div>
-    </div>
-
-    <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"></div>
-  </div>
-
-  <!-- Einfaches Vollbild-Modal -->
-  <div id="modal" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
-    <div class="relative max-w-[95vw] max-h-[95vh]">
-      <button onclick="closeModal()" 
-              class="absolute -top-4 -right-4 bg-zinc-900 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl hover:bg-amber-300 hover:text-black z-10">×</button>
-      <img id="modalImg" src="" alt="" class="max-h-[90vh] max-w-full object-contain rounded-xl shadow-2xl">
-      <p id="modalCaption" class="text-center text-zinc-400 mt-4 text-sm"></p>
-    </div>
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl text-center mb-6" id="title">Werke • chronologisch</h2>
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
   </div>
 
   <script>
@@ -81,103 +39,225 @@
       "1992 - Sehnsucht.JPG",
       "1992 - W.JPG",
       "1992 - Zuversicht.JPG",
-      // ... (deine komplette Liste – ich habe sie hier gekürzt, füge alle ein wie in deiner Datei)
+      "1993 - Apfel.JPG",
+      "1993 - Augenschein.JPG",
+      "1993 - Begutachtung.JPG",
+      "1993 - Betrachtungen.JPG",
+      "1993 - Bildung I.JPG",
+      "1993 - Der Pfau.JPG",
+      "1993 - Einblick Aussicht.JPG",
+      "1993 - Einsamkeit.JPG",
+      "1993 - Geduld.JPG",
+      "1993 - Kristal.JPG",
+      "1993 - Nächstenliebe.JPG",
+      "1993 Einsamkeit '86.JPG",
+      "1994 - 1001.JPG",
+      "1994 - Durchblick.JPG",
+      "1994 - Wunschdenken.JPG",
+      "1995 - Einladung zum ....JPG",
+      "1995 - Es war einmal ....JPG",
+      "1995 - Fabel.JPG",
+      "1995 - Gästebuch.JPG",
+      "1995 - Kaffee.JPG",
+      "1995 - Katzenkunst oder 15.000 Dollar.JPG",
+      "1995 - Märchen.JPG",
+      "1995 - Trilogie gelbe Blumen.JPG",
+      "1996 - Gesellschaft.JPG",
+      "1996 - Themen.JPG",
+      "1996 - Trilogie weiße Blumen.JPG",
+      "1996 - Zeit.JPG",
+      "1997 - Europa und Ophthalmologie.JPG",
+      "1997 - Jahrtausendwende.JPG",
+      "1997 - Komposition.JPG",
+      "1997 - Medienzeitalter.JPG",
+      "1997 - Position.JPG",
+      "1997 - Situation.JPG",
+      "1997 - Trilogie rote Blumen.JPG",
+      "1997 - Unterhaltung.JPG",
+      "1998 - Besinnung.JPG",
+      "1998 - Betreuung.JPG",
+      "1998 - Euroclown.JPG",
+      "1998 - Integration.JPG",
+      "1998 - Toleranz.JPG",
+      "1998 - Überblick - Übersicht.JPG",
+      "1998 - Weg.JPG",
+      "1998 - Zeiterscheinung.JPG",
+      "1999 - Blaue Rose.JPG",
+      "1999 - Garten.JPG",
+      "1999 - Gespräche.JPG",
+      "1999 - Praxis.JPG",
+      "1999 - Rückblick.JPG",
+      "1999 - Sonnenfinsternis.JPG",
+      "2000 - 5 Jahreszeiten.JPG",
+      "2000 - Wahrnemung.JPG",
+      "2001 - Kompetente Beratung.JPG",
+      "2002 - 3 Jahre.JPG",
+      "2002 - Schweigen.JPG",
+      "2002 - Zuhause.JPG",
+      "2002 - Zukunft.JPG",
+      "2003 - Analyse.JPG",
+      "2003 - Europa und die Optik.JPG",
+      "2003 - Garten.JPG",
+      "2003 - Stilleben mit (Prisma)Hand.JPG",
+      "2003 - Trilogie Gestern.JPG",
+      "2003 - Trilogie Heute.JPG",
+      "2003 - Trilogie Morgen.JPG",
+      "2004 - Eingebung.JPG",
+      "2004 - Sprache der Malerei I.JPG",
+      "2004 - Themenwahl.JPG",
+      "2004 - Vertrauen I.JPG",
+      "2004 - Vertrauen II.JPG",
+      "2004 Zweisamkeit.JPG",
+      "2005 - Bildung II.JPG",
+      "2005 - Blumenstrauss.JPG",
+      "2005 - F.JPG",
+      "2005 - Geburt.JPG",
+      "2005 - Klostergarten.JPG",
+      "2005 - Sachverstand.JPG",
+      "2005 - U+M.JPG",
+      "2005 - Umstellung.JPG",
+      "2006 - Allegorie.JPG",
+      "2006 - Ausdruckskraft.JPG",
+      "2006 - Ausgleich.JPG",
+      "2006 - Gesundheit.JPG",
+      "2006 - Sprache der Malerei II.JPG",
+      "2006 - Tulpen.JPG",
+      "2006 - Virtuelle Welt.JPG",
+      "2007 - Abstraktion I.JPG",
+      "2007 - Abstraktion II.JPG",
+      "2007 - Gefühl.JPG",
+      "2007 - Prismarose.JPG",
+      "2007 - Sprache der Malerei III.JPG",
+      "2007 - Verstand.JPG",
+      "2007 - Zauberwürfel.JPG",
+      "2007 - Zuordnung.JPG",
+      "2007 - Zusammenhang.JPG",
+      "2008 - Bausteine.JPG",
+      "2008 - Bitte.JPG",
+      "2008 - Charisma.JPG",
+      "2008 - Feste.JPG",
+      "2008 - Kulisse.JPG",
+      "2008 - Mohn mit Schmetterling.JPG",
+      "2008 - Spardose.JPG",
+      "2008 - Stille.JPG",
+      "2008 - Ursache und Wirkung.JPG",
+      "2008 - Wetter.JPG",
+      "2008 - Zuversicht II.JPG",
+      "2009 - Bewusstsein.JPG",
+      "2009 - Danke.JPG",
+      "2009 - Frühstück.JPG",
+      "2009 - Gabe.JPG",
+      "2009 - Künstliche Befruchtung.JPG",
+      "2009 - literarische Denkanstöße.JPG",
+      "2009 - Retrospektive (2).JPG",
+      "2009 - Retrospektive.JPG",
+      "2009 - Sprache der Malerei IV.JPG",
+      "2010 - Baum.JPG",
+      "2010 - Blumen mit Diskette.JPG",
+      "2010 - Ebene Niveau.JPG",
+      "2010 - Freizeit.JPG",
+      "2010 - Himmelsreisen.JPG",
+      "2010 - Parabel.JPG",
+      "2010 - Prisma mit Herz.JPG",
+      "2010 - Sicherheit (2).JPG",
+      "2010 - Sicherheit.JPG",
+      "2010 - Sprache der Malerei V.JPG",
+      "2010 - Vielfalt I.JPG",
+      "2010 - Vielfalt II.JPG",
+      "2011 - Ansehen.JPG",
+      "2011 - Ansicht.JPG",
+      "2011 - Assoziation.JPG",
+      "2011 - Blumenstrauß.JPG",
+      "2011 - Motivation.JPG",
+      "2011 - Phantasie.JPG",
+      "2011 - Sprache der Malerei VI.JPG",
+      "2011 - Verantwortung.JPG",
+      "2012 - Begriffsbestimmung.JPG",
+      "2012 - Denkart.JPG",
+      "2012 - Einstellung.JPG",
+      "2012 - Freude.JPG",
+      "2012 - Gelassenheit.JPG",
+      "2012 - Gestaltung.JPG",
+      "2012 - Kalender.JPG",
+      "2012 - Komposition II.JPG",
+      "2012 - Muse.JPG",
+      "2012 - Sprache der Malerei VII.JPG",
+      "2012 - Tropfen.JPG",
+      "2013 - Alltag.JPG",
+      "2013 - Emotionen.JPG",
+      "2013 - Ergänzungen.JPG",
+      "2013 - Erneuerung.JPG",
+      "2013 - Harmonie.JPG",
+      "2013 - Konstante.JPG",
+      "2013 - Künstliche Befruchtung.JPG",
+      "2013 - Sagen.JPG",
+      "2013 - Sprache der Malerei VIII.JPG",
+      "2014 - Aspekte.JPG",
+      "2014 - Auswahl.JPG",
+      "2014 - Deutung.JPG",
+      "2014 - Dokumentation.JPG",
+      "2014 - Eurasia.JPG",
+      "2014 - Farbenspiel.JPG",
+      "2014 - Kohärenz.JPG",
+      "2014 - Lebensart.JPG",
+      "2014 - Obulus.JPG",
+      "2014 - Sprache und Gedanken.JPG",
+      "2015 - Äquivalent.JPG",
+      "2015 - Gewissen.JPG",
+      "2015 - Humor und Trickfilmzeichnung.JPG",
+      "2015 - Informationen.JPG",
+      "2015 - Proportionen.JPG",
+      "2015 - Sprache der Malerei IX.JPG",
+      "2015 - Sympathien.JPG",
+      "2016 - 1000 Worte.JPG",
+      "2016 - Informationen II.JPG",
+      "2016 - Migration.JPG",
+      "2016 - Modus.JPG",
+      "2016 - Sprache der Malerei X.JPG",
+      "2016 - Unterbewußtsein.JPG",
+      "2016 - Würde.JPG",
+      "2016 - Zeitvertreib.JPG",
+      "2017 - Aesthetik.JPG",
+      "2017 - Eurabike.JPG",
+      "2017 - Formeln.JPG",
+      "2017 - Gedankengut.JPG",
+      "2017 - Glückwünsche.JPG",
+      "2017 - Göttliche Fügung.JPG",
+      "2017 - Prävention.JPG",
+      "2017 - Verfügungen.JPG",
+      "2018 - Digitale Welt.JPG",
+      "2018 - Einstellung.JPG",
+      "2018 - Ergebnis.JPG",
+      "2018 - Generationen.JPG",
+      "2018 - Kompromisse.JPG",
+      "2018 - Sprache der Malerei XI.JPG",
+      "2018 - Zeitenwende.JPG",
+      "2019 - Begutachtung II.JPG",
+      "2019 - Stil.JPG",
+      "2019 - Strauss.JPG",
+      "2019 - Trilogie.JPG",
+      "2019 - Wirklichkeit.JPG",
+      "2020 - Manifest.JPG",
       "2020 - Weg der Liebe.JPG",
       "TSS04766-bearbeitet.JPG",
       "TSS04855-bearbeitet.JPG",
       "TSS04947-bearbeitet.JPG"
     ];
 
-    let allImages = [];
+    const gallery = document.getElementById("gallery");
 
-    function createImageObjects() {
-      allImages = imageFiles.map(name => {
-        const match = name.match(/(\d{4})/);
-        const year = match ? parseInt(match[1]) : 9999;
-        return { name, year, url: name };
-      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
-    }
-
-    function renderGallery(images) {
-      const gallery = document.getElementById("gallery");
-      gallery.innerHTML = "";
-
-      document.getElementById("title").textContent = `Werke • chronologisch (${images.length} Werke)`;
-
-      images.forEach((img, index) => {
-        const div = document.createElement("div");
-        div.className = "art-card cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 aspect-square border border-zinc-800";
-        div.innerHTML = `
-          <img src="${img.url}" 
-               class="gallery-img" 
-               alt="${img.name}"
-               loading="lazy"
-               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 200 200%27%3E%3Crect width=%27200%27 height=%27200%27 fill=%27%23333%27/%3E%3Ctext x=%27100%27 y=%27100%27 text-anchor=%27middle%27 dy=%27.3em%27 fill=%27%23999%27 font-size=%2712%27%3EBild nicht gefunden%3C/text%3E%3C/svg%27'; this.alt='Fehler';">
-          <p class="text-xs text-zinc-500 mt-3 text-center px-2 truncate">${img.name}</p>
-        `;
-        div.onclick = () => openModal(index);
-        gallery.appendChild(div);
-      });
-    }
-
-    function setupSearch() {
-      const input = document.getElementById("searchInput");
-      input.addEventListener("input", () => {
-        const term = input.value.toLowerCase().trim();
-        if (!term) {
-          renderGallery(allImages);
-          return;
-        }
-        const filtered = allImages.filter(img => 
-          img.name.toLowerCase().includes(term) || 
-          img.year.toString().includes(term)
-        );
-        renderGallery(filtered);
-      });
-    }
-
-    let currentIndex = 0;
-
-    function openModal(index) {
-      currentIndex = index;
-      const img = allImages[currentIndex];
-      document.getElementById("modalImg").src = img.url;
-      document.getElementById("modalCaption").textContent = img.name;
-      document.getElementById("modal").classList.add("open");
-      document.getElementById("modal").classList.remove("hidden");
-    }
-
-    function closeModal() {
-      const modal = document.getElementById("modal");
-      modal.classList.remove("open");
-      setTimeout(() => modal.classList.add("hidden"), 300);
-    }
-
-    // Tastatur-Support
-    document.addEventListener("keydown", (e) => {
-      if (document.getElementById("modal").classList.contains("open")) {
-        if (e.key === "Escape") closeModal();
-        if (e.key === "ArrowRight") {
-          currentIndex = (currentIndex + 1) % allImages.length;
-          const img = allImages[currentIndex];
-          document.getElementById("modalImg").src = img.url;
-          document.getElementById("modalCaption").textContent = img.name;
-        }
-        if (e.key === "ArrowLeft") {
-          currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
-          const img = allImages[currentIndex];
-          document.getElementById("modalImg").src = img.url;
-          document.getElementById("modalCaption").textContent = img.name;
-        }
-      }
+    imageFiles.forEach((filename, index) => {
+      const div = document.createElement("div");
+      div.className = "cursor-pointer overflow-hidden rounded-xl bg-zinc-900 aspect-square";
+      div.innerHTML = `
+        <img src="${filename}" class="gallery-img" alt="${filename}">
+        <p class="text-xs text-zinc-400 mt-2 text-center truncate px-2">${filename}</p>
+      `;
+      div.onclick = () => alert("Bild " + (index+1) + ": " + filename);
+      gallery.appendChild(div);
     });
 
-    // Start
-    window.onload = () => {
-      createImageObjects();
-      renderGallery(allImages);
-      setupSearch();
-    };
+    document.getElementById("gallery-title").textContent = `Werke • chronologisch (${imageFiles.length} Werke)`;
   </script>
 </body>
 </html>
