@@ -2,782 +2,438 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doris Zarrinnam – Malerei</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Doris Zarrinnam • Künstlerin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <style>
-    :root {
-      --bg: #0e0e0e;
-      --bg2: #161616;
-      --gold: #c9a96e;
-      --text: #e8e0d4;
-      --muted: #7a7068;
-      --border: #2a2520;
+    .gallery-img { 
+      transition: all 0.3s ease; 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
     }
-    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Jost', sans-serif;
-      scroll-behavior: smooth;
+    .gallery-img:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3); 
     }
-    header {
-      text-align: center;
-      padding: 70px 20px 40px;
-      border-bottom: 1px solid var(--border);
-    }
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-    }
-    h1 em { color: var(--gold); font-style: italic; }
 
-    /* Menü oberhalb der Suchleiste */
-    .main-nav {
-      background: rgba(14,14,14,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 110;
+    /* Karussell Optimierung für Mobil */
+    .swiper-slide {
       display: flex;
-      justify-content: center;
-      gap: 40px;
-      font-size: 15px;
-      letter-spacing: 1px;
-    }
-    .main-nav a {
-      color: var(--text);
-      text-decoration: none;
-      padding: 8px 20px;
-      transition: all 0.3s ease;
-    }
-    .main-nav a:hover { color: var(--gold); }
-    .main-nav a.active {
-      color: var(--gold);
-      border-bottom: 2px solid var(--gold);
-    }
-
-    .search-bar {
-      background: rgba(14,14,14,0.95);
-      backdrop-filter: blur(12px);
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-    #searchInput {
-      width: 100%;
-      max-width: 520px;
-      padding: 12px 20px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 15px;
-      border-radius: 4px;
-      outline: none;
-    }
-    #searchInput:focus { border-color: var(--gold); }
-
-    .gallery {
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px;
-      max-width: 1600px;
-      margin: 0 auto;
-    }
-    .art-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .art-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-    }
-    .art-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .art-card:hover img { transform: scale(1.05); }
-    .info {
-      padding: 12px 14px;
-    }
-    .title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 15px;
-    }
-    .year {
-      font-size: 12px;
-      color: var(--gold);
-      letter-spacing: 1px;
-    }
-
-    /* Lightbox */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10,8,6,0.98);
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      flex-direction: column;
+      background: #000;
+      padding: 10px 0;
     }
-    #lightbox.open { display: flex; }
-
-    .lb-topbar {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 25px 30px 20px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-      z-index: 30;
-      color: #fff;
-    }
-    .lb-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 23px;
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-    .lb-year {
-      font-size: 14.5px;
-      color: var(--gold);
-      letter-spacing: 2px;
-    }
-
-    .lb-content {
-      position: relative;
+    .swiper-slide img {
+      max-height: 88vh;
       max-width: 94vw;
-      max-height: 74vh;
-      margin-bottom: 95px;
-    }
-    #lbImg {
-      max-width: 100%;
-      max-height: 74vh;
       object-fit: contain;
-      transform-origin: center center;
-      transition: transform 0.12s linear;
-      cursor: grab;
-      user-select: none;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
-    }
-
-    .lb-bottombar {
-      position: absolute;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      background: var(--bg2);
-      padding: 10px 20px;
-      border-radius: 50px;
-      border: 1px solid var(--border);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-      z-index: 25;
-    }
-    .lb-nav, .lb-close {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      font-size: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lb-nav:hover, .lb-close:hover {
-      background: var(--gold);
-      color: #0e0e0e;
-      border-color: var(--gold);
-    }
-    .lb-close:hover {
-      background: #c94a4a;
-      color: white;
-    }
-
-    /* Zur Person */
-    #person-section {
-      padding: 60px 20px;
-      max-width: 920px;
-      margin: 0 auto;
-      display: none;
-    }
-    #person-section.active { display: block; }
-
-    .einleitung {
-      line-height: 1.85;
-      font-size: 15.5px;
-      margin-bottom: 70px;
-    }
-    .einleitung blockquote {
-      font-style: italic;
-      border-left: 4px solid var(--gold);
-      padding-left: 20px;
-      margin: 30px 0;
-      color: var(--gold);
-    }
-
-    .lebenslauf {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 12px 30px;
-      line-height: 1.65;
-      font-size: 15px;
-    }
-    .lebenslauf dt {
-      color: var(--gold);
-      font-weight: 500;
-      text-align: right;
-    }
-    .lebenslauf dd {
-      margin: 0;
-    }
-
-    footer {
-      background: var(--bg2);
-      padding: 70px 20px 50px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 14px;
+      border-radius: 8px;
     }
   </style>
 </head>
-<body>
+<body class="bg-zinc-950 text-zinc-100">
 
-<header>
-  <h1>Doris <em>Zarrinnam</em></h1>
-  <p style="margin-top:12px; color:var(--muted);">Malerei • 1971 – 2020</p>
-</header>
+  <header class="bg-black py-8 border-b border-zinc-800">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-light tracking-widest">DORIS ZARRINNAM</h1>
+      <p class="text-lg text-amber-300 mt-2">Künstlerin • Malerei</p>
+    </div>
+  </header>
 
-<!-- Menü oberhalb der Suchleiste -->
-<nav class="main-nav">
-  <a href="#" id="menu-werke" class="active">Werke</a>
-  <a href="#" id="menu-person">Zur Person</a>
-</nav>
+  <section class="max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-light mb-6 border-l-4 border-amber-300 pl-4">Über mich</h2>
+    <div class="prose prose-invert text-zinc-300 text-lg">
+      <p>Diese Homepage zeigt die Hauptwerke der Künstlerin Doris Zarrinnam.</p>
+      <p>Geboren am 19. September 1941 in Bromberg | Studium der Pharmazie bis zum Vordiplom 1961 - 1963 | Ausstellung von Bildern 1995 im "Grünen Haus" in Heinsberg</p>
+    </div>
+  </section>
 
-<div class="search-bar" id="search-bar">
-  <input type="text" id="searchInput" placeholder="Titel oder Jahr suchen …">
-</div>
+  <section class="max-w-7xl mx-auto px-6 pb-20">
+    <div class="mb-10">
+      <h2 class="text-3xl font-light text-center mb-6" id="gallery-title">Werke • chronologisch</h2>
+      
+      <div class="max-w-xl mx-auto">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 01-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Trilogie, Prisma...)"
+            class="block w-full bg-zinc-900 border border-zinc-700 focus:border-amber-300 rounded-2xl py-3 pl-11 pr-4 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-300">
+        </div>
+        <p class="text-center text-xs text-zinc-500 mt-2">Tippe z. B. „1995“, „Trilogie“ oder „Prisma“</p>
+      </div>
+    </div>
+    
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+  </section>
 
-<!-- Werke Galerie (Hauptseite) -->
-<div id="werke-section">
-  <div class="gallery" id="gallery"></div>
-</div>
-
-<!-- Zur Person -->
-<div id="person-section">
-  <h2 style="text-align:center; margin-bottom:50px; font-family:'Cormorant Garamond', serif; font-size:2.4rem;">Zur Person</h2>
-
-  <!-- Einleitung von Prof. Stecker -->
-  <div class="einleitung">
-    <blockquote>
-      Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
-      Ich kann beisteuern, meine Energie, damit die Kunst an die Macht kommt. 
-      Damit die Kunst sich platziert.<br>
-      <strong>— Jonathan Meese</strong>
-    </blockquote>
-
-    <h3 style="color:var(--gold); margin-bottom:20px;">sichten, um zu malen – malen, um zu sehen</h3>
-    <h3 style="color:var(--gold); margin-bottom:30px;">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
-
-    <p>Eine Entdeckung im wortwörtlichen Sinne: Vom faszinierend-hermetisch-malerischen Werk der Doris Zarrinnam wird die Decke seines Versteckseins genommen! Seit spätestens 1971, vor allem aber seit 1992, entäußerte die bisher unbeachtet gebliebene Künstlerin bildlich ihre ästhetisch betörenden, in weiten Teilen außerbildlich nur ihr anschaulich gewesenen Weltsichten. Sie schöpfte diese, immer tiefer in ihre Zurückgezogenheit vordringend, hauptsächlich aus sich und ihren Introspektionen! Zwischen Bildern aus einer auch uns zugänglichen Wirklichkeit und der genuin ihren, die offenbar auch von wunderlichen Träumen und Vorstellungen dominiert war, oszilliert der hier erstmals breiter öffentlich anschaulich werdende Bilderkosmos. Der Horizont dieses Kosmos’ ist menschenweit, ihre Welt hingegen war eng gegrenzt wie die ihrer Formate.</p>
-
-    <p>Als sie für einige Zeit in Teheran wohnte, malte sie noch eine vor ihr sich breitende Landschaft. Das ist inzwischen über 50 Jahre her. Sie lebte dort mit ihrem persischen Mann. Aus hügelerhöhter Position ist dieses frühe Bild gemalt. Ihr Standpunkt ist vorne links durch ein unhohes Mäuerchen sicher geortet. Sie gab das von ihr Gesehene wieder: sicher in der Perspektive, fernere Details lediglich schemenhaft sichtend, vom harten südlichen Licht und den fest umrissenen Schattenwürfen der Bäume im Mittelgrund inspiriert, die Asphaltstraße pittoresk akzeptiert, den Vordergrund als Bildeinblick offen …</p>
-
-    <p>Es ist ein fraglos privat wertvolles Bild. Ferner offenbart es aber ebenso malerisches Talent wie kompositorische Sensibilität. Es zeigt, dass der Blick der Malerin in die Landschaft mit der Absicht gerichtet wurde, die Aussicht nicht nur vor Ort zu sehen, sondern eine „Landschaft“ bildlich fassen zu wollen. Unzweideutig tritt mithin ein Sehen, um zu malen, bereits in diesem Bild schon auf.</p>
-
-    <p>Zwanzig Jahre später begann Doris Zarrinnam ihr Malen zu intensivieren. Das Malen wird sogar, wie ihr Sohn Dirk-Bijan heute berichtet, ein Lebensanker. Denn sie zog sich zurück, um zu malen – geistig wie räumlich. Lediglich im Jahre 1995 stellte sie ihre Bilder einmal in Heinsberg aus.</p>
-
-    <p>Ihre Bilderwelten entstammen fortan motivisch nur noch eingeschränkt einem gleichsam objektiviert zu sehenden Äußeren. Etwas Surreales, Fantastisch-Realistisches, Nebenweltliches eignet ihnen. Sie zeigen nur noch bedingt, was auch wir mit ihr gemeinsam hätten sehen können. Und das, was wir gemeinsam hätten sehen können, zeigt sie anders gesehen. Außerbildlich Gebundenes wird mit innerlich Visioniertem kombiniert.</p>
-
-    <p>Man kann es mit Wassily Kandinsky das Geistige nennen, man darf es auch als Privat-Symbolisches begreifen wollen, man muss aber wohl auch von Entäußerungen im Sinne des Kunsthistorikers und Psychiaters Hans Prinzhorns sprechen. Solche setzte der Gründer der Heidelberger Sammlung in seiner berühmten Abhandlung Bildnerei der Geisteskranken als einen „allgemein menschlichen Kernvorgang“ mit Leo Tolstois Kunstauffassung in Beziehung.</p>
-
-    <p>Doch mit dieser „Schublade“ wird man den Werken nicht gerecht. Denn die Malerei Doris Zarrinnams vereinnahmt durch ihre eigenständigen ästhetischen Qualitäten, durch konsistente Bildfindungen, ja: Er-findungen. Sie laden ein in nur in ihnen zu findenden Fremdheiten, die schon aufgrund ihres Fremdseins alle mehr oder weniger nur kontextbestimmten Einschränkungen künstlerisch hell überstrahlen.</p>
-
-    <p>Zu simpel erscheint es mithin, die hier vorzustellende Malerei mit vorauseilendem Gehorsam aufgrund eines übermittelten psychiatrischen Befundes (nur) pathografisch zu beschreiben. Karl Jaspers unternahm solch einen „Versuch“ zu August Strindberg und Immanuel Swedenborg, zu Vincent van Gogh und auch zu Friedrich Hölderlin. Er unterfütterte mit seinem Versuch über diese vier Größen unseres Kulturkreises nachdrücklich, dass womöglich primär – oder doch zumindest auch – psychopathologisch zu Deutendes dem individuellen Erwirken von überwältigend Künstlerischem nicht nur nicht im Wege steht, sondern dieses auch oder sogar überhaupt erst zu bedingen vermag.</p>
-
-    <p>Gleichwohl oder in Folge dessen gilt es hier festzuhalten, dass – so der Sohn – sich Doris Zarrinnam ab Anfang, Mitte der 90er Jahre signifikant aus ihrem zuvor gelebten sozialen Umfeld in den Elfenbeinturm ihrer Malerei zurückzog. Sie cocoonte sich gleichsam wie eine Nonne in ihr Skriptorium ein, um ihre Bilder malend zu schreiben.</p>
-
-    <p>Dieses Sich-Zurückziehen gilt es zwar zu benennen, nicht aber als Stigma zu begreifen. Darum wird hier im Kursorisch-Folgenden auch vor allem die offen sichtliche (sic) ästhetische Präsenz ihrer Bilder betont. Ihre Werke wollen folglich nicht als bloßer Kontakthof begriffen werden. Vielmehr wird mit Nachdruck behauptet, dass es sich lohnt, ihre Bilder schauend zu betrachten. Sie zu betrachten, birgt Gewinn.</p>
-
-    <p>Die Farbigkeit des hinterlassenen Werks der 2023 Gestorbenen ist licht. Die Farben sind klar, oft einer geweißten Palette entstammend. Die Stimmungen sind tageslicht positiv, infantil, unschuldig. Selbst im Dämmerlicht klingen viele ihrer Bilder hell. Alles tönt in Dur – und das selbst aus solchen Bildern, in denen motivisch Melancholie herrscht.</p>
-
-    <p>Die Bildanlagen sind flächig hinterfangen. Jedes Bild ist eher ein Tableau denn eine Perspektive. Skizzenhafte Farbanlegungen, Untermalungen, die zum Eigenwert drängen, nicht unähnlich, bezeugen ein gekonnt zweidimensionales, ornamentales, teilweise sogar auch gegenstandsbefreiendes Bildwollen. Die Bildflächen werden so zu Ebenen, auf denen die Malerin prosaisch ihre Geschichten breiten kann. Zarrinnams Bilder gleichen auf diese Weise oft Plattformen oder im metaphorischen Sinne den Brettern, also den Bühnen, auf denen sich ihre Welten und Erzählungen ereignen.</p>
-
-    <p>Formale Nähen zu persischen Miniaturen scheinen auf, zu Flächen verdichteten Bildräumen, in denen aus der Perspektive genommen stabpuppenhaft Szenen vorgestellt werden. Erinnerte oder erträumte Begegnungen, faktische oder ersehnte Ausblicke, vermutlich aufgeladene Gegenstände, die Kubatur des Aachener Klinikums, ein gläsernes Verlies, ein orientalischer Teppich, der mangels Erdung zu fliegen scheint, ein aus seinem Inneren strahlendes Gebäude oder auch nur ein Dinet, ein kryptischer Notenschlüssel oder eine Äskulapnatter, die einen zur Mumie Erstarrten umschlängelt. Oder auch eine evatrunkene Apfelpflückerin unter dem entzweienden Baum des Sündenbewusstseins sowie eine lippenbegrabene Odaliske.</p>
-
-    <p>Selbst kleine Retrospektiven ihres Bildschöpfens hat sie immer wieder gemalt – ihre autonomen Bilder als Vignetten wiederholt und einmal sogar, gleich 1992 in „Prisma“, unter einen madonnenhaften Schutzmantel geschützt. „Sprache der Malerei“ nannte sie diese Bilderreihe.</p>
-
-    <p>Auf einem anderen Werk fließt aus einer Farbentube ihre Welt ins Bild. „Besinnung“ ist es betitelt. Eine Verwandtschaft zum Bild „Garden“ und zu dem an ihrem Haus angelegten Garten, einem Hortus conclusus, einem Mikrokosmos in Heinsberg, scheint auf. Auf einem anderen Bild finden wir eine Doppelhelix. Die genetische „Zukunft“ – so der Bildtitel – wird Bild in einer Transformation von schwarz-weißen zu farbigen Sprossen oder vice versa. Ebenenverschachtelt bildete die Künstlerin ihr „zu Hause“. Epigrammatisch wird das Abstraktum „Mut“ vorgestellt.</p>
-
-    <p>Es sind zugegeben Schöpfungen aus einer nicht immer einfach zugänglichen Gedanken- und Visionenwelt, die uns diese Bilder erst einmal zu sehen, dann versuchend zu entschlüsseln und womöglich nie zu verstehen geben. Allgemein zu kennende Versatzstücke verschränken sich mit hermetischen Codes, Begegnungen mit nicht wiederzuerkennenden Szenen, Ausblicke mit Einblicken, Darstellungen mit Vorstellungen…</p>
-
-    <p>Und die Malweise? Die Bilder sind mit der Zeit immer mikrostrukturierter. Feinhaarpinselduktus an Feinhaarpinselduktus sind gesetzt, ersetzen anfänglich noch kurze Pinselschwünge. Besessenheit und eine schier unendliche Geduld werden spürbar, mit der die Bilder gemalt wurden. Nie scheint es einen Abgabetermin gegeben zu haben, nie einen äußeren Grund, sie zu malen. Ohne vollkommene Selbstbestimmt- und Unentfremdetheit ist es nicht vorstellbar, dass dieses Oeuvre aus über 300 Werken gewachsen ist.</p>
-
-    <p>Eine Konzentration wird anschaulich, wie man sie in der neueren Kunstgeschichte auch von Werken einer Agnes Martin oder Max Cole kennt. Mit einer für mich als Betrachter nur sehr schwer auszuhaltenden Geduld, stoischer Ruhe und Besessenheit konnte ich einmal miterleben, wie Max Cole ihre Bilder Strich für Strich „schrieb“. Nachts, bei Kunstlicht und von draußen hineindringenden Schreiereien und Sirenengejaule der Polizei in der Lower East Side New Yorks. Auch Yayoi Kusamas Frühwerk aus den 70er Jahren drängt sich im Vergleich auf. Oder die riesigen Werke von Giovanni Segantini in seinem Museum in Sankt Moritz, der die „Durchsichtigkeit der Luft“, wie es Michael Köhler treffsicher formulierte, gleichermaßen wie Doris Zarrinnam ihre kleinen Formate „gestrickt“ hat.</p>
-
-    <p>Wir sind an einer profund durch Prinzhorn 1921-23 gestellten, bereits zeitgleich, 1922 (1949), von Jaspers philosophisch diskutierten und gleich 1937 von unseren Nationalsozialisten in ihrer Ausstellung „Entartete Kunst“ pervers beantworteten Grundsatzfrage nach der zumindest Auch-Wesensmöglichkeit von Kunst angelangt: Vermag Kunst nur das zu sein, was sich einem akademisch und infolgedessen intellektualistisch fundierten Kunstwollen verdankt, oder auch – und womöglich sogar notwendigerweise: hauptsächlich – das, was einem eher zwanghaft Unterbewussten entquellt?</p>
-
-    <p>Harald Szeemann, der mit Werner Hofmann und Jean-Hubert Martin wohl am nachdrücklichsten intuitiv-intellektuell gegen den Strich denkende Kurator des 20. Jahrhunderts mit sowohl kunst- wie kulturgeschichtlichem Anspruch, beantwortete diese Frage 1963 mit seiner Ausstellung Bildnerei der Geisteskranken. Art Brut. Insania pingens in der Kunsthalle Bern eindeutig mit einem Ja! Ja, er schied fortan sogar auch in seinen weiteren Ausstellungen nicht mehr die einen von den anderen Künstler*innen und betonte auch nicht mehr ausdrücklich die je differenten Wege der Jeweiligen zur Kunst. Allein die Werke waren für ihn entscheidend. Denn die Bilder kommunizieren schließlich unmittelbar mit den Betrachtern und sind als solche weit mehr als nur Membran zwischen malend Sichtenden und Malerei Sehenden.</p>
-
-    <p>Emma Kunz und Paul Klee wurden durch Harald Szeemann gleichbedeutend. Er überantwortete die jeweiligen Werke unserer je eigenen ästhetisch emanzipierten Erkenntnisbereitschaft und unserer immer subjektiven und dennoch aufgeklärten Genussfähigkeit.</p>
-
-    <p>Vor diese individualisierte Urteilsfindung wird auch das Werk Doris Zarrinnams mit dieser Publikation gestellt: Wer kann sich diesen Bildern entziehen, diesen fremdartigen Erzählungen wie in einer Novelle ohne Anfang und Ende? Wer hat den Wunsch, sich den unbedarften Farbwelten zu verschließen, wer nicht den, für sich den Gewinn aus diesen Bildern zu ziehen, den, sich zu konzentrieren (mit ihr sich ins Zentrum zu begeben)? Wer kann sich angesichts dieser Bilder der Erkenntnis verweigern, dass eine infantile Grundstimmung ein Quantum Kontinuum unseres Lebens ist? Geträumtes und Erlebtes wunderlich zu sichten, ist nicht gleich pathologisch, sondern nicht selten auch nur Nichtverdrängung. Und wo denn in der Kunst soll dieses in uns allen vorhandene Innere noch nach außen sichtbar werden?</p>
-
-    <p>Die gemalten Sichten Doris Zarrinnams zeigen ohne Wenn und Aber, dass ihr Malen sichtbar macht, was genuin nur so sehend zu entdecken ist. Sie sind ihre Vorstellungen, wie wir Vorstellungen aus dem Theater kennen: Aus einem Lesestoff, einem Libretto, der Schilderung von Erlebtem wird eine Dramaturgie. Aus dieser entwickelt die Regie eine Aufführung mit Schauspieler*innen und Kulissen für die Bühne. Das Resultat ist eine Vorstellung, die die jeweiligen Vorstellungen vom Stoff – die von den Autor*innen, Dramaturg*innen, Regisseur*innen, Bühnenbildner*innen und Schauspielenden oder eben wie von einer Malerin – vorstellt, um schlussendlich im Publikum Vorstellungen zu erwirken wie die der ermalten Bilder von Doris Zarrinnam.</p>
-
-    <p style="margin-top:40px; text-align:right; font-style:italic;">
-      <a href="https://de.wikipedia.org/wiki/Raimund_Stecker" target="_blank" style="color:var(--gold); text-decoration:none;">Raimund Stecker</a><br>
-      Düsseldorf, im März 2026
-    </p>
-  </div>
-
-  <!-- Lebenslauf -->
-  <h3 style="color:var(--gold); margin-bottom:20px;">Lebenslauf Doris (Dodo) Zarrinnam</h3>
-  <dl class="lebenslauf">
-    <dt>* 19.09.1941</dt><dd>in Bromberg</dd>
-    <dt>Vorschule</dt><dd>1948–1952</dd>
-    <dt>Internatsschule Marienberg</dt><dd>1952–1955</dd>
-    <dt>Schulzeit</dt><dd>1957–1961</dd>
-    <dt>Tod der Mutter 1959</dt><dd>Vollweise</dd>
-    <dt>Januar 1960</dt><dd>Kennenlernen von Shapur Zarrinnam beim indischen Abend im Paulushaus in Düsseldorf</dd>
-    <dt>Abitur</dt><dd>1961</dd>
-    <dt>1961–1963</dt><dd>Pharmaziestudium bis Vordiplom</dd>
-    <dt>04/1961 – 01/1963</dt><dd>Arbeit als Apothekengehilfin</dd>
-    <dt>November 1963</dt><dd>Hochzeit mit Abolghassem (Shapur) Zarrinnam</dd>
-    <dt>19.04.1967</dt><dd>Geburt Sohn Dirk-Bijan in Münster</dd>
-    <dt>1968–1971</dt><dd>Aufenthalt im Iran; Arbeit als Augenarzt im Iran</dd>
-    <dt>1976 Gründung</dt><dd>Augenarztpraxis in Heinsberg<br>Mitarbeit in der Praxis als Ehefrau</dd>
-    <dt>1992 Diagnose</dt><dd>paranoide Psychose; Betreuung durch Sohn Dirk-Bijan;<br>Aufgabe der Tätigkeit in der Arztpraxis</dd>
-    <dt>Ausstellung</dt><dd>„Grünes Haus“ 29.05. – 16.06.1995</dd>
-    <dt>Juli 1999</dt><dd>Sohn übernimmt väterliche Augenarztpraxis</dd>
-    <dt>Okt. 2001</dt><dd>Gemeinschaftspraxis Sohn mit Dr. Schmitz</dd>
-    <dt>22.04.2005</dt><dd>Geburt Enkel Julian</dd>
-    <dt>09.03.2007</dt><dd>Geburt Enkelin Neela</dd>
-    <dt>Jan. 2010</dt><dd>Tod Dr. Schmitz</dd>
-    <dt>✝ 21.09.2023</dt><dd>SZB Wassenberg</dd>
-  </dl>
-</div>
-
-<!-- Lightbox -->
-<div id="lightbox">
-  <div class="lb-topbar">
-    <div>
-      <div class="lb-title" id="lbTitle"></div>
-      <div class="lb-year" id="lbYear"></div>
+  <!-- Karussell -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+    <div class="max-w-[95vw] w-full px-4 relative">
+      <button onclick="closeModal()" 
+              class="absolute -top-4 -right-4 bg-black text-white rounded-full w-12 h-12 flex items-center justify-center text-4xl hover:bg-amber-300 hover:text-black z-50">×</button>
+      
+      <div class="swiper mySwiper">
+        <div id="swiper-wrapper" class="swiper-wrapper"></div>
+        <div class="swiper-button-prev text-white"></div>
+        <div class="swiper-button-next text-white"></div>
+      </div>
+      
+      <div id="modal-caption" class="text-center text-zinc-400 mt-6 text-sm"></div>
     </div>
   </div>
 
-  <div class="lb-content">
-    <img id="lbImg" src="" alt="">
-  </div>
-
-  <div class="lb-bottombar">
-    <button class="lb-nav" id="lbPrev">‹</button>
-    <button class="lb-close" id="lbClose">×</button>
-    <button class="lb-nav" id="lbNext">›</button>
-  </div>
-</div>
-
-<footer>
-  <div class="impressum">
-    <strong>Impressum</strong><br><br>
-    Dr. Dirk-Bijan Zarrinnam<br>
-    Geilenkirchener Str. 15<br>
-    52525 Heinsberg<br><br>
-    E-Mail: <a href="mailto:doris.zarrinnam@web.de" style="color:var(--gold);">doris.zarrinnam@web.de</a><br><br>
-    
-    Alle auf dieser Website gezeigten Werke sind urheberrechtlich geschützt. 
-    Jede Vervielfältigung, Verbreitung oder öffentliche Wiedergabe bedarf der schriftlichen Zustimmung der Erben.<br><br>
-    
-    Haftungshinweis gemäß § 5 DDG: Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen.
-  </div>
-  <div>© Dr. Dirk-Bijan Zarrinnam – Alle Rechte vorbehalten</div>
-</footer>
-
-<script>
-// AKTUALISIERTE BILDER-Liste (genau wie von dir angegeben)
-const IMAGES = [
-  { file: "2020 - Weg der Liebe.JPG", year: 2020, title: "Weg der Liebe" },
-  { file: "TSS04947-bearbeitet.JPG", year: null, title: "Ohne Titel (III)" },
-  { file: "1971 - persische Landschaft.JPG", year: 1971, title: "Persische Landschaft" },
-  { file: "1992 - Blaue Engel.JPG", year: 1992, title: "Blaue Engel" },
-  { file: "1992 - Erlebnis '85 Aachen.JPG", year: 1992, title: "Erlebnis '85 Aachen" },
-  { file: "1992 - Feuerwerk.JPG", year: 1992, title: "Feuerwerk" },
-  { file: "1992 - Flaggenbaum.JPG", year: 1992, title: "Flaggenbaum" },
-  { file: "1992 - Friedensgedanken.JPG", year: 1992, title: "Friedensgedanken" },
-  { file: "1992 - Glühwurm - Glühwein.JPG", year: 1992, title: "Glühwurm – Glühwein" },
-  { file: "1992 - Hoffnung.JPG", year: 1992, title: "Hoffnung" },
-  { file: "1992 - Jahreszeiten.JPG", year: 1992, title: "Jahreszeiten" },
-  { file: "1992 - Lebenslauf.JPG", year: 1992, title: "Lebenslauf" },
-  { file: "1992 - Mut.JPG", year: 1992, title: "Mut" },
-  { file: "1992 - Osterstrauß.JPG", year: 1992, title: "Osterstrauß" },
-  { file: "1992 - Prisma.JPG", year: 1992, title: "Prisma" },
-  { file: "1992 - Sehnsucht.JPG", year: 1992, title: "Sehnsucht" },
-  { file: "1992 - W.JPG", year: 1992, title: "W" },
-  { file: "1992 - Zuversicht.JPG", year: 1992, title: "Zuversicht" },
-  { file: "1993 - Apfel.JPG", year: 1993, title: "Apfel" },
-  { file: "1993 - Augenschein.JPG", year: 1993, title: "Augenschein" },
-  { file: "1993 - Begutachtung.JPG", year: 1993, title: "Begutachtung" },
-  { file: "1993 - Betrachtungen.JPG", year: 1993, title: "Betrachtungen" },
-  { file: "1993 - Bildung I.JPG", year: 1993, title: "Bildung I" },
-  { file: "1993 - Der Pfau.JPG", year: 1993, title: "Der Pfau" },
-  { file: "1993 - Einblick Aussicht.JPG", year: 1993, title: "Einblick Aussicht" },
-  { file: "1993 - Einsamkeit '86.JPG", year: 1993, title: "Einsamkeit '86" },
-  { file: "1993 - Geduld.JPG", year: 1993, title: "Geduld" },
-  { file: "1993 - Kristal.JPG", year: 1993, title: "Kristal" },
-  { file: "1993 - Nächstenliebe.JPG", year: 1993, title: "Nächstenliebe" },
-  { file: "1994 - 1001.JPG", year: 1994, title: "1001" },
-  { file: "1994 - Durchblick.JPG", year: 1994, title: "Durchblick" },
-  { file: "1994 - Wunschdenken.JPG", year: 1994, title: "Wunschdenken" },
-  { file: "1995 - Einladung zum ....JPG", year: 1995, title: "Einladung zum …" },
-  { file: "1995 - Es war einmal ....JPG", year: 1995, title: "Es war einmal …" },
-  { file: "1995 - Fabel.JPG", year: 1995, title: "Fabel" },
-  { file: "1995 - Gästebuch.JPG", year: 1995, title: "Gästebuch" },
-  { file: "1995 - Kaffee.JPG", year: 1995, title: "Kaffee" },
-  { file: "1995 - Katzenkunst oder 15.000 Dollar.JPG", year: 1995, title: "Katzenkunst oder 15.000 Dollar" },
-  { file: "1995 - Märchen.JPG", year: 1995, title: "Märchen" },
-  { file: "1995 - Trilogie gelbe Blumen.JPG", year: 1995, title: "Trilogie gelbe Blumen" },
-  { file: "1996 - Gesellschaft.JPG", year: 1996, title: "Gesellschaft" },
-  { file: "1996 - Themen.JPG", year: 1996, title: "Themen" },
-  { file: "1996 - Trilogie weiße Blumen.JPG", year: 1996, title: "Trilogie weiße Blumen" },
-  { file: "1996 - Zeit.JPG", year: 1996, title: "Zeit" },
-  { file: "1997 - Europa und Ophthalmologie.JPG", year: 1997, title: "Europa und Ophthalmologie" },
-  { file: "1997 - Jahrtausendwende.JPG", year: 1997, title: "Jahrtausendwende" },
-  { file: "1997 - Komposition.JPG", year: 1997, title: "Komposition" },
-  { file: "1997 - Medienzeitalter.JPG", year: 1997, title: "Medienzeitalter" },
-  { file: "1997 - Position.JPG", year: 1997, title: "Position" },
-  { file: "1997 - Situation.JPG", year: 1997, title: "Situation" },
-  { file: "1997 - Trilogie rote Blumen.JPG", year: 1997, title: "Trilogie rote Blumen" },
-  { file: "1997 - Unterhaltung.JPG", year: 1997, title: "Unterhaltung" },
-  { file: "1998 - Besinnung.JPG", year: 1998, title: "Besinnung" },
-  { file: "1998 - Betreuung.JPG", year: 1998, title: "Betreuung" },
-  { file: "1998 - Euroclown.JPG", year: 1998, title: "Euroclown" },
-  { file: "1998 - Integration.JPG", year: 1998, title: "Integration" },
-  { file: "1998 - Toleranz.JPG", year: 1998, title: "Toleranz" },
-  { file: "1998 - Überblick - Übersicht.JPG", year: 1998, title: "Überblick – Übersicht" },
-  { file: "1998 - Weg.JPG", year: 1998, title: "Weg" },
-  { file: "1998 - Zeiterscheinung.JPG", year: 1998, title: "Zeiterscheinung" },
-  { file: "1999 - Blaue Rose.JPG", year: 1999, title: "Blaue Rose" },
-  { file: "1999 - Garten.JPG", year: 1999, title: "Garten" },
-  { file: "1999 - Gespräche.JPG", year: 1999, title: "Gespräche" },
-  { file: "1999 - Praxis.JPG", year: 1999, title: "Praxis" },
-  { file: "1999 - Rückblick.JPG", year: 1999, title: "Rückblick" },
-  { file: "1999 - Sonnenfinsternis.JPG", year: 1999, title: "Sonnenfinsternis" },
-  { file: "2000 - 5 Jahreszeiten.JPG", year: 2000, title: "5 Jahreszeiten" },
-  { file: "2000 - Wahrnemung.JPG", year: 2000, title: "Wahrnehmung" },
-  { file: "2001 - Kompetente Beratung.JPG", year: 2001, title: "Kompetente Beratung" },
-  { file: "2002 - 3 Jahre.JPG", year: 2002, title: "3 Jahre" },
-  { file: "2002 - Schweigen.JPG", year: 2002, title: "Schweigen" },
-  { file: "2002 - Zuhause.JPG", year: 2002, title: "Zuhause" },
-  { file: "2002 - Zukunft.JPG", year: 2002, title: "Zukunft" },
-  { file: "2003 - Analyse.JPG", year: 2003, title: "Analyse" },
-  { file: "2003 - Europa und die Optik.JPG", year: 2003, title: "Europa und die Optik" },
-  { file: "2003 - Garten.JPG", year: 2003, title: "Garten" },
-  { file: "2003 - Stilleben mit (Prisma)Hand.JPG", year: 2003, title: "Stilleben mit (Prisma)Hand" },
-  { file: "2003 - Trilogie Gestern.JPG", year: 2003, title: "Trilogie Gestern" },
-  { file: "2003 - Trilogie Heute.JPG", year: 2003, title: "Trilogie Heute" },
-  { file: "2003 - Trilogie Morgen.JPG", year: 2003, title: "Trilogie Morgen" },
-  { file: "2004 - Eingebung.JPG", year: 2004, title: "Eingebung" },
-  { file: "2004 - Sprache der Malerei I.JPG", year: 2004, title: "Sprache der Malerei I" },
-  { file: "2004 - Themenwahl.JPG", year: 2004, title: "Themenwahl" },
-  { file: "2004 - Vertrauen I.JPG", year: 2004, title: "Vertrauen I" },
-  { file: "2004 - Vertrauen II.JPG", year: 2004, title: "Vertrauen II" },
-  { file: "2004 - Zweisamkeit.JPG", year: 2004, title: "Zweisamkeit" },
-  { file: "2005 - Bildung II.JPG", year: 2005, title: "Bildung II" },
-  { file: "2005 - Blumenstrauss.JPG", year: 2005, title: "Blumenstrauß" },
-  { file: "2005 - F.JPG", year: 2005, title: "F" },
-  { file: "2005 - Geburt.JPG", year: 2005, title: "Geburt" },
-  { file: "2005 - Klostergarten.JPG", year: 2005, title: "Klostergarten" },
-  { file: "2005 - Sachverstand.JPG", year: 2005, title: "Sachverstand" },
-  { file: "2005 - U+M.JPG", year: 2005, title: "U+M" },
-  { file: "2005 - Umstellung.JPG", year: 2005, title: "Umstellung" },
-  { file: "2006 - Allegorie.JPG", year: 2006, title: "Allegorie" },
-  { file: "2006 - Ausdruckskraft.JPG", year: 2006, title: "Ausdruckskraft" },
-  { file: "2006 - Ausgleich.JPG", year: 2006, title: "Ausgleich" },
-  { file: "2006 - Gesundheit.JPG", year: 2006, title: "Gesundheit" },
-  { file: "2006 - Sprache der Malerei II.JPG", year: 2006, title: "Sprache der Malerei II" },
-  { file: "2006 - Tulpen.JPG", year: 2006, title: "Tulpen" },
-  { file: "2006 - Virtuelle Welt.JPG", year: 2006, title: "Virtuelle Welt" },
-  { file: "2007 - Abstraktion I.JPG", year: 2007, title: "Abstraktion I" },
-  { file: "2007 - Abstraktion II.JPG", year: 2007, title: "Abstraktion II" },
-  { file: "2007 - Entwicklung.JPG", year: 2007, title: "Entwicklung" },
-  { file: "2007 - Gefühl.JPG", year: 2007, title: "Gefühl" },
-  { file: "2007 - Prismarose.JPG", year: 2007, title: "Prismarose" },
-  { file: "2007 - Sprache der Malerei III.JPG", year: 2007, title: "Sprache der Malerei III" },
-  { file: "2007 - Verstand.JPG", year: 2007, title: "Verstand" },
-  { file: "2007 - Zauberwürfel.JPG", year: 2007, title: "Zauberwürfel" },
-  { file: "2007 - Zuordnung.JPG", year: 2007, title: "Zuordnung" },
-  { file: "2007 - Zusammenhang.JPG", year: 2007, title: "Zusammenhang" },
-  { file: "2008 - Bausteine.JPG", year: 2008, title: "Bausteine" },
-  { file: "2008 - Bitte.JPG", year: 2008, title: "Bitte" },
-  { file: "2008 - Charisma.JPG", year: 2008, title: "Charisma" },
-  { file: "2008 - Feste.JPG", year: 2008, title: "Feste" },
-  { file: "2008 - Kulisse.JPG", year: 2008, title: "Kulisse" },
-  { file: "2008 - Mohn mit Schmetterling.JPG", year: 2008, title: "Mohn mit Schmetterling" },
-  { file: "2008 - Spardose.JPG", year: 2008, title: "Spardose" },
-  { file: "2008 - Stille.JPG", year: 2008, title: "Stille" },
-  { file: "2008 - Ursache und Wirkung.JPG", year: 2008, title: "Ursache und Wirkung" },
-  { file: "2008 - Wetter.JPG", year: 2008, title: "Wetter" },
-  { file: "2008 - Zuversicht II.JPG", year: 2008, title: "Zuversicht II" },
-  { file: "2009 - Bewusstsein.JPG", year: 2009, title: "Bewusstsein" },
-  { file: "2009 - Danke.JPG", year: 2009, title: "Danke" },
-  { file: "2009 - Frühstück.JPG", year: 2009, title: "Frühstück" },
-  { file: "2009 - Gabe.JPG", year: 2009, title: "Gabe" },
-  { file: "2009 - Künstliche Befruchtung.JPG", year: 2009, title: "Künstliche Befruchtung" },
-  { file: "2009 - literarische Denkanstöße.JPG", year: 2009, title: "Literarische Denkanstöße" },
-  { file: "2009 - Retrospektive (2).JPG", year: 2009, title: "Retrospektive (2)" },
-  { file: "2009 - Retrospektive.JPG", year: 2009, title: "Retrospektive" },
-  { file: "2009 - Sprache der Malerei IV.JPG", year: 2009, title: "Sprache der Malerei IV" },
-  { file: "2010 - Baum.JPG", year: 2010, title: "Baum" },
-  { file: "2010 - Blumen mit Diskette.JPG", year: 2010, title: "Blumen mit Diskette" },
-  { file: "2010 - Ebene Niveau.JPG", year: 2010, title: "Ebene Niveau" },
-  { file: "2010 - Freizeit.JPG", year: 2010, title: "Freizeit" },
-  { file: "2010 - Himmelsreisen.JPG", year: 2010, title: "Himmelsreisen" },
-  { file: "2010 - Parabel.JPG", year: 2010, title: "Parabel" },
-  { file: "2010 - Prisma mit Herz.JPG", year: 2010, title: "Prisma mit Herz" },
-  { file: "2010 - Sicherheit (2).JPG", year: 2010, title: "Sicherheit (2)" },
-  { file: "2010 - Sicherheit.JPG", year: 2010, title: "Sicherheit" },
-  { file: "2010 - Sprache der Malerei V.JPG", year: 2010, title: "Sprache der Malerei V" },
-  { file: "2010 - Vielfalt I.JPG", year: 2010, title: "Vielfalt I" },
-  { file: "2010 - Vielfalt II.JPG", year: 2010, title: "Vielfalt II" },
-  { file: "2011 - Ansehen.JPG", year: 2011, title: "Ansehen" },
-  { file: "2011 - Ansicht.JPG", year: 2011, title: "Ansicht" },
-  { file: "2011 - Assoziation.JPG", year: 2011, title: "Assoziation" },
-  { file: "2011 - Blumenstrauß (2).JPG", year: 2011, title: "Blumenstrauß (2)" },
-  { file: "2011 - Blumenstrauß.JPG", year: 2011, title: "Blumenstrauß" },
-  { file: "2011 - Motivation.JPG", year: 2011, title: "Motivation" },
-  { file: "2011 - Phantasie.JPG", year: 2011, title: "Phantasie" },
-  { file: "2011 - Sprache der Malerei VI.JPG", year: 2011, title: "Sprache der Malerei VI" },
-  { file: "2011 - Verantwortung.JPG", year: 2011, title: "Verantwortung" },
-  { file: "2012 - Begriffsbestimmung.JPG", year: 2012, title: "Begriffsbestimmung" },
-  { file: "2012 - Denkart.JPG", year: 2012, title: "Denkart" },
-  { file: "2012 - Einstellung.JPG", year: 2012, title: "Einstellung" },
-  { file: "2012 - Freude.JPG", year: 2012, title: "Freude" },
-  { file: "2012 - Gelassenheit.JPG", year: 2012, title: "Gelassenheit" },
-  { file: "2012 - Gestaltung.JPG", year: 2012, title: "Gestaltung" },
-  { file: "2012 - Kalender.JPG", year: 2012, title: "Kalender" },
-  { file: "2012 - Komposition II.JPG", year: 2012, title: "Komposition II" },
-  { file: "2012 - Muse.JPG", year: 2012, title: "Muse" },
-  { file: "2012 - Sprache der Malerei VII.JPG", year: 2012, title: "Sprache der Malerei VII" },
-  { file: "2012 - Tropfen.JPG", year: 2012, title: "Tropfen" },
-  { file: "2013 - Alltag.JPG", year: 2013, title: "Alltag" },
-  { file: "2013 - Emotionen.JPG", year: 2013, title: "Emotionen" },
-  { file: "2013 - Ergänzungen.JPG", year: 2013, title: "Ergänzungen" },
-  { file: "2013 - Erneuerung.JPG", year: 2013, title: "Erneuerung" },
-  { file: "2013 - Harmonie.JPG", year: 2013, title: "Harmonie" },
-  { file: "2013 - Konstante.JPG", year: 2013, title: "Konstante" },
-  { file: "2013 - Künstliche Befruchtung.JPG", year: 2013, title: "Künstliche Befruchtung" },
-  { file: "2013 - Sagen.JPG", year: 2013, title: "Sagen" },
-  { file: "2013 - Sprache der Malerei VIII.JPG", year: 2013, title: "Sprache der Malerei VIII" },
-  { file: "2014 - Aspekte.JPG", year: 2014, title: "Aspekte" },
-  { file: "2014 - Auswahl.JPG", year: 2014, title: "Auswahl" },
-  { file: "2014 - Deutung.JPG", year: 2014, title: "Deutung" },
-  { file: "2014 - Dokumentation.JPG", year: 2014, title: "Dokumentation" },
-  { file: "2014 - Eurasia.JPG", year: 2014, title: "Eurasia" },
-  { file: "2014 - Farbenspiel.JPG", year: 2014, title: "Farbenspiel" },
-  { file: "2014 - Kohärenz.JPG", year: 2014, title: "Kohärenz" },
-  { file: "2014 - Lebensart.JPG", year: 2014, title: "Lebensart" },
-  { file: "2014 - Obulus.JPG", year: 2014, title: "Obulus" },
-  { file: "2014 - Sprache und Gedanken.JPG", year: 2014, title: "Sprache und Gedanken" },
-  { file: "2015 - Äquivalent.JPG", year: 2015, title: "Äquivalent" },
-  { file: "2015 - Gewissen.JPG", year: 2015, title: "Gewissen" },
-  { file: "2015 - Humor und Trickfilmzeichnung.JPG", year: 2015, title: "Humor und Trickfilmzeichnung" },
-  { file: "2015 - Informationen.JPG", year: 2015, title: "Informationen" },
-  { file: "2015 - Proportionen.JPG", year: 2015, title: "Proportionen" },
-  { file: "2015 - Sprache der Malerei IX.JPG", year: 2015, title: "Sprache der Malerei IX" },
-  { file: "2015 - Sympathien.JPG", year: 2015, title: "Sympathien" },
-  { file: "2016 - 1000 Worte.JPG", year: 2016, title: "1000 Worte" },
-  { file: "2016 - Informationen II.JPG", year: 2016, title: "Informationen II" },
-  { file: "2016 - Migration.JPG", year: 2016, title: "Migration" },
-  { file: "2016 - Modus.JPG", year: 2016, title: "Modus" },
-  { file: "2016 - Sprache der Malerei X.JPG", year: 2016, title: "Sprache der Malerei X" },
-  { file: "2016 - Unterbewußtsein.JPG", year: 2016, title: "Unterbewusstsein" },
-  { file: "2016 - Würde.JPG", year: 2016, title: "Würde" },
-  { file: "2016 - Zeitvertreib.JPG", year: 2016, title: "Zeitvertreib" },
-  { file: "2017 - Aesthetik.JPG", year: 2017, title: "Ästhetik" },
-  { file: "2017 - Eurabike.JPG", year: 2017, title: "Eurabike" },
-  { file: "2017 - Formeln.JPG", year: 2017, title: "Formeln" },
-  { file: "2017 - Gedankengut.JPG", year: 2017, title: "Gedankengut" },
-  { file: "2017 - Glückwünsche.JPG", year: 2017, title: "Glückwünsche" },
-  { file: "2017 - Göttliche Fügung.JPG", year: 2017, title: "Göttliche Fügung" },
-  { file: "2017 - Prävention.JPG", year: 2017, title: "Prävention" },
-  { file: "2017 - Verfügungen.JPG", year: 2017, title: "Verfügungen" },
-  { file: "2018 - Digitale Welt.JPG", year: 2018, title: "Digitale Welt" },
-  { file: "2018 - Einstellung.JPG", year: 2018, title: "Einstellung" },
-  { file: "2018 - Ergebnis.JPG", year: 2018, title: "Ergebnis" },
-  { file: "2018 - Generationen.JPG", year: 2018, title: "Generationen" },
-  { file: "2018 - Kompromisse.JPG", year: 2018, title: "Kompromisse" },
-  { file: "2018 - Sprache der Malerei XI.JPG", year: 2018, title: "Sprache der Malerei XI" },
-  { file: "2018 - Zeitenwende.JPG", year: 2018, title: "Zeitenwende" },
-  { file: "2019 - Begutachtung II.JPG", year: 2019, title: "Begutachtung II" },
-  { file: "2019 - Stil.JPG", year: 2019, title: "Stil" },
-  { file: "2019 - Strauss.JPG", year: 2019, title: "Strauß" },
-  { file: "2019 - Trilogie.JPG", year: 2019, title: "Trilogie" },
-  { file: "2019 - Wirklichkeit.JPG", year: 2019, title: "Wirklichkeit" },
-  { file: "2020 - Manifest.JPG", year: 2020, title: "Manifest" }
-];
-
-let currentIndex = 0;
-let scale = 1;
-let posX = 0, posY = 0;
-let isDragging = false;
-let startX, startY;
-
-const galleryEl = document.getElementById('gallery');
-const searchInput = document.getElementById('searchInput');
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lbImg');
-const lbTitle = document.getElementById('lbTitle');
-const lbYear = document.getElementById('lbYear');
-const werkeSection = document.getElementById('werke-section');
-const personSection = document.getElementById('person-section');
-const menuWerke = document.getElementById('menu-werke');
-const menuPerson = document.getElementById('menu-person');
-
-// Menü-Navigation
-menuWerke.addEventListener('click', e => {
-  e.preventDefault();
-  werkeSection.style.display = 'block';
-  personSection.style.display = 'none';
-  menuWerke.classList.add('active');
-  menuPerson.classList.remove('active');
-  searchInput.parentElement.style.display = 'block';
-});
-
-menuPerson.addEventListener('click', e => {
-  e.preventDefault();
-  werkeSection.style.display = 'none';
-  personSection.style.display = 'block';
-  menuWerke.classList.remove('active');
-  menuPerson.classList.add('active');
-  searchInput.parentElement.style.display = 'none';
-});
-
-// Gallery Rendering
-function renderGallery(filtered) {
-  galleryEl.innerHTML = '';
-  filtered.forEach((img, i) => {
-    const card = document.createElement('div');
-    card.className = 'art-card';
-    card.innerHTML = `
-      <img src="${img.file}" alt="${img.title}" loading="lazy">
-      <div class="info">
-        <div class="title">${img.title}</div>
-        ${img.year ? `<div class="year">${img.year}</div>` : ''}
+  <!-- Impressum -->
+  <footer class="bg-black border-t border-zinc-800 py-8 text-xs text-zinc-400">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <strong>Impressum</strong><br>
+        Angaben gemäß § 5 TMG<br>
+        Dr. Dirk-Bijan Zarrinnam<br>
+        Geilenkirchener Str. 15<br>
+        52525 Heinsberg<br>
+        E-Mail: <a href="mailto:doris.zarrinnam@web.de" class="underline hover:text-amber-300">doris.zarrinnam@web.de</a>
       </div>
-    `;
-    card.addEventListener('click', () => openLightbox(i));
-    galleryEl.appendChild(card);
-  });
-}
+      <div class="text-center md:text-right">
+        © 2026 Dr. Dirk-Bijan Zarrinnam • Alle Rechte vorbehalten
+      </div>
+    </div>
+  </footer>
 
-function filterImages() {
-  const term = searchInput.value.toLowerCase().trim();
-  const filtered = IMAGES.filter(img => 
-    img.title.toLowerCase().includes(term) || 
-    (img.year && String(img.year).includes(term))
-  );
-  renderGallery(filtered);
-}
-searchInput.addEventListener('input', filterImages);
+  <script>
+    const imageFiles = [
+      "1971 - persische Landschaft.JPG",
+      "1992 - Blaue Engel.JPG",
+      "1992 - Erlebnis '85 Aachen.JPG",
+      "1992 - Feuerwerk.JPG",
+      "1992 - Flaggenbaum.JPG",
+      "1992 - Friedensgedanken.JPG",
+      "1992 - Glühwurm - Glühwein.JPG",
+      "1992 - Hoffnung.JPG",
+      "1992 - Jahreszeiten.JPG",
+      "1992 - Lebenslauf.JPG",
+      "1992 - Mut.JPG",
+      "1992 - O.T..JPG",
+      "1992 - Osterstrauß.JPG",
+      "1992 - Prisma.JPG",
+      "1992 - Sehnsucht.JPG",
+      "1992 - W.JPG",
+      "1992 - Zuversicht.JPG",
+      "1993 - Apfel.JPG",
+      "1993 - Augenschein.JPG",
+      "1993 - Begutachtung.JPG",
+      "1993 - Betrachtungen.JPG",
+      "1993 - Bildung I.JPG",
+      "1993 - Der Pfau.JPG",
+      "1993 - Einblick Aussicht.JPG",
+      "1993 - Einsamkeit.JPG",
+      "1993 - Geduld.JPG",
+      "1993 - Kristal.JPG",
+      "1993 - Nächstenliebe.JPG",
+      "1993 Einsamkeit '86.JPG",
+      "1994 - 1001.JPG",
+      "1994 - Durchblick.JPG",
+      "1994 - Wunschdenken.JPG",
+      "1995 - Einladung zum ....JPG",
+      "1995 - Es war einmal ....JPG",
+      "1995 - Fabel.JPG",
+      "1995 - Gästebuch.JPG",
+      "1995 - Kaffee.JPG",
+      "1995 - Katzenkunst oder 15.000 Dollar.JPG",
+      "1995 - Märchen.JPG",
+      "1995 - Trilogie gelbe Blumen.JPG",
+      "1996 - Gesellschaft.JPG",
+      "1996 - Themen.JPG",
+      "1996 - Trilogie weiße Blumen.JPG",
+      "1996 - Zeit.JPG",
+      "1997 - Europa und Ophthalmologie.JPG",
+      "1997 - Jahrtausendwende.JPG",
+      "1997 - Komposition.JPG",
+      "1997 - Medienzeitalter.JPG",
+      "1997 - Position.JPG",
+      "1997 - Situation.JPG",
+      "1997 - Trilogie rote Blumen.JPG",
+      "1997 - Unterhaltung.JPG",
+      "1998 - Besinnung.JPG",
+      "1998 - Betreuung.JPG",
+      "1998 - Euroclown.JPG",
+      "1998 - Integration.JPG",
+      "1998 - Toleranz.JPG",
+      "1998 - Überblick - Übersicht.JPG",
+      "1998 - Weg.JPG",
+      "1998 - Zeiterscheinung.JPG",
+      "1999 - Blaue Rose.JPG",
+      "1999 - Garten.JPG",
+      "1999 - Gespräche.JPG",
+      "1999 - Praxis.JPG",
+      "1999 - Rückblick.JPG",
+      "1999 - Sonnenfinsternis.JPG",
+      "2000 - 5 Jahreszeiten.JPG",
+      "2000 - Wahrnemung.JPG",
+      "2001 - Kompetente Beratung.JPG",
+      "2002 - 3 Jahre.JPG",
+      "2002 - Schweigen.JPG",
+      "2002 - Zuhause.JPG",
+      "2002 - Zukunft.JPG",
+      "2003 - Analyse.JPG",
+      "2003 - Europa und die Optik.JPG",
+      "2003 - Garten.JPG",
+      "2003 - Stilleben mit (Prisma)Hand.JPG",
+      "2003 - Trilogie Gestern.JPG",
+      "2003 - Trilogie Heute.JPG",
+      "2003 - Trilogie Morgen.JPG",
+      "2004 - Eingebung.JPG",
+      "2004 - Sprache der Malerei I.JPG",
+      "2004 - Themenwahl.JPG",
+      "2004 - Vertrauen I.JPG",
+      "2004 - Vertrauen II.JPG",
+      "2004 Zweisamkeit.JPG",
+      "2005 - Bildung II.JPG",
+      "2005 - Blumenstrauss.JPG",
+      "2005 - F.JPG",
+      "2005 - Geburt.JPG",
+      "2005 - Klostergarten.JPG",
+      "2005 - Sachverstand.JPG",
+      "2005 - U+M.JPG",
+      "2005 - Umstellung.JPG",
+      "2006 - Allegorie.JPG",
+      "2006 - Ausdruckskraft.JPG",
+      "2006 - Ausgleich.JPG",
+      "2006 - Gesundheit.JPG",
+      "2006 - Sprache der Malerei II.JPG",
+      "2006 - Tulpen.JPG",
+      "2006 - Virtuelle Welt.JPG",
+      "2007 - Abstraktion I.JPG",
+      "2007 - Abstraktion II.JPG",
+      "2007 - Gefühl.JPG",
+      "2007 - Prismarose.JPG",
+      "2007 - Sprache der Malerei III.JPG",
+      "2007 - Verstand.JPG",
+      "2007 - Zauberwürfel.JPG",
+      "2007 - Zuordnung.JPG",
+      "2007 - Zusammenhang.JPG",
+      "2008 - Bausteine.JPG",
+      "2008 - Bitte.JPG",
+      "2008 - Charisma.JPG",
+      "2008 - Feste.JPG",
+      "2008 - Kulisse.JPG",
+      "2008 - Mohn mit Schmetterling.JPG",
+      "2008 - Spardose.JPG",
+      "2008 - Stille.JPG",
+      "2008 - Ursache und Wirkung.JPG",
+      "2008 - Wetter.JPG",
+      "2008 - Zuversicht II.JPG",
+      "2009 - Bewusstsein.JPG",
+      "2009 - Danke.JPG",
+      "2009 - Frühstück.JPG",
+      "2009 - Gabe.JPG",
+      "2009 - Künstliche Befruchtung.JPG",
+      "2009 - literarische Denkanstöße.JPG",
+      "2009 - Retrospektive (2).JPG",
+      "2009 - Retrospektive.JPG",
+      "2009 - Sprache der Malerei IV.JPG",
+      "2010 - Baum.JPG",
+      "2010 - Blumen mit Diskette.JPG",
+      "2010 - Ebene Niveau.JPG",
+      "2010 - Freizeit.JPG",
+      "2010 - Himmelsreisen.JPG",
+      "2010 - Parabel.JPG",
+      "2010 - Prisma mit Herz.JPG",
+      "2010 - Sicherheit (2).JPG",
+      "2010 - Sicherheit.JPG",
+      "2010 - Sprache der Malerei V.JPG",
+      "2010 - Vielfalt I.JPG",
+      "2010 - Vielfalt II.JPG",
+      "2011 - Ansehen.JPG",
+      "2011 - Ansicht.JPG",
+      "2011 - Assoziation.JPG",
+      "2011 - Blumenstrauß.JPG",
+      "2011 - Motivation.JPG",
+      "2011 - Phantasie.JPG",
+      "2011 - Sprache der Malerei VI.JPG",
+      "2011 - Verantwortung.JPG",
+      "2012 - Begriffsbestimmung.JPG",
+      "2012 - Denkart.JPG",
+      "2012 - Einstellung.JPG",
+      "2012 - Freude.JPG",
+      "2012 - Gelassenheit.JPG",
+      "2012 - Gestaltung.JPG",
+      "2012 - Kalender.JPG",
+      "2012 - Komposition II.JPG",
+      "2012 - Muse.JPG",
+      "2012 - Sprache der Malerei VII.JPG",
+      "2012 - Tropfen.JPG",
+      "2013 - Alltag.JPG",
+      "2013 - Emotionen.JPG",
+      "2013 - Ergänzungen.JPG",
+      "2013 - Erneuerung.JPG",
+      "2013 - Harmonie.JPG",
+      "2013 - Konstante.JPG",
+      "2013 - Künstliche Befruchtung.JPG",
+      "2013 - Sagen.JPG",
+      "2013 - Sprache der Malerei VIII.JPG",
+      "2014 - Aspekte.JPG",
+      "2014 - Auswahl.JPG",
+      "2014 - Deutung.JPG",
+      "2014 - Dokumentation.JPG",
+      "2014 - Eurasia.JPG",
+      "2014 - Farbenspiel.JPG",
+      "2014 - Kohärenz.JPG",
+      "2014 - Lebensart.JPG",
+      "2014 - Obulus.JPG",
+      "2014 - Sprache und Gedanken.JPG",
+      "2015 - Äquivalent.JPG",
+      "2015 - Gewissen.JPG",
+      "2015 - Humor und Trickfilmzeichnung.JPG",
+      "2015 - Informationen.JPG",
+      "2015 - Proportionen.JPG",
+      "2015 - Sprache der Malerei IX.JPG",
+      "2015 - Sympathien.JPG",
+      "2016 - 1000 Worte.JPG",
+      "2016 - Informationen II.JPG",
+      "2016 - Migration.JPG",
+      "2016 - Modus.JPG",
+      "2016 - Sprache der Malerei X.JPG",
+      "2016 - Unterbewußtsein.JPG",
+      "2016 - Würde.JPG",
+      "2016 - Zeitvertreib.JPG",
+      "2017 - Aesthetik.JPG",
+      "2017 - Eurabike.JPG",
+      "2017 - Formeln.JPG",
+      "2017 - Gedankengut.JPG",
+      "2017 - Glückwünsche.JPG",
+      "2017 - Göttliche Fügung.JPG",
+      "2017 - Prävention.JPG",
+      "2017 - Verfügungen.JPG",
+      "2018 - Digitale Welt.JPG",
+      "2018 - Einstellung.JPG",
+      "2018 - Ergebnis.JPG",
+      "2018 - Generationen.JPG",
+      "2018 - Kompromisse.JPG",
+      "2018 - Sprache der Malerei XI.JPG",
+      "2018 - Zeitenwende.JPG",
+      "2019 - Begutachtung II.JPG",
+      "2019 - Stil.JPG",
+      "2019 - Strauss.JPG",
+      "2019 - Trilogie.JPG",
+      "2019 - Wirklichkeit.JPG",
+      "2020 - Manifest.JPG",
+      "2020 - Weg der Liebe.JPG",
+      "TSS04766-bearbeitet.JPG",
+      "TSS04855-bearbeitet.JPG",
+      "TSS04947-bearbeitet.JPG"
+    ];
 
-function openLightbox(idx) {
-  currentIndex = idx;
-  showImage();
-  lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+    let allImages = [];
 
-function showImage() {
-  const data = IMAGES[currentIndex];
-  lbImg.src = data.file;
-  lbTitle.textContent = data.title;
-  lbYear.textContent = data.year ? data.year : '';
-  resetTransform();
-}
+    function loadImages(filteredImages = null) {
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
 
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
+      const imagesToShow = filteredImages || allImages;
 
-function applyTransform() {
-  lbImg.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-}
+      document.getElementById("gallery-title").textContent = `Werke • chronologisch (${imagesToShow.length} Werke)`;
 
-function resetTransform() {
-  scale = 1; posX = 0; posY = 0;
-  applyTransform();
-}
+      if (imagesToShow.length === 0) {
+        gallery.innerHTML = `<p class="col-span-full text-center text-amber-300 py-12">Keine Bilder gefunden.</p>`;
+        return;
+      }
 
-// Lightbox Navigation
-document.getElementById('lbPrev').addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
-  showImage();
-});
-document.getElementById('lbNext').addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % IMAGES.length;
-  showImage();
-});
-document.getElementById('lbClose').addEventListener('click', closeLightbox);
+      imagesToShow.forEach((img, idx) => {
+        const div = document.createElement("div");
+        div.className = "cursor-pointer group overflow-hidden rounded-xl bg-zinc-900 aspect-square";
+        div.innerHTML = `
+          <img src="${img.url}" 
+               alt="${img.name}"
+               class="gallery-img"
+               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden:<br>${img.name}</div>'">
+          <p class="text-xs text-zinc-500 mt-2 text-center truncate px-1">${img.name}</p>
+        `;
+        div.onclick = () => openCarousel(idx);
+        gallery.appendChild(div);
+      });
+    }
 
-// Drag + Wheel Zoom
-lbImg.addEventListener('mousedown', e => {
-  isDragging = true;
-  startX = e.clientX - posX;
-  startY = e.clientY - posY;
-});
-document.addEventListener('mousemove', e => {
-  if (!isDragging) return;
-  posX = e.clientX - startX;
-  posY = e.clientY - startY;
-  applyTransform();
-});
-document.addEventListener('mouseup', () => { isDragging = false; });
+    function setupSearch() {
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", () => {
+        const term = searchInput.value.toLowerCase().trim();
+        if (!term) {
+          loadImages();
+          return;
+        }
+        const filtered = allImages.filter(img => 
+          img.name.toLowerCase().includes(term) || img.year.toString().includes(term)
+        );
+        loadImages(filtered);
+      });
+    }
 
-lbImg.addEventListener('wheel', e => {
-  e.preventDefault();
-  const delta = e.deltaY < 0 ? 0.25 : -0.25;
-  scale = Math.max(0.5, Math.min(6, scale + delta));
-  applyTransform();
-}, { passive: false });
+    let swiperInstance = null;
 
-// Keyboard
-document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') {
-    currentIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
-    showImage();
-  }
-  if (e.key === 'ArrowRight') {
-    currentIndex = (currentIndex + 1) % IMAGES.length;
-    showImage();
-  }
-});
+    function openCarousel(startIndex) {
+      const modal = document.getElementById("modal");
+      const wrapper = document.getElementById("swiper-wrapper");
+      wrapper.innerHTML = "";
 
-// Initialisierung – Bilder sofort anzeigen
-renderGallery(IMAGES);
-</script>
+      allImages.forEach(img => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+        slide.innerHTML = `
+          <img src="${img.url}" 
+               class="max-h-[88vh] max-w-[94vw] object-contain rounded-xl" 
+               alt="${img.name}">
+        `;
+        wrapper.appendChild(slide);
+      });
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      if (swiperInstance) swiperInstance.destroy();
+
+      swiperInstance = new Swiper('.mySwiper', {
+        initialSlide: startIndex,
+        loop: true,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        keyboard: { enabled: true },
+        centeredSlides: true
+      });
+
+      const updateCaption = () => {
+        const active = allImages[swiperInstance.realIndex];
+        document.getElementById("modal-caption").textContent = active ? active.name : '';
+      };
+      swiperInstance.on('slideChange', updateCaption);
+      updateCaption();
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+      document.getElementById("modal").classList.remove("flex");
+      if (swiperInstance) swiperInstance.destroy();
+    }
+
+    // Start der Seite
+    window.onload = () => {
+      allImages = imageFiles.map(name => {
+        const match = name.match(/(\d{4})/);
+        const year = match ? parseInt(match[1]) : 9999;
+        return { name, year, url: name };
+      }).sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+
+      loadImages();
+      setupSearch();
+    };
+  </script>
 </body>
 </html>
