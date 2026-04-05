@@ -37,15 +37,11 @@
       color: #fbbf24;
       border-bottom: 2px solid #fbbf24;
     }
-    .swiper-button-prev, .swiper-button-next {
-      color: #fbbf24 !important;
-      background: rgba(0,0,0,0.7);
-      width: 48px;
-      height: 48px;
-      border-radius: 9999px;
-    }
-    .swiper-button-prev:after, .swiper-button-next:after {
-      font-size: 22px;
+    .swiper-slide img {
+      max-height: 68vh;
+      max-width: 100%;
+      object-fit: contain;
+      user-select: none;
     }
   </style>
 </head>
@@ -182,7 +178,7 @@
     </div>
   </div>
 
-  <!-- Karussell Modal -->
+  <!-- Karussell Modal mit Zoom -->
   <div id="modal" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
     <div class="relative w-full max-w-5xl flex flex-col items-center">
       
@@ -192,7 +188,7 @@
         <div id="modalYear" class="text-sm text-zinc-400 mt-1"></div>
       </div>
 
-      <!-- Swiper Karussell -->
+      <!-- Swiper Karussell mit Zoom -->
       <div class="swiper mySwiper w-full">
         <div id="swiperWrapper" class="swiper-wrapper"></div>
       </div>
@@ -521,9 +517,11 @@
 
       allImages.forEach(img => {
         const slide = document.createElement("div");
-        slide.className = "swiper-slide flex justify-center";
+        slide.className = "swiper-slide flex justify-center items-center";
         slide.innerHTML = `
-          <img src="${img.url}" class="max-h-[68vh] max-w-full object-contain rounded-xl" alt="${img.name}">
+          <div class="swiper-zoom-container">
+            <img src="${img.url}" class="swiper-zoom-target max-h-[68vh] max-w-full object-contain rounded-xl" alt="${img.name}">
+          </div>
         `;
         wrapper.appendChild(slide);
       });
@@ -536,6 +534,11 @@
       swiperInstance = new Swiper('.mySwiper', {
         initialSlide: startIndex,
         loop: true,
+        zoom: {
+          maxRatio: 6,
+          minRatio: 1,
+          toggle: true
+        },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -552,11 +555,8 @@
 
     function updateModalInfo(index) {
       const img = allImages[index];
-      const titleEl = document.getElementById("modalTitle");
-      const yearEl = document.getElementById("modalYear");
-
-      titleEl.textContent = img.name.replace(/\.\w+$/, '');
-      yearEl.textContent = img.year !== 9999 ? img.year : '';
+      document.getElementById("modalTitle").textContent = img.name.replace(/\.\w+$/, '');
+      document.getElementById("modalYear").textContent = img.year !== 9999 ? img.year : '';
     }
 
     function closeModal() {
