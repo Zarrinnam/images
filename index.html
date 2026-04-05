@@ -11,18 +11,25 @@
     .gallery-img { 
       width: 100%; 
       height: 100%; 
-      object-fit: cover; 
+      object-fit: contain; 
+      background: #000;
+      padding: 8px;
       transition: transform 0.4s ease; 
     }
     .gallery-img:hover { 
-      transform: scale(1.08); 
+      transform: scale(1.04); 
     }
     .art-card {
       transition: all 0.3s ease;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 16px;
+      overflow: hidden;
     }
     .art-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+      border-color: #444;
     }
 
     #modal { display: none; }
@@ -501,15 +508,17 @@
 
       images.forEach((img, filteredIndex) => {
         const div = document.createElement("div");
-        div.className = "art-card cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 aspect-square border border-zinc-800";
+        div.className = "art-card cursor-pointer overflow-hidden";
         div.innerHTML = `
-          <img src="${img.url}" 
-               width="600" 
-               height="600"
-               loading="lazy"
-               decoding="async"
-               class="gallery-img" 
-               alt="${img.name}">
+          <div class="aspect-square bg-black flex items-center justify-center p-3">
+            <img src="${img.url}" 
+                 width="600" 
+                 height="600"
+                 loading="lazy"
+                 decoding="async"
+                 class="gallery-img" 
+                 alt="${img.name}">
+          </div>
           <p class="text-xs text-zinc-500 mt-3 text-center px-2 truncate">${img.name}</p>
         `;
         div.onclick = () => openCarousel(filteredIndex, images);
