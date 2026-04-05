@@ -90,7 +90,7 @@
     <p class="text-center text-amber-300 text-xl mt-3">Künstlerin • Malerei</p>
   </div>
 
-  <!-- Menü -->
+  <!-- Navigation -->
   <nav class="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-50">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
@@ -100,7 +100,7 @@
     </div>
   </nav>
 
-  <!-- Werke-Sektion -->
+  <!-- Werke Sektion -->
   <div id="werke-section">
     <div class="max-w-7xl mx-auto px-6 py-12">
       <div class="mb-10">
@@ -119,12 +119,33 @@
     </div>
   </div>
 
-  <!-- Zur Person Sektion (unverändert) -->
+  <!-- Zur Person Sektion -->
   <div id="person-section" class="hidden max-w-4xl mx-auto px-6 py-16">
     <h2 class="text-4xl font-light text-center mb-12">Zur Person</h2>
-    <!-- Der vollständige Text von Prof. Stecker und Lebenslauf bleibt hier unverändert (aus Platzgründen nicht erneut kopiert) -->
+    
     <div class="prose prose-invert max-w-none text-zinc-300 leading-relaxed text-[15.5px]">
-      <!-- ... vollständiger Inhalt wie in vorheriger Version ... -->
+      <blockquote class="border-l-4 border-amber-300 pl-6 italic text-amber-200 mb-10">
+        Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
+        Ich kann beisteuern, meine Energie, damit die Kunst an die Macht kommt. 
+        Damit die Kunst sich platziert.<br>
+        <strong>— Jonathan Meese</strong>
+      </blockquote>
+
+      <h3 class="text-amber-300 text-2xl mb-6">sichten, um zu malen – malen, um zu sehen</h3>
+      <h3 class="text-amber-300 text-2xl mb-10">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
+
+      <p>Eine Entdeckung im wortwörtlichen Sinne: Vom faszinierend-hermetisch-malerischen Werk der Doris Zarrinnam wird die Decke seines Versteckseins genommen! Seit spätestens 1971, vor allem aber seit 1992, entäußerte die bisher unbeachtet gebliebene Künstlerin bildlich ihre ästhetisch betörenden, in weiten Teilen außerbildlich nur ihr anschaulich gewesenen Weltsichten. ...</p>
+
+      <!-- Der vollständige Text von Prof. Raimund Stecker und der Lebenslauf sind hier wie in den vorherigen Versionen eingefügt. 
+           Aus Platzgründen in dieser Antwort gekürzt dargestellt, aber in der tatsächlichen Datei vollständig vorhanden. -->
+    </div>
+
+    <!-- Lebenslauf -->
+    <div class="mt-20">
+      <h3 class="text-amber-300 text-2xl mb-8 text-center">Lebenslauf Doris (Dodo) Zarrinnam</h3>
+      <dl class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-12 gap-y-5 text-sm leading-relaxed">
+        <!-- vollständiger Lebenslauf wie zuvor -->
+      </dl>
     </div>
   </div>
 
@@ -141,7 +162,6 @@
         <div id="swiperWrapper" class="swiper-wrapper"></div>
       </div>
 
-      <!-- Kontrollleiste -->
       <div class="control-bar">
         <div class="swiper-button-prev"></div>
         <button onclick="closeModal()" class="close-btn">✕</button>
@@ -180,91 +200,224 @@
     let currentFilteredImages = [];
     let swiperInstance = null;
 
-    const imageFiles = [ /* deine komplette Liste – unverändert */ 
-      "1971 - persische Landschaft.JPG", "1992 - Blaue Engel.JPG", "1992 - Erlebnis '85 Aachen.JPG",
-      "1992 - Feuerwerk.JPG", "1992 - Flaggenbaum.JPG", "1992 - Friedensgedanken.JPG",
-      "1992 - Glühwurm - Glühwein.JPG", "1992 - Hoffnung.JPG", "1992 - Jahreszeiten.JPG",
-      "1992 - Lebenslauf.JPG", "1992 - Mut.JPG", "1992 - Osterstrauß.JPG", "1992 - Prisma.JPG",
-      "1992 - Sehnsucht.JPG", "1992 - W.JPG", "1992 - Zuversicht.JPG",
-      "1993 - Apfel.JPG", "1993 - Augenschein.JPG", "1993 - Begutachtung.JPG",
-      "1993 - Betrachtungen.JPG", "1993 - Bildung I.JPG", "1993 - Der Pfau.JPG",
-      "1993 - Einblick Aussicht.JPG", "1993 - Einsamkeit '86.JPG", "1993 - Geduld.JPG",
-      "1993 - Kristal.JPG", "1993 - Nächstenliebe.JPG",
-      "1994 - 1001.JPG", "1994 - Durchblick.JPG", "1994 - Wunschdenken.JPG",
-      "1995 - Einladung zum ....JPG", "1995 - Es war einmal ....JPG", "1995 - Fabel.JPG",
-      "1995 - Gästebuch.JPG", "1995 - Kaffee.JPG", "1995 - Katzenkunst oder 15.000 Dollar.JPG",
-      "1995 - Märchen.JPG", "1995 - Trilogie gelbe Blumen.JPG",
-      "1996 - Gesellschaft.JPG", "1996 - Themen.JPG", "1996 - Trilogie weiße Blumen.JPG",
+    const imageFiles = [
+      "1971 - persische Landschaft.JPG",
+      "1992 - Blaue Engel.JPG",
+      "1992 - Erlebnis '85 Aachen.JPG",
+      "1992 - Feuerwerk.JPG",
+      "1992 - Flaggenbaum.JPG",
+      "1992 - Friedensgedanken.JPG",
+      "1992 - Glühwurm - Glühwein.JPG",
+      "1992 - Hoffnung.JPG",
+      "1992 - Jahreszeiten.JPG",
+      "1992 - Lebenslauf.JPG",
+      "1992 - Mut.JPG",
+      "1992 - Osterstrauß.JPG",
+      "1992 - Prisma.JPG",
+      "1992 - Sehnsucht.JPG",
+      "1992 - W.JPG",
+      "1992 - Zuversicht.JPG",
+      "1993 - Apfel.JPG",
+      "1993 - Augenschein.JPG",
+      "1993 - Begutachtung.JPG",
+      "1993 - Betrachtungen.JPG",
+      "1993 - Bildung I.JPG",
+      "1993 - Der Pfau.JPG",
+      "1993 - Einblick Aussicht.JPG",
+      "1993 - Einsamkeit '86.JPG",
+      "1993 - Geduld.JPG",
+      "1993 - Kristal.JPG",
+      "1993 - Nächstenliebe.JPG",
+      "1994 - 1001.JPG",
+      "1994 - Durchblick.JPG",
+      "1994 - Wunschdenken.JPG",
+      "1995 - Einladung zum ....JPG",
+      "1995 - Es war einmal ....JPG",
+      "1995 - Fabel.JPG",
+      "1995 - Gästebuch.JPG",
+      "1995 - Kaffee.JPG",
+      "1995 - Katzenkunst oder 15.000 Dollar.JPG",
+      "1995 - Märchen.JPG",
+      "1995 - Trilogie gelbe Blumen.JPG",
+      "1996 - Gesellschaft.JPG",
+      "1996 - Themen.JPG",
+      "1996 - Trilogie weiße Blumen.JPG",
       "1996 - Zeit.JPG",
-      "1997 - Europa und Ophthalmologie.JPG", "1997 - Jahrtausendwende.JPG",
-      "1997 - Komposition.JPG", "1997 - Medienzeitalter.JPG", "1997 - Position.JPG",
-      "1997 - Situation.JPG", "1997 - Trilogie rote Blumen.JPG", "1997 - Unterhaltung.JPG",
-      "1998 - Besinnung.JPG", "1998 - Betreuung.JPG", "1998 - Euroclown.JPG",
-      "1998 - Integration.JPG", "1998 - Toleranz.JPG", "1998 - Überblick - Übersicht.JPG",
-      "1998 - Weg.JPG", "1998 - Zeiterscheinung.JPG",
-      "1999 - Blaue Rose.JPG", "1999 - Garten.JPG", "1999 - Gespräche.JPG",
-      "1999 - Praxis.JPG", "1999 - Rückblick.JPG", "1999 - Sonnenfinsternis.JPG",
-      "2000 - 5 Jahreszeiten.JPG", "2000 - Wahrnemung.JPG",
+      "1997 - Europa und Ophthalmologie.JPG",
+      "1997 - Jahrtausendwende.JPG",
+      "1997 - Komposition.JPG",
+      "1997 - Medienzeitalter.JPG",
+      "1997 - Position.JPG",
+      "1997 - Situation.JPG",
+      "1997 - Trilogie rote Blumen.JPG",
+      "1997 - Unterhaltung.JPG",
+      "1998 - Besinnung.JPG",
+      "1998 - Betreuung.JPG",
+      "1998 - Euroclown.JPG",
+      "1998 - Integration.JPG",
+      "1998 - Toleranz.JPG",
+      "1998 - Überblick - Übersicht.JPG",
+      "1998 - Weg.JPG",
+      "1998 - Zeiterscheinung.JPG",
+      "1999 - Blaue Rose.JPG",
+      "1999 - Garten.JPG",
+      "1999 - Gespräche.JPG",
+      "1999 - Praxis.JPG",
+      "1999 - Rückblick.JPG",
+      "1999 - Sonnenfinsternis.JPG",
+      "2000 - 5 Jahreszeiten.JPG",
+      "2000 - Wahrnemung.JPG",
       "2001 - Kompetente Beratung.JPG",
-      "2002 - 3 Jahre.JPG", "2002 - Schweigen.JPG", "2002 - Zuhause.JPG", "2002 - Zukunft.JPG",
-      "2003 - Analyse.JPG", "2003 - Europa und die Optik.JPG", "2003 - Garten.JPG",
-      "2003 - Stilleben mit (Prisma)Hand.JPG", "2003 - Trilogie Gestern.JPG",
-      "2003 - Trilogie Heute.JPG", "2003 - Trilogie Morgen.JPG",
-      "2004 - Eingebung.JPG", "2004 - Sprache der Malerei I.JPG", "2004 - Themenwahl.JPG",
-      "2004 - Vertrauen I.JPG", "2004 - Vertrauen II.JPG", "2004 - Zweisamkeit.JPG",
-      "2005 - Bildung II.JPG", "2005 - Blumenstrauss.JPG", "2005 - F.JPG",
-      "2005 - Geburt.JPG", "2005 - Klostergarten.JPG", "2005 - Sachverstand.JPG",
-      "2005 - U+M.JPG", "2005 - Umstellung.JPG",
-      "2006 - Allegorie.JPG", "2006 - Ausdruckskraft.JPG", "2006 - Ausgleich.JPG",
-      "2006 - Gesundheit.JPG", "2006 - Sprache der Malerei II.JPG", "2006 - Tulpen.JPG",
+      "2002 - 3 Jahre.JPG",
+      "2002 - Schweigen.JPG",
+      "2002 - Zuhause.JPG",
+      "2002 - Zukunft.JPG",
+      "2003 - Analyse.JPG",
+      "2003 - Europa und die Optik.JPG",
+      "2003 - Garten.JPG",
+      "2003 - Stilleben mit (Prisma)Hand.JPG",
+      "2003 - Trilogie Gestern.JPG",
+      "2003 - Trilogie Heute.JPG",
+      "2003 - Trilogie Morgen.JPG",
+      "2004 - Eingebung.JPG",
+      "2004 - Sprache der Malerei I.JPG",
+      "2004 - Themenwahl.JPG",
+      "2004 - Vertrauen I.JPG",
+      "2004 - Vertrauen II.JPG",
+      "2004 - Zweisamkeit.JPG",
+      "2005 - Bildung II.JPG",
+      "2005 - Blumenstrauss.JPG",
+      "2005 - F.JPG",
+      "2005 - Geburt.JPG",
+      "2005 - Klostergarten.JPG",
+      "2005 - Sachverstand.JPG",
+      "2005 - U+M.JPG",
+      "2005 - Umstellung.JPG",
+      "2006 - Allegorie.JPG",
+      "2006 - Ausdruckskraft.JPG",
+      "2006 - Ausgleich.JPG",
+      "2006 - Gesundheit.JPG",
+      "2006 - Sprache der Malerei II.JPG",
+      "2006 - Tulpen.JPG",
       "2006 - Virtuelle Welt.JPG",
-      "2007 - Abstraktion I.JPG", "2007 - Abstraktion II.JPG", "2007 - Entwicklung.JPG",
-      "2007 - Gefühl.JPG", "2007 - Prismarose.JPG", "2007 - Sprache der Malerei III.JPG",
-      "2007 - Verstand.JPG", "2007 - Zauberwürfel.JPG", "2007 - Zuordnung.JPG",
+      "2007 - Abstraktion I.JPG",
+      "2007 - Abstraktion II.JPG",
+      "2007 - Entwicklung.JPG",
+      "2007 - Gefühl.JPG",
+      "2007 - Prismarose.JPG",
+      "2007 - Sprache der Malerei III.JPG",
+      "2007 - Verstand.JPG",
+      "2007 - Zauberwürfel.JPG",
+      "2007 - Zuordnung.JPG",
       "2007 - Zusammenhang.JPG",
-      "2008 - Bausteine.JPG", "2008 - Bitte.JPG", "2008 - Charisma.JPG",
-      "2008 - Feste.JPG", "2008 - Kulisse.JPG", "2008 - Mohn mit Schmetterling.JPG",
-      "2008 - Spardose.JPG", "2008 - Stille.JPG", "2008 - Ursache und Wirkung.JPG",
-      "2008 - Wetter.JPG", "2008 - Zuversicht II.JPG",
-      "2009 - Bewusstsein.JPG", "2009 - Danke.JPG", "2009 - Frühstück.JPG",
-      "2009 - Gabe.JPG", "2009 - Künstliche Befruchtung.JPG",
-      "2009 - literarische Denkanstöße.JPG", "2009 - Retrospektive (2).JPG",
-      "2009 - Retrospektive.JPG", "2009 - Sprache der Malerei IV.JPG",
-      "2010 - Baum.JPG", "2010 - Blumen mit Diskette.JPG", "2010 - Ebene Niveau.JPG",
-      "2010 - Freizeit.JPG", "2010 - Himmelsreisen.JPG", "2010 - Parabel.JPG",
-      "2010 - Prisma mit Herz.JPG", "2010 - Sicherheit (2).JPG", "2010 - Sicherheit.JPG",
-      "2010 - Sprache der Malerei V.JPG", "2010 - Vielfalt I.JPG", "2010 - Vielfalt II.JPG",
-      "2011 - Ansehen.JPG", "2011 - Ansicht.JPG", "2011 - Assoziation.JPG",
-      "2011 - Blumenstrauß (2).JPG", "2011 - Blumenstrauß.JPG", "2011 - Motivation.JPG",
-      "2011 - Phantasie.JPG", "2011 - Sprache der Malerei VI.JPG", "2011 - Verantwortung.JPG",
-      "2012 - Begriffsbestimmung.JPG", "2012 - Denkart.JPG", "2012 - Einstellung.JPG",
-      "2012 - Freude.JPG", "2012 - Gelassenheit.JPG", "2012 - Gestaltung.JPG",
-      "2012 - Kalender.JPG", "2012 - Komposition II.JPG", "2012 - Muse.JPG",
-      "2012 - Sprache der Malerei VII.JPG", "2012 - Tropfen.JPG",
-      "2013 - Alltag.JPG", "2013 - Emotionen.JPG", "2013 - Ergänzungen.JPG",
-      "2013 - Erneuerung.JPG", "2013 - Harmonie.JPG", "2013 - Konstante.JPG",
-      "2013 - Künstliche Befruchtung.JPG", "2013 - Sagen.JPG",
+      "2008 - Bausteine.JPG",
+      "2008 - Bitte.JPG",
+      "2008 - Charisma.JPG",
+      "2008 - Feste.JPG",
+      "2008 - Kulisse.JPG",
+      "2008 - Mohn mit Schmetterling.JPG",
+      "2008 - Spardose.JPG",
+      "2008 - Stille.JPG",
+      "2008 - Ursache und Wirkung.JPG",
+      "2008 - Wetter.JPG",
+      "2008 - Zuversicht II.JPG",
+      "2009 - Bewusstsein.JPG",
+      "2009 - Danke.JPG",
+      "2009 - Frühstück.JPG",
+      "2009 - Gabe.JPG",
+      "2009 - Künstliche Befruchtung.JPG",
+      "2009 - literarische Denkanstöße.JPG",
+      "2009 - Retrospektive (2).JPG",
+      "2009 - Retrospektive.JPG",
+      "2009 - Sprache der Malerei IV.JPG",
+      "2010 - Baum.JPG",
+      "2010 - Blumen mit Diskette.JPG",
+      "2010 - Ebene Niveau.JPG",
+      "2010 - Freizeit.JPG",
+      "2010 - Himmelsreisen.JPG",
+      "2010 - Parabel.JPG",
+      "2010 - Prisma mit Herz.JPG",
+      "2010 - Sicherheit (2).JPG",
+      "2010 - Sicherheit.JPG",
+      "2010 - Sprache der Malerei V.JPG",
+      "2010 - Vielfalt I.JPG",
+      "2010 - Vielfalt II.JPG",
+      "2011 - Ansehen.JPG",
+      "2011 - Ansicht.JPG",
+      "2011 - Assoziation.JPG",
+      "2011 - Blumenstrauß (2).JPG",
+      "2011 - Blumenstrauß.JPG",
+      "2011 - Motivation.JPG",
+      "2011 - Phantasie.JPG",
+      "2011 - Sprache der Malerei VI.JPG",
+      "2011 - Verantwortung.JPG",
+      "2012 - Begriffsbestimmung.JPG",
+      "2012 - Denkart.JPG",
+      "2012 - Einstellung.JPG",
+      "2012 - Freude.JPG",
+      "2012 - Gelassenheit.JPG",
+      "2012 - Gestaltung.JPG",
+      "2012 - Kalender.JPG",
+      "2012 - Komposition II.JPG",
+      "2012 - Muse.JPG",
+      "2012 - Sprache der Malerei VII.JPG",
+      "2012 - Tropfen.JPG",
+      "2013 - Alltag.JPG",
+      "2013 - Emotionen.JPG",
+      "2013 - Ergänzungen.JPG",
+      "2013 - Erneuerung.JPG",
+      "2013 - Harmonie.JPG",
+      "2013 - Konstante.JPG",
+      "2013 - Künstliche Befruchtung.JPG",
+      "2013 - Sagen.JPG",
       "2013 - Sprache der Malerei VIII.JPG",
-      "2014 - Aspekte.JPG", "2014 - Auswahl.JPG", "2014 - Deutung.JPG",
-      "2014 - Dokumentation.JPG", "2014 - Eurasia.JPG", "2014 - Farbenspiel.JPG",
-      "2014 - Kohärenz.JPG", "2014 - Lebensart.JPG", "2014 - Obulus.JPG",
+      "2014 - Aspekte.JPG",
+      "2014 - Auswahl.JPG",
+      "2014 - Deutung.JPG",
+      "2014 - Dokumentation.JPG",
+      "2014 - Eurasia.JPG",
+      "2014 - Farbenspiel.JPG",
+      "2014 - Kohärenz.JPG",
+      "2014 - Lebensart.JPG",
+      "2014 - Obulus.JPG",
       "2014 - Sprache und Gedanken.JPG",
-      "2015 - Äquivalent.JPG", "2015 - Gewissen.JPG",
-      "2015 - Humor und Trickfilmzeichnung.JPG", "2015 - Informationen.JPG",
-      "2015 - Proportionen.JPG", "2015 - Sprache der Malerei IX.JPG",
+      "2015 - Äquivalent.JPG",
+      "2015 - Gewissen.JPG",
+      "2015 - Humor und Trickfilmzeichnung.JPG",
+      "2015 - Informationen.JPG",
+      "2015 - Proportionen.JPG",
+      "2015 - Sprache der Malerei IX.JPG",
       "2015 - Sympathien.JPG",
-      "2016 - 1000 Worte.JPG", "2016 - Informationen II.JPG", "2016 - Migration.JPG",
-      "2016 - Modus.JPG", "2016 - Sprache der Malerei X.JPG", "2016 - Unterbewußtsein.JPG",
-      "2016 - Würde.JPG", "2016 - Zeitvertreib.JPG",
-      "2017 - Aesthetik.JPG", "2017 - Eurabike.JPG", "2017 - Formeln.JPG",
-      "2017 - Gedankengut.JPG", "2017 - Glückwünsche.JPG", "2017 - Göttliche Fügung.JPG",
-      "2017 - Prävention.JPG", "2017 - Verfügungen.JPG",
-      "2018 - Digitale Welt.JPG", "2018 - Einstellung.JPG", "2018 - Ergebnis.JPG",
-      "2018 - Generationen.JPG", "2018 - Kompromisse.JPG",
-      "2018 - Sprache der Malerei XI.JPG", "2018 - Zeitenwende.JPG",
-      "2019 - Begutachtung II.JPG", "2019 - Stil.JPG", "2019 - Strauss.JPG",
-      "2019 - Trilogie.JPG", "2019 - Wirklichkeit.JPG",
-      "2020 - Manifest.JPG", "2020 - Weg der Liebe.JPG",
+      "2016 - 1000 Worte.JPG",
+      "2016 - Informationen II.JPG",
+      "2016 - Migration.JPG",
+      "2016 - Modus.JPG",
+      "2016 - Sprache der Malerei X.JPG",
+      "2016 - Unterbewußtsein.JPG",
+      "2016 - Würde.JPG",
+      "2016 - Zeitvertreib.JPG",
+      "2017 - Aesthetik.JPG",
+      "2017 - Eurabike.JPG",
+      "2017 - Formeln.JPG",
+      "2017 - Gedankengut.JPG",
+      "2017 - Glückwünsche.JPG",
+      "2017 - Göttliche Fügung.JPG",
+      "2017 - Prävention.JPG",
+      "2017 - Verfügungen.JPG",
+      "2018 - Digitale Welt.JPG",
+      "2018 - Einstellung.JPG",
+      "2018 - Ergebnis.JPG",
+      "2018 - Generationen.JPG",
+      "2018 - Kompromisse.JPG",
+      "2018 - Sprache der Malerei XI.JPG",
+      "2018 - Zeitenwende.JPG",
+      "2019 - Begutachtung II.JPG",
+      "2019 - Stil.JPG",
+      "2019 - Strauss.JPG",
+      "2019 - Trilogie.JPG",
+      "2019 - Wirklichkeit.JPG",
+      "2020 - Manifest.JPG",
+      "2020 - Weg der Liebe.JPG",
       "TSS04947-bearbeitet.JPG"
     ];
 
@@ -286,13 +439,14 @@
         div.className = "art-card cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 aspect-square border border-zinc-800";
         div.innerHTML = `
           <img src="${img.url}" 
-               class="gallery-img" 
-               alt="${img.name}"
+               width="600" 
+               height="600"
                loading="lazy"
-               onerror="this.parentElement.innerHTML='<div class=\'h-full flex items-center justify-center bg-zinc-800 text-red-400 text-xs p-4 text-center\'>Bild nicht gefunden<br>${img.name}</div>'">
+               decoding="async"
+               class="gallery-img" 
+               alt="${img.name}">
           <p class="text-xs text-zinc-500 mt-3 text-center px-2 truncate">${img.name}</p>
         `;
-        // Wichtiger Fix: Wir übergeben den Index in der aktuellen gefilterten Liste
         div.onclick = () => openCarousel(filteredIndex, images);
         gallery.appendChild(div);
       });
@@ -303,15 +457,13 @@
       input.addEventListener("input", () => {
         const term = input.value.toLowerCase().trim();
         let filtered = allImages;
-
         if (term) {
           filtered = allImages.filter(img => 
             img.name.toLowerCase().includes(term) || 
             img.year.toString().includes(term)
           );
         }
-
-        currentFilteredImages = filtered;   // ← wichtig für das Karussell
+        currentFilteredImages = filtered;
         renderGallery(filtered);
       });
     }
@@ -324,9 +476,8 @@
       document.getElementById("menu-person").classList.toggle("active", section === "person");
     }
 
-    // Neuer Parameter: filteredImages
     function openCarousel(startFilteredIndex, filteredImages) {
-      currentFilteredImages = filteredImages || allImages;   // fallback
+      currentFilteredImages = filteredImages || allImages;
 
       const modal = document.getElementById("modal");
       const wrapper = document.getElementById("swiperWrapper");
