@@ -40,7 +40,7 @@
       border-bottom: 2px solid #fbbf24;
     }
 
-    /* Kontrollleiste am unteren Rand */
+    /* Kontrollleiste am unteren Rand – klar getrennt */
     .control-bar {
       position: fixed;
       bottom: 40px;
@@ -49,12 +49,12 @@
       z-index: 100;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(12px);
-      padding: 14px 40px;
+      padding: 12px 50px;
       border-radius: 9999px;
       border: 1px solid rgba(251, 191, 36, 0.25);
       display: flex;
       align-items: center;
-      gap: 60px;
+      gap: 50px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
@@ -235,12 +235,10 @@
         <div id="swiperWrapper" class="swiper-wrapper"></div>
       </div>
 
-      <!-- Kontrollleiste am unteren Bildschirmrand -->
+      <!-- Kontrollleiste am unteren Rand – klar nebeneinander -->
       <div class="control-bar">
         <div class="swiper-button-prev"></div>
-        
         <button onclick="closeModal()" class="close-btn">✕</button>
-        
         <div class="swiper-button-next"></div>
       </div>
     </div>
