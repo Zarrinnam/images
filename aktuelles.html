@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Aktuelles • Doris Zarrinnam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    .nav-link.active {
+      color: #fbbf24;
+      border-bottom: 2px solid #fbbf24;
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <div class="max-w-7xl mx-auto px-6 pt-12 pb-8 w-full">
+    <h1 class="text-5xl md:text-6xl font-light text-center tracking-wide">DORIS ZARRINNAM</h1>
+    <p class="text-center text-amber-300 text-xl mt-3">Künstlerin • Malerei</p>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-50 w-full">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
+        <a href="index.html" class="nav-link">Werke</a>
+        <a href="index.html#person" class="nav-link">Zur Person</a>
+        <a href="aktuelles.html" class="nav-link active">Aktuelles</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Inhalt -->
+  <main class="flex-1 max-w-3xl mx-auto px-6 py-20 w-full text-center">
+    <h2 class="text-4xl font-light mb-10">Aktuelles</h2>
+    <p class="text-zinc-300 text-lg leading-relaxed">
+      <a href="Z-Katalog.pdf" class="text-amber-300 hover:text-amber-400 underline underline-offset-4">
+        Werksverzeichnis als Buch in Vorbereitung
+      </a>
+    </p>
+  </main>
+
+  <!-- Impressum -->
+  <footer class="bg-zinc-900 border-t border-zinc-800 py-12 mt-20">
+    <div class="max-w-7xl mx-auto px-6 text-xs text-zinc-400">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <strong class="text-amber-300">Impressum</strong><br><br>
+          Angaben gemäß § 5 TMG / § 5 DDG<br><br>
+          Dr. Dirk-Bijan Zarrinnam<br>
+          Geilenkirchener Str. 15<br>
+          52525 Heinsberg<br><br>
+          E-Mail: <a href="mailto:doris.zarrinnam@web.de" class="hover:text-amber-300">doris.zarrinnam@web.de</a>
+        </div>
+        <div class="text-right md:text-left">
+          Verantwortlich für den Inhalt dieser Website:<br>
+          Dr. Dirk-Bijan Zarrinnam<br><br>
+          Alle auf dieser Website gezeigten Werke sind urheberrechtlich geschützt.<br>
+          Jede Vervielfältigung, Verbreitung oder öffentliche Wiedergabe bedarf der schriftlichen Zustimmung der Erben.
+        </div>
+      </div>
+      <div class="text-center mt-10 pt-6 border-t border-zinc-800">
+        © Dr. Dirk-Bijan Zarrinnam – Alle Rechte vorbehalten
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

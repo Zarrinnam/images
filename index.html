@@ -113,6 +113,7 @@
       <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
         <a href="#" id="menu-werke" onclick="showSection('werke')" class="nav-link active">Werke</a>
         <a href="#" id="menu-person" onclick="showSection('person')" class="nav-link">Zur Person</a>
+        <a href="aktuelles.html" id="menu-aktuelles" class="nav-link">Aktuelles</a>
       </div>
     </div>
   </nav>
@@ -633,7 +634,8 @@
       currentFilteredImages = allImages;
       renderGallery(allImages);
       setupSearch();
-      showSection("werke");
+      const section = (location.hash === "#person") ? "person" : "werke";
+      showSection(section);
     };
   </script>
 </body>
