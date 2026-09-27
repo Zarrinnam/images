@@ -111,9 +111,10 @@
   <nav class="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-50">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
-        <a href="#" id="menu-werke" onclick="showSection('werke')" class="nav-link active">Werke</a>
+        <a href="#" id="menu-werke" onclick="showSection('werke')" class="nav-link active">Künstlerarchiv</a>
         <a href="#" id="menu-person" onclick="showSection('person')" class="nav-link">Zur Person</a>
         <a href="aktuelles.html" id="menu-aktuelles" class="nav-link">Aktuelles</a>
+        <a href="werke-erwerben.html" id="menu-erwerben" class="nav-link">Werke erwerben</a>
       </div>
     </div>
   </nav>
@@ -122,7 +123,7 @@
   <div id="werke-section">
     <div class="max-w-7xl mx-auto px-6 py-12">
       <div class="mb-10">
-        <h2 id="title" class="text-3xl font-light text-center mb-6">Werke • chronologisch</h2>
+        <h2 id="title" class="text-3xl font-light text-center mb-6">Künstlerarchiv • chronologisch</h2>
         
         <div class="max-w-md mx-auto">
           <input 
@@ -523,7 +524,7 @@
     function renderGallery(images) {
       const gallery = document.getElementById("gallery");
       gallery.innerHTML = "";
-      document.getElementById("title").textContent = `Werke • chronologisch (${images.length} Werke)`;
+      document.getElementById("title").textContent = `Künstlerarchiv • chronologisch (${images.length} Werke)`;
 
       images.forEach((img, filteredIndex) => {
         const div = document.createElement("div");
