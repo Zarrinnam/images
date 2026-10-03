@@ -81,6 +81,17 @@
     .swiper-button-prev:after, .swiper-button-next:after {
       font-size: 28px;
     }
+    .control-bar .swiper-button-prev, .control-bar .swiper-button-next {
+      position: static;
+      margin: 0;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+    .control-bar .close-btn { flex: 0 0 auto; }
 
     .close-btn {
       background: #ef4444;
@@ -593,7 +604,7 @@
         slide.innerHTML = `
           <div class="swiper-zoom-container w-full h-full flex items-center justify-center">
             <img src="${img.url}" 
-                 class="swiper-zoom-target max-h-[68vh] sm:max-h-[78vh] max-w-full object-contain" 
+                 class="swiper-zoom-target max-h-[68vh] sm:max-h-[72vh] max-w-full object-contain" 
                  alt="${img.name}">
           </div>
         `;
