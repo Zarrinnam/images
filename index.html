@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <style>
+    body { overflow-x: clip; }
+    .nav-link { white-space: nowrap; }
     .art-card {
       transition: all 0.3s ease;
       background: #0a0a0a;
@@ -22,7 +24,7 @@
     }
 
     .image-frame {
-      aspect-square;
+      aspect-ratio: 1 / 1;
       background: #000;
       display: flex;
       align-items: center;
@@ -97,20 +99,28 @@
       background: #dc2626;
       transform: scale(1.08);
     }
+    @media (max-width: 767px) {
+      #person-section dd { margin-bottom: 0.9rem; }
+    }
+    @media (max-width: 640px) {
+      .control-bar { bottom: calc(16px + env(safe-area-inset-bottom)); padding: 8px 22px; gap: 22px; }
+      .close-btn { width: 48px; height: 48px; font-size: 26px; }
+      .swiper-button-prev:after, .swiper-button-next:after { font-size: 22px; }
+    }
   </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 min-h-screen">
 
   <!-- Header -->
-  <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
-    <h1 class="text-5xl md:text-6xl font-light text-center tracking-wide">DORIS ZARRINNAM</h1>
-    <p class="text-center text-amber-300 text-xl mt-3">Künstlerin • Malerei</p>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-6 sm:pb-8">
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-light text-center tracking-wide">DORIS ZARRINNAM</h1>
+    <p class="text-center text-amber-300 text-base sm:text-xl mt-2 sm:mt-3">Künstlerin • Malerei</p>
   </div>
 
   <!-- Navigation -->
   <nav class="sticky top-0 bg-zinc-900 border-b border-zinc-800 z-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex justify-center gap-12 text-sm uppercase tracking-widest py-5">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-x-8 md:gap-12 text-[11px] sm:text-sm uppercase tracking-wider sm:tracking-widest py-3 sm:py-5">
         <a href="#" id="menu-werke" onclick="showSection('werke')" class="nav-link active">Künstlerarchiv</a>
         <a href="#" id="menu-person" onclick="showSection('person')" class="nav-link">Zur Person</a>
         <a href="aktuelles.html" id="menu-aktuelles" class="nav-link">Aktuelles</a>
@@ -121,37 +131,37 @@
 
   <!-- Werke Sektion -->
   <div id="werke-section">
-    <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-8 sm:py-12">
       <div class="mb-10">
-        <h2 id="title" class="text-3xl font-light text-center mb-6">Künstlerarchiv • chronologisch</h2>
+        <h2 id="title" class="text-xl sm:text-3xl font-light text-center mb-4 sm:mb-6">Künstlerarchiv • chronologisch</h2>
         
         <div class="max-w-md mx-auto">
           <input 
             id="searchInput"
             type="text" 
-            placeholder="Suchen nach Jahr oder Titel (z.B. 1992, Prisma...)"
-            class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-2xl px-5 py-3 text-zinc-100 placeholder-zinc-500 focus:outline-none">
+            placeholder="Jahr oder Titel suchen (z.B. 1992, Prisma)"
+            class="w-full bg-zinc-900 border border-zinc-700 focus:border-amber-400 rounded-2xl px-4 sm:px-5 py-3 text-base text-zinc-100 placeholder-zinc-500 focus:outline-none">
         </div>
       </div>
 
-      <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6"></div>
+      <div id="gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-6"></div>
     </div>
   </div>
 
   <!-- Zur Person Sektion -->
-  <div id="person-section" class="hidden max-w-4xl mx-auto px-6 py-16">
-    <h2 class="text-4xl font-light text-center mb-12">Zur Person</h2>
+  <div id="person-section" class="hidden max-w-4xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+    <h2 class="text-3xl sm:text-4xl font-light text-center mb-8 sm:mb-12">Zur Person</h2>
     
-    <div class="prose prose-invert max-w-none text-zinc-300 leading-relaxed text-[15.5px]">
-      <blockquote class="border-l-4 border-amber-300 pl-6 italic text-amber-200 mb-10">
+    <div class="prose prose-invert max-w-none text-zinc-300 leading-relaxed text-[15.5px] hyphens-auto break-words">
+      <blockquote class="border-l-4 border-amber-300 pl-4 sm:pl-6 italic text-amber-200 mb-10">
         Die Kunst überlebt, der Künstler nicht. Der Künstler ist nur Beiwerk. 
         Ich kann beisteuern, meine Energie, damit die Kunst an die Macht kommt. 
         Damit die Kunst sich platziert.<br>
         <strong>— Jonathan Meese</strong>
       </blockquote>
 
-      <h3 class="text-amber-300 text-2xl mb-6">sichten, um zu malen – malen, um zu sehen</h3>
-      <h3 class="text-amber-300 text-2xl mb-10">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
+      <h3 class="text-amber-300 text-xl sm:text-2xl mb-6">sichten, um zu malen – malen, um zu sehen</h3>
+      <h3 class="text-amber-300 text-xl sm:text-2xl mb-10">Die Kunst der Malerin Doris Zarrinnam wird endlich entdeckt</h3>
 
       <p>Eine Entdeckung im wortwörtlichen Sinne: Vom faszinierend-hermetisch-malerischen Werk der Doris Zarrinnam wird die Decke seines Versteckseins genommen! Seit spätestens 1971, vor allem aber seit 1992, entäußerte die bisher unbeachtet gebliebene Künstlerin bildlich ihre ästhetisch betörenden, in weiten Teilen außerbildlich nur ihr anschaulich gewesenen Weltsichten. Sie schöpfte diese, immer tiefer in ihre Zurückgezogenheit vordringend, hauptsächlich aus sich und ihren Introspektionen! Zwischen Bildern aus einer auch uns zugänglichen Wirklichkeit und der genuin ihren, die offenbar auch von wunderlichen Träumen und Vorstellungen dominiert war, oszilliert der hier erstmals breiter öffentlich anschaulich werdende Bilderkosmos. Der Horizont dieses Kosmos’ ist menschenweit, ihre Welt hingegen war eng gegrenzt wie die ihrer Formate.</p>
 
@@ -207,43 +217,43 @@
 
     <!-- Lebenslauf -->
     <div class="mt-20">
-      <h3 class="text-amber-300 text-2xl mb-8 text-center">Lebenslauf Doris (Dodo) Zarrinnam</h3>
-      <dl class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-12 gap-y-5 text-sm leading-relaxed">
-        <dt class="text-amber-300 text-right font-medium">* 19.09.1941</dt><dd>Doris Borgmann in Bromberg</dd>
-        <dt class="text-amber-300 text-right font-medium">Vorschule</dt><dd>1948–1952</dd>
-        <dt class="text-amber-300 text-right font-medium">Internatsschule Marienberg</dt><dd>1952–1955</dd>
-        <dt class="text-amber-300 text-right font-medium">Schulzeit</dt><dd>1957–1961</dd>
-        <dt class="text-amber-300 text-right font-medium">Tod der Mutter 1959</dt><dd>Vollweise</dd>
-        <dt class="text-amber-300 text-right font-medium">Januar 1960</dt><dd>Kennenlernen von Shapur Zarrinnam beim indischen Abend im Paulushaus in Düsseldorf</dd>
-        <dt class="text-amber-300 text-right font-medium">Abitur</dt><dd>1961</dd>
-        <dt class="text-amber-300 text-right font-medium">1961–1963</dt><dd>Pharmaziestudium bis Vordiplom</dd>
-        <dt class="text-amber-300 text-right font-medium">1961–1966</dt><dd>Arbeit als Apothekengehilfin</dd>
-        <dt class="text-amber-300 text-right font-medium">November 1963</dt><dd>Hochzeit mit Abolghassem (Shapur) Zarrinnam</dd>
-        <dt class="text-amber-300 text-right font-medium">19.04.1967</dt><dd>Geburt Sohn Dirk-Bijan in Münster</dd>
-        <dt class="text-amber-300 text-right font-medium">1968–1971</dt><dd>Aufenthalt im Iran; Ehemann arbeitet als Augenarzt im Iran</dd>
-        <dt class="text-amber-300 text-right font-medium">1973</dt><dd>Umzug nach Heinsberg<br>Augenarztpraxis in Heinsberg<br>Mitarbeit in der Praxis als Ehefrau</dd>
-        <dt class="text-amber-300 text-right font-medium">1992 Diagnose:</dt><dd>paranoide Psychose; Betreuung durch Sohn Dirk-Bijan;<br>Aufgabe der Tätigkeit in der Arztpraxis</dd>
-        <dt class="text-amber-300 text-right font-medium">Ausstellung</dt><dd>„Grünes Haus“ 29.05. – 16.06.1995</dd>
-        <dt class="text-amber-300 text-right font-medium">Juli 1999</dt><dd>Sohn übernimmt väterliche Augenarztpraxis</dd>
-        <dt class="text-amber-300 text-right font-medium">Okt. 2001</dt><dd>Gemeinschaftspraxis Sohn mit Dr. Schmitz</dd>
-        <dt class="text-amber-300 text-right font-medium">22.04.2005</dt><dd>Geburt Enkel Julian</dd>
-        <dt class="text-amber-300 text-right font-medium">09.03.2007</dt><dd>Geburt Enkelin Neela</dd>
-        <dt class="text-amber-300 text-right font-medium">Jan. 2010</dt><dd>Tod Dr. Schmitz</dd>
-        <dt class="text-amber-300 text-right font-medium">† 21.09.2023</dt><dd>SZB Wassenberg</dd>
+      <h3 class="text-amber-300 text-xl sm:text-2xl mb-8 text-center">Lebenslauf Doris (Dodo) Zarrinnam</h3>
+      <dl class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-12 gap-y-1 md:gap-y-5 text-sm leading-relaxed">
+        <dt class="text-amber-300 text-left md:text-right font-medium">* 19.09.1941</dt><dd>Doris Borgmann in Bromberg</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Vorschule</dt><dd>1948–1952</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Internatsschule Marienberg</dt><dd>1952–1955</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Schulzeit</dt><dd>1957–1961</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Tod der Mutter 1959</dt><dd>Vollweise</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Januar 1960</dt><dd>Kennenlernen von Shapur Zarrinnam beim indischen Abend im Paulushaus in Düsseldorf</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Abitur</dt><dd>1961</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">1961–1963</dt><dd>Pharmaziestudium bis Vordiplom</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">1961–1966</dt><dd>Arbeit als Apothekengehilfin</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">November 1963</dt><dd>Hochzeit mit Abolghassem (Shapur) Zarrinnam</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">19.04.1967</dt><dd>Geburt Sohn Dirk-Bijan in Münster</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">1968–1971</dt><dd>Aufenthalt im Iran; Ehemann arbeitet als Augenarzt im Iran</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">1973</dt><dd>Umzug nach Heinsberg<br>Augenarztpraxis in Heinsberg<br>Mitarbeit in der Praxis als Ehefrau</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">1992 Diagnose:</dt><dd>paranoide Psychose; Betreuung durch Sohn Dirk-Bijan;<br>Aufgabe der Tätigkeit in der Arztpraxis</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Ausstellung</dt><dd>„Grünes Haus“ 29.05. – 16.06.1995</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Juli 1999</dt><dd>Sohn übernimmt väterliche Augenarztpraxis</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Okt. 2001</dt><dd>Gemeinschaftspraxis Sohn mit Dr. Schmitz</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">22.04.2005</dt><dd>Geburt Enkel Julian</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">09.03.2007</dt><dd>Geburt Enkelin Neela</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">Jan. 2010</dt><dd>Tod Dr. Schmitz</dd>
+        <dt class="text-amber-300 text-left md:text-right font-medium">† 21.09.2023</dt><dd>SZB Wassenberg</dd>
       </dl>
     </div>
   </div>
 
   <!-- Karussell Modal -->
-  <div id="modal" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4">
+  <div id="modal" class="fixed inset-0 bg-black/95 z-[60] hidden items-center justify-center p-2 sm:p-4">
     <div class="relative w-full max-w-5xl flex flex-col h-full">
 
-      <div class="text-center mb-8 z-20">
-        <div id="modalTitle" class="text-3xl font-light text-amber-300"></div>
+      <div class="text-center mt-2 sm:mt-0 mb-3 sm:mb-8 z-20">
+        <div id="modalTitle" class="text-xl sm:text-3xl px-2 font-light text-amber-300"></div>
         <div id="modalYear" class="text-zinc-400 mt-1"></div>
       </div>
 
-      <div class="swiper mySwiper flex-1 w-full">
+      <div class="swiper mySwiper flex-1 min-h-0 w-full">
         <div id="swiperWrapper" class="swiper-wrapper"></div>
       </div>
 
@@ -256,8 +266,8 @@
   </div>
 
   <!-- Impressum -->
-  <footer class="bg-zinc-900 border-t border-zinc-800 py-12 mt-20">
-    <div class="max-w-7xl mx-auto px-6 text-xs text-zinc-400">
+  <footer class="bg-zinc-900 border-t border-zinc-800 py-10 sm:py-12 mt-12 sm:mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-xs text-zinc-400">
       <div class="grid md:grid-cols-2 gap-8">
         <div>
           <strong class="text-amber-300">Impressum</strong><br><br>
@@ -267,7 +277,7 @@
           52525 Heinsberg<br><br>
           E-Mail: <a href="mailto:doris.zarrinnam@web.de" class="hover:text-amber-300">doris.zarrinnam@web.de</a>
         </div>
-        <div class="text-right md:text-left">
+        <div class="text-left">
           Verantwortlich für den Inhalt dieser Website:<br>
           Dr. Dirk-Bijan Zarrinnam<br><br>
           Alle auf dieser Website gezeigten Werke sind urheberrechtlich geschützt.<br>
@@ -583,7 +593,7 @@
         slide.innerHTML = `
           <div class="swiper-zoom-container w-full h-full flex items-center justify-center">
             <img src="${img.url}" 
-                 class="swiper-zoom-target max-h-[78vh] max-w-full object-contain" 
+                 class="swiper-zoom-target max-h-[68vh] sm:max-h-[78vh] max-w-full object-contain" 
                  alt="${img.name}">
           </div>
         `;
